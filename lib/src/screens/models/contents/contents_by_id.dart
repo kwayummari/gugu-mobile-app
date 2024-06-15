@@ -182,25 +182,14 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
-                                                                List<String>
-                                                                    customerReceiptLines =
-                                                                    [
-                                                                  'Customer Name: Kwayu',
-                                                                  'Phone Number: 0762996305',
-                                                                  'Product: Weaving',
-                                                                  'Quantity: 5',
-                                                                  // Add more lines as needed
-                                                                ];
-                                                                Navigator.pop(
-                                                                    context);
+                                                                // Navigator.pop(
+                                                                //     context);
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
                                                                   response:
                                                                       'Printing',
                                                                 ).show(context);
-                                                                // printReceipt(
-                                                                //     customerReceiptLines);
                                                                 ReceiptPrinter();
                                                               },
                                                               label:
@@ -223,8 +212,8 @@ class _contentsByIdState extends State<contentsById> {
                                                           child: AppButton(
                                                               onPress: () {
                                                                 ReceiptPrinter();
-                                                                Navigator.pop(
-                                                                    context);
+                                                                // Navigator.pop(
+                                                                //     context);
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
