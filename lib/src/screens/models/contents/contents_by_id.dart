@@ -222,6 +222,7 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
+                                                                ReceiptPrinter();
                                                                 Navigator.pop(
                                                                     context);
                                                                 AppSnackbar(
