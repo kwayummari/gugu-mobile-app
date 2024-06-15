@@ -43,15 +43,11 @@ class hairDressers {
       String name,
       String phone,
       String hairStyleId,
-      String inventoryId,
-      String number,
       String hairDresserId) async {
     Map<String, dynamic> dataValue = {
       'name': name,
       'phone': phone,
       'hairStyleId': hairStyleId,
-      'inventoryId': inventoryId,
-      'number': number,
       'hairDresserId': hairDresserId
     };
     final response = await api.post(context, 'addOrder', dataValue);

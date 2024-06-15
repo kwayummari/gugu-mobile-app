@@ -1,12 +1,13 @@
 import 'dart:convert';
+import 'package:gugu/src/provider/login-provider.dart';
 import 'package:gugu/src/widgets/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class Api {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
-
   // Check for internet connection
   Future<bool> hasInternetConnection() async {
     try {
@@ -60,6 +61,8 @@ class Api {
       _handleError(response);
       return response;
     } catch (e) {
+      final myProvider = Provider.of<MyProvider>(context, listen: false);
+      if(myProvider.myLoging == true) {myProvider.updateLoging(!myProvider.myLoging);}
       AppSnackbar(
         isError: true,
         response: e.toString(),

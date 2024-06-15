@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           ],
         ),
         debugShowCheckedModeBanner: false,
-        title: 'GUGU BEAUTY SALOON',
+        title: 'GUGU BEAUTY SALOONv',
         theme: ThemeData(
             // timePickerTheme: Theme.of(context).primaryColor,
             cardColor: AppConst.primary,

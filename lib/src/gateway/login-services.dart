@@ -22,7 +22,6 @@ class loginService {
 
     final response = await api.post(context, 'loginHairDresser', data);
     final newResponse = jsonDecode(response.body);
-
     if (response.statusCode == 200) {
       myProvider.updateLoging(!myProvider.myLoging);
       AppSnackbar(

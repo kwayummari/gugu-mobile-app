@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gugu/src/functions/printReceipt.dart';
 import 'package:gugu/src/gateway/categories.dart';
 import 'package:gugu/src/utils/animations/shimmers/available_courses.dart';
 import 'package:gugu/src/utils/app_const.dart';
@@ -8,6 +7,7 @@ import 'package:gugu/src/widgets/app_button.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:gugu/src/widgets/app_snackbar.dart';
 import 'package:gugu/src/widgets/app_text.dart';
+import 'package:gugu/src/widgets/blue_thermal_printer.dart';
 
 class contentsById extends StatefulWidget {
   final dynamic styleId;
@@ -131,60 +131,6 @@ class _contentsByIdState extends State<contentsById> {
                                         isemail: false,
                                         isPhone: true,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 20, left: 10, right: 10),
-                                        child: DropdownButtonFormField(
-                                          dropdownColor: AppConst.white,
-                                          value: selectedValue,
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                            ),
-                                            filled: true,
-                                            fillColor: AppConst.white,
-                                            disabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                              borderSide: BorderSide(
-                                                  color: AppConst.black),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                              borderSide: BorderSide(
-                                                  color: AppConst.black),
-                                            ),
-                                          ),
-                                          items: inventory.map((item) {
-                                            return DropdownMenuItem<String>(
-                                              value:
-                                                  '${item['id']}-${item['name']}',
-                                              child: Text(item['name']),
-                                            );
-                                          }).toList(),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              selectedValue = value.toString();
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                      AppInputText(
-                                        textsColor: AppConst.black,
-                                        textfieldcontroller: number,
-                                        ispassword: false,
-                                        fillcolor: AppConst.white,
-                                        label: 'Number of product',
-                                        obscure: false,
-                                        icon: Icon(
-                                          Icons.numbers,
-                                          color: AppConst.black,
-                                        ),
-                                        isemail: false,
-                                        isPhone: false,
-                                      ),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -197,9 +143,6 @@ class _contentsByIdState extends State<contentsById> {
                                                 .validate()) {
                                               return;
                                             }
-                                            final inventoryId = selectedValue
-                                                .toString()
-                                                .split('-')[0];
                                             hairDressers HairDresserServices =
                                                 hairDressers();
                                             final datas =
@@ -209,8 +152,6 @@ class _contentsByIdState extends State<contentsById> {
                                               name.text.toString(),
                                               phone.text.toString(),
                                               widget.styleId.toString(),
-                                              inventoryId.toString(),
-                                              number.text.toString(),
                                               data[index]['hairdresserId']
                                                   .toString(),
                                             );
@@ -260,6 +201,7 @@ class _contentsByIdState extends State<contentsById> {
                                                                 ).show(context);
                                                                 // printReceipt(
                                                                 //     customerReceiptLines);
+                                                                ReceiptPrinter();
                                                               },
                                                               label:
                                                                   'Customer receipt',
