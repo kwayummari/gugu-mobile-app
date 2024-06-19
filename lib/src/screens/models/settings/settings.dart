@@ -97,16 +97,16 @@ class _settingsState extends State<settings> {
           SizedBox(
             height: 15,
           ),
-          ListTile(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => BluetoothPrinterPage())),
-            leading: Icon(Icons.bluetooth),
-            title: AppText(
-              txt: 'Bluetooth Connection',
-              size: 15,
-              weight: FontWeight.bold,
-            ),
-          ),
+          // ListTile(
+          //   onTap: () => Navigator.of(context).push(MaterialPageRoute(
+          //       builder: (context) => BluetoothPrinterPage())),
+          //   leading: Icon(Icons.bluetooth),
+          //   title: AppText(
+          //     txt: 'Bluetooth Connection',
+          //     size: 15,
+          //     weight: FontWeight.bold,
+          //   ),
+          // ),
           SizedBox(
             height: 15,
           ),
