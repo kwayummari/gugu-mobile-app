@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gugu/src/screens/models/settings/account/account.dart';
+import 'package:gugu/src/screens/models/settings/bluetoothSettings.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_text.dart';
@@ -92,6 +93,19 @@ class _settingsState extends State<settings> {
                 txt:
                     'Communicate through our office phone number incase of any emergency.',
                 size: 14),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ListTile(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => BluetoothPrinterPage())),
+            leading: Icon(Icons.bluetooth),
+            title: AppText(
+              txt: 'Bluetooth Connection',
+              size: 15,
+              weight: FontWeight.bold,
+            ),
           ),
           SizedBox(
             height: 15,

@@ -22,9 +22,8 @@ class contentsById extends StatefulWidget {
 
 class _contentsByIdState extends State<contentsById> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController name = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController number = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   String selectedValue = '';
   List data = [];
   List inventory = [];
@@ -105,7 +104,7 @@ class _contentsByIdState extends State<contentsById> {
                                       ),
                                       AppInputText(
                                         textsColor: AppConst.black,
-                                        textfieldcontroller: name,
+                                        textfieldcontroller: nameController,
                                         ispassword: false,
                                         fillcolor: AppConst.white,
                                         label: 'Name',
@@ -119,7 +118,7 @@ class _contentsByIdState extends State<contentsById> {
                                       ),
                                       AppInputText(
                                         textsColor: AppConst.black,
-                                        textfieldcontroller: phone,
+                                        textfieldcontroller: phoneController,
                                         ispassword: false,
                                         fillcolor: AppConst.white,
                                         label: 'Phone',
@@ -143,14 +142,14 @@ class _contentsByIdState extends State<contentsById> {
                                                 .validate()) {
                                               return;
                                             }
-                                            hairDressers HairDresserServices =
+                                            hairDressers hairDresserServices =
                                                 hairDressers();
                                             final datas =
-                                                await HairDresserServices
+                                                await hairDresserServices
                                                     .makeOrder(
                                               context,
-                                              name.text.toString(),
-                                              phone.text.toString(),
+                                              nameController.text.toString(),
+                                              phoneController.text.toString(),
                                               widget.styleId.toString(),
                                               data[index]['hairdresserId']
                                                   .toString(),
@@ -182,15 +181,13 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
-                                                                // Navigator.pop(
-                                                                //     context);
+                                                                // _printReceipt();
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
                                                                   response:
                                                                       'Printing',
                                                                 ).show(context);
-                                                                ReceiptPrinter();
                                                               },
                                                               label:
                                                                   'Customer receipt',
@@ -211,9 +208,7 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
-                                                                ReceiptPrinter();
-                                                                // Navigator.pop(
-                                                                //     context);
+                                                                // _printReceipt();
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
