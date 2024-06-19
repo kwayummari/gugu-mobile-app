@@ -25,14 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  bluetooth_thermal_printer:
-    dependency: "direct main"
-    description:
-      name: bluetooth_thermal_printer
-      sha256: "07a68b3980be020e6d3f849f27e38034e6e6b27fab737a58c0b716dacf142941"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.6"
   boolean_selector:
     dependency: transitive
     description:
