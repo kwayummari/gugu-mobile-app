@@ -53,7 +53,7 @@ class _contentsByIdState extends State<contentsById> {
 
   Future<void> printDoc() async {
     final image = await imageFromAssetBundle(
-      "assets/avatar.png",
+      "assets/logo.jpg",
     );
     final doc = pw.Document();
     doc.addPage(pw.Page(
