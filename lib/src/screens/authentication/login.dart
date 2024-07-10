@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
                 height: 50,
               ),
               SizedBox(
-                height: 45,
+                height: 20,
               ),
               AppInputText(
                 textsColor: AppConst.black,
