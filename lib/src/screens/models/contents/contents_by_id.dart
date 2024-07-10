@@ -15,8 +15,9 @@ import 'package:pdf/widgets.dart' as pw;
 class contentsById extends StatefulWidget {
   final dynamic styleId;
   final String name;
+  final String amount;
 
-  const contentsById({Key? key, required this.styleId, required this.name})
+  const contentsById({Key? key, required this.styleId, required this.name, required this.amount})
       : super(key: key);
 
   @override
@@ -51,15 +52,16 @@ class _contentsByIdState extends State<contentsById> {
     });
   }
 
-  Future<void> printDoc() async {
+  Future<void> printDoc(style, amount) async {
     final image = await imageFromAssetBundle(
       "assets/logo.jpg",
     );
     final doc = pw.Document();
     doc.addPage(pw.Page(
-        pageFormat: PdfPageFormat.a4,
+        // pageFormat: PdfPageFormat.a4,
+        pageFormat: PdfPageFormat(58 * PdfPageFormat.mm, double.infinity),
         build: (pw.Context context) {
-          return buildPrintableData(image);
+          return buildPrintableData(image, style, amount);
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
@@ -198,7 +200,10 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
-                                                                printDoc();
+                                                                printDoc(
+                                                                    widget.name,
+                                                                    widget
+                                                                        .amount);
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,

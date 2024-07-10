@@ -1,9 +1,25 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:math';
+
+import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-buildPrintableData(image) => pw.Padding(
+int generateRandomSixDigitNumber() {
+  final random = Random();
+  return 100000 + random.nextInt(900000);
+}
+
+String getCurrentDate() {
+  DateTime now = DateTime.now();
+  DateFormat formatter = DateFormat('dd/MM/yyyy');
+  return formatter.format(now);
+}
+
+int randomNumber = generateRandomSixDigitNumber();
+String currentDate = getCurrentDate();
+buildPrintableData(image,style,amount) => pw.Padding(
       padding: const pw.EdgeInsets.all(16.00),
       child: pw.Column(
         children: [
@@ -16,7 +32,46 @@ buildPrintableData(image) => pw.Padding(
             ),
           ),
           pw.SizedBox(height: 10.00),
-          pw.Divider(),
+          pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Text(
+              'P.O.Box 104874',
+              style:
+                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+            ),
+          ),
+          pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Text(
+              'Dar es Salaam',
+              style:
+                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+            ),
+          ),
+          pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Text(
+              'Tanzania',
+              style:
+                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+            ),
+          ),
+          pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Text(
+              'Tel: 0712673638',
+              style:
+                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+            ),
+          ),
+          pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Text(
+              currentDate,
+              style:
+                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+            ),
+          ),
           pw.Column(
             children: [
               pw.Row(
@@ -24,27 +79,58 @@ buildPrintableData(image) => pw.Padding(
                 children: [
                   pw.SizedBox(width: 5.5),
                   pw.Text(
-                    "Report",
-                    style: pw.TextStyle(
-                        fontSize: 23.00, fontWeight: pw.FontWeight.bold),
-                  )
+                    'Receipt number',
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.Spacer(),
+                  pw.Text(
+                    randomNumber.toString(),
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.SizedBox(width: 5.5),
                 ],
               ),
-              pw.SizedBox(height: 10.00),
-              pw.Text(
-                "Thanks for choosing our service!",
-                style: const pw.TextStyle(
-                    color: PdfColor(0.5, 0.5, 0.5, 0.5), fontSize: 12.00),
+              pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.end,
+                children: [
+                  pw.SizedBox(width: 5.5),
+                  pw.Text(
+                    'Style',
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.Spacer(),
+                  pw.Text(
+                    style,
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.SizedBox(width: 5.5),
+                ],
               ),
-              pw.SizedBox(height: 5.00),
-              pw.Text(
-                "Contact the branch for any clarifications.",
-                style: const pw.TextStyle(
-                    color: PdfColor(0.5, 0.5, 0.5, 0.5), fontSize: 12.00),
+              pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.end,
+                children: [
+                  pw.SizedBox(width: 5.5),
+                  pw.Text(
+                    'Total Amount',
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.Spacer(),
+                  pw.Text(
+                    amount,
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.SizedBox(width: 5.5),
+                ],
               ),
-              pw.SizedBox(height: 15.00),
             ],
           ),
+          pw.Divider(),
         ],
       ),
     );

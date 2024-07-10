@@ -34,6 +34,7 @@ final Map<String, WidgetBuilder> routes = {
     return contentsById(
       name: args?['name'],
       styleId: args?['styleId'],
+      amount: args?['amount'],
     );
   },
 };
