@@ -7,7 +7,10 @@ import 'package:gugu/src/widgets/app_button.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:gugu/src/widgets/app_snackbar.dart';
 import 'package:gugu/src/widgets/app_text.dart';
-import 'package:gugu/src/widgets/blue_thermal_printer.dart';
+import 'package:gugu/src/widgets/printableData.dart';
+import 'package:printing/printing.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class contentsById extends StatefulWidget {
   final dynamic styleId;
@@ -46,6 +49,20 @@ class _contentsByIdState extends State<contentsById> {
         selectedValue = '${inventory[0]['id']}-${inventory[0]['name']}';
       }
     });
+  }
+
+  Future<void> printDoc() async {
+    final image = await imageFromAssetBundle(
+      "assets/avatar.png",
+    );
+    final doc = pw.Document();
+    doc.addPage(pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return buildPrintableData(image);
+        }));
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async => doc.save());
   }
 
   @override
@@ -208,7 +225,7 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
-                                                                // _printReceipt();
+                                                                printDoc();
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
