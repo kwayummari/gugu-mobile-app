@@ -43,7 +43,7 @@ class _allStylesState extends State<allStyles> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: AppConst.primary,
-          title: AppText(txt: 'All Hair Styles', size: 20, color: AppConst.black, weight: FontWeight.bold,),
+          title: AppText(txt: 'All Hair Styles', size: 20, color: AppConst.white, weight: FontWeight.bold,),
         ),
         child: Column(
           children: [

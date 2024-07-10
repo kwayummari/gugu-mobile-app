@@ -11,8 +11,8 @@ buildPrintableData(image) => pw.Padding(
             alignment: pw.Alignment.center,
             child: pw.Image(
               image,
-              width: 100,
-              height: 100,
+              width: 200,
+              height: 200,
             ),
           ),
           pw.SizedBox(height: 10.00),
