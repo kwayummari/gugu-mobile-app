@@ -80,14 +80,14 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Receipt no:',
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     randomNumber.toString(),
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -99,14 +99,14 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Customer:',
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     customer,
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -118,14 +118,14 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Customer Phone:',
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     customerPhone,
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -137,14 +137,14 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Style',
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     style,
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -156,14 +156,14 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Styler:',
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     name,
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -175,14 +175,14 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Amount:',
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     amount,
-                    style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
+                    style:  pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
