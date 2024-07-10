@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gugu/src/screens/models/settings/account/account.dart';
-import 'package:gugu/src/screens/models/settings/bluetoothSettings.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_text.dart';
-import 'package:gugu/src/widgets/printableData.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class settings extends StatefulWidget {
@@ -27,6 +25,7 @@ class _settingsState extends State<settings> {
   Widget build(BuildContext context) {
     return AppBaseScreen(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: AppText(
           txt: 'Settings',
           size: 20,
