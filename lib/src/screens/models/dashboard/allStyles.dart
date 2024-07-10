@@ -43,45 +43,10 @@ class _allStylesState extends State<allStyles> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: AppConst.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-          ),
+          title: AppText(txt: 'All Hair Styles', size: 20, color: AppConst.black, weight: FontWeight.bold,),
         ),
         child: Column(
           children: [
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                children: [
-                  AppText(
-                    txt: 'Available Hair Styles',
-                    size: 15,
-                    color: AppConst.black,
-                    weight: FontWeight.w700,
-                  ),
-                  Spacer(),
-                  AppText(
-                    txt: 'View All',
-                    size: 15,
-                    color: AppConst.black,
-                    weight: FontWeight.w700,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: AppConst.black,
-                  )
-                ],
-              ),
-            ),
             SizedBox(
               height: 20,
             ),

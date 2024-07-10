@@ -7,25 +7,13 @@ buildPrintableData(image) => pw.Padding(
       padding: const pw.EdgeInsets.all(16.00),
       child: pw.Column(
         children: [
-          pw.Row(
-            children: [
-              pw.Align(
-                alignment: pw.Alignment.topLeft,
-                child: pw.Image(
-                  image,
-                  width: 24,
-                  height: 24,
-                ),
-              ),
-              pw.SizedBox(width: 5.5),
-              pw.Text(
-                "Hayat Tamboli",
-                style: pw.TextStyle(
-                  fontSize: 24,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-            ],
+          pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Image(
+              image,
+              width: 100,
+              height: 100,
+            ),
           ),
           pw.SizedBox(height: 10.00),
           pw.Divider(),
