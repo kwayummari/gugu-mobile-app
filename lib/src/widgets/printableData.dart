@@ -19,7 +19,7 @@ String getCurrentDate() {
 
 int randomNumber = generateRandomSixDigitNumber();
 String currentDate = getCurrentDate();
-buildPrintableData(image,style,amount) => pw.Padding(
+buildPrintableData(image,style,amount,name) => pw.Padding(
       padding: const pw.EdgeInsets.all(16.00),
       child: pw.Column(
         children: [
@@ -27,8 +27,8 @@ buildPrintableData(image,style,amount) => pw.Padding(
             alignment: pw.Alignment.center,
             child: pw.Image(
               image,
-              width: 200,
-              height: 200,
+              width: 80,
+              height: 80,
             ),
           ),
           pw.SizedBox(height: 10.00),
@@ -37,7 +37,7 @@ buildPrintableData(image,style,amount) => pw.Padding(
             child: pw.Text(
               'P.O.Box 104874',
               style:
-                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+                  pw.TextStyle(fontSize: 12.00, fontWeight: pw.FontWeight.bold),
             ),
           ),
           pw.Align(
@@ -45,7 +45,7 @@ buildPrintableData(image,style,amount) => pw.Padding(
             child: pw.Text(
               'Dar es Salaam',
               style:
-                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+                  pw.TextStyle(fontSize: 12.00, fontWeight: pw.FontWeight.bold),
             ),
           ),
           pw.Align(
@@ -53,7 +53,7 @@ buildPrintableData(image,style,amount) => pw.Padding(
             child: pw.Text(
               'Tanzania',
               style:
-                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+                  pw.TextStyle(fontSize: 12.00, fontWeight: pw.FontWeight.bold),
             ),
           ),
           pw.Align(
@@ -61,7 +61,7 @@ buildPrintableData(image,style,amount) => pw.Padding(
             child: pw.Text(
               'Tel: 0712673638',
               style:
-                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+                  pw.TextStyle(fontSize: 12.00, fontWeight: pw.FontWeight.bold),
             ),
           ),
           pw.Align(
@@ -69,7 +69,7 @@ buildPrintableData(image,style,amount) => pw.Padding(
             child: pw.Text(
               currentDate,
               style:
-                  pw.TextStyle(fontSize: 23.00, fontWeight: pw.FontWeight.bold),
+                  pw.TextStyle(fontSize: 12.00, fontWeight: pw.FontWeight.bold),
             ),
           ),
           pw.Column(
@@ -128,9 +128,26 @@ buildPrintableData(image,style,amount) => pw.Padding(
                   pw.SizedBox(width: 5.5),
                 ],
               ),
+              pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.end,
+                children: [
+                  pw.SizedBox(width: 5.5),
+                  pw.Text(
+                    'Styler',
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.Spacer(),
+                  pw.Text(
+                    name,
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                  ),
+                  pw.SizedBox(width: 5.5),
+                ],
+              ),
             ],
           ),
-          pw.Divider(),
         ],
       ),
     );

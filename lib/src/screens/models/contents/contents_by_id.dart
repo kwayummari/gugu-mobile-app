@@ -17,7 +17,11 @@ class contentsById extends StatefulWidget {
   final String name;
   final String amount;
 
-  const contentsById({Key? key, required this.styleId, required this.name, required this.amount})
+  const contentsById(
+      {Key? key,
+      required this.styleId,
+      required this.name,
+      required this.amount})
       : super(key: key);
 
   @override
@@ -52,7 +56,7 @@ class _contentsByIdState extends State<contentsById> {
     });
   }
 
-  Future<void> printDoc(style, amount) async {
+  Future<void> printDoc(style, amount, name) async {
     final image = await imageFromAssetBundle(
       "assets/logo.jpg",
     );
@@ -61,7 +65,7 @@ class _contentsByIdState extends State<contentsById> {
         // pageFormat: PdfPageFormat.a4,
         pageFormat: PdfPageFormat(58 * PdfPageFormat.mm, double.infinity),
         build: (pw.Context context) {
-          return buildPrintableData(image, style, amount);
+          return buildPrintableData(image, style, amount, name);
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
@@ -173,11 +177,9 @@ class _contentsByIdState extends State<contentsById> {
                                               data[index]['hairdresserId']
                                                   .toString(),
                                             );
-                                            print(datas['message']);
                                             if (datas['message'] ==
                                                 'Order created successfully') {
                                               Navigator.of(context).pop();
-                                              // Open another dialog and pass previously sent data
                                               showDialog(
                                                 context: context,
                                                 builder:
@@ -200,10 +202,17 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
+                                                                // print(widget
+                                                                //     .name);
+                                                                // print(widget
+                                                                //     .amount);
+                                                                // print(data[index]['hairDresserName']);
                                                                 printDoc(
                                                                     widget.name,
                                                                     widget
-                                                                        .amount);
+                                                                        .amount,
+                                                                    data[index][
+                                                                        'hairDresserName']);
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
