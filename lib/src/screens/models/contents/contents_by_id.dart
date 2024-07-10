@@ -215,7 +215,7 @@ class _contentsByIdState extends State<contentsById> {
                                                                     phoneController
                                                                         .text
                                                                         .toString());
-                                                                Navigator.pop(context);
+                                                                Navigator.of(context).pop();
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
