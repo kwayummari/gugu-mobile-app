@@ -1,20 +1,18 @@
 import 'package:gugu/src/screens/models/available_courses/available_courses.dart';
 import 'package:gugu/src/utils/app_const.dart';
-import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
-import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class dashboard extends StatefulWidget {
-  const dashboard({Key? key}) : super(key: key);
+class allStyles extends StatefulWidget {
+  const allStyles({Key? key}) : super(key: key);
 
   @override
-  State<dashboard> createState() => _dashboardState();
+  State<allStyles> createState() => _allStylesState();
 }
 
-class _dashboardState extends State<dashboard> {
+class _allStylesState extends State<allStyles> {
   var fullname;
   @override
   void initState() {
@@ -51,48 +49,6 @@ class _dashboardState extends State<dashboard> {
               bottomRight: Radius.circular(10),
             ),
           ),
-          toolbarHeight: 100,
-          flexibleSpace: Padding(
-            padding: EdgeInsets.only(top: 30),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 30,
-                    ),
-                    CircleAvatar(
-                      backgroundColor: AppConst.white,
-                      child: Icon(
-                        Icons.person,
-                        size: 30,
-                        color: AppConst.primary,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    AppText(
-                      txt: 'Welcome \n${fullname}',
-                      size: 18,
-                      weight: FontWeight.w600,
-                      color: AppConst.white,
-                    ),
-                    Spacer(),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          ),
         ),
         child: Column(
           children: [
@@ -110,17 +66,11 @@ class _dashboardState extends State<dashboard> {
                     weight: FontWeight.w700,
                   ),
                   Spacer(),
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      RouteNames.allStyles,
-                    ),
-                    child: AppText(
-                      txt: 'View All',
-                      size: 15,
-                      color: AppConst.black,
-                      weight: FontWeight.w700,
-                    ),
+                  AppText(
+                    txt: 'View All',
+                    size: 15,
+                    color: AppConst.black,
+                    weight: FontWeight.w700,
                   ),
                   SizedBox(
                     width: 10,
@@ -136,9 +86,6 @@ class _dashboardState extends State<dashboard> {
               height: 20,
             ),
             availableCourses(),
-            SizedBox(
-              height: 50,
-            ),
           ],
         ));
   }
