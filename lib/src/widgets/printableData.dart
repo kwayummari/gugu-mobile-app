@@ -174,7 +174,7 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                 children: [
                   pw.SizedBox(width: 5.5),
                   pw.Text(
-                    'Amount:',
+                    'Total:',
                     style:  pw.TextStyle(
                         color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
                   ),
