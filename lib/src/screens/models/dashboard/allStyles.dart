@@ -41,7 +41,7 @@ class _allStylesState extends State<allStyles> {
         backgroundAuth: false,
         padding: EdgeInsets.all(0),
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           backgroundColor: AppConst.primary,
           title: AppText(txt: 'All Hair Styles', size: 20, color: AppConst.white, weight: FontWeight.bold,),
         ),
