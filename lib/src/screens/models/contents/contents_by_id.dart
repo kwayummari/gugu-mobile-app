@@ -198,33 +198,6 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
-                                                                // _printReceipt();
-                                                                AppSnackbar(
-                                                                  isError:
-                                                                      false,
-                                                                  response:
-                                                                      'Printing',
-                                                                ).show(context);
-                                                              },
-                                                              label:
-                                                                  'Customer receipt',
-                                                              borderRadius: 5,
-                                                              textColor:
-                                                                  AppConst
-                                                                      .white,
-                                                              bcolor: AppConst
-                                                                  .primary),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Container(
-                                                          width: 350,
-                                                          height: 55,
-                                                          child: AppButton(
-                                                              onPress: () {
                                                                 printDoc();
                                                                 AppSnackbar(
                                                                   isError:
@@ -234,7 +207,7 @@ class _contentsByIdState extends State<contentsById> {
                                                                 ).show(context);
                                                               },
                                                               label:
-                                                                  'Company Receipts',
+                                                                  'Print Receipts',
                                                               borderRadius: 5,
                                                               textColor:
                                                                   AppConst
