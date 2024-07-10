@@ -71,7 +71,7 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.TextStyle(fontSize: 8.00, fontWeight: pw.FontWeight.bold),
             ),
           ),
-          pw.SizedBox(width: 10.5),
+          pw.SizedBox(height: 10.0),
           pw.Column(
             children: [
               pw.Row(
@@ -81,18 +81,18 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.Text(
                     'Receipt no:',
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     randomNumber.toString(),
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
               ),
-              pw.SizedBox(width: 5.5),
+              pw.SizedBox(height: 8.5),
               pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.end,
                 children: [
@@ -100,18 +100,18 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.Text(
                     'Customer:',
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     customer,
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
               ),
-              pw.SizedBox(width: 5.5),
+              pw.SizedBox(height: 8.5),
               pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.end,
                 children: [
@@ -119,18 +119,18 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.Text(
                     'Customer Phone:',
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     customerPhone,
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
               ),
-              pw.SizedBox(width: 5.5),
+              pw.SizedBox(height: 8.5),
               pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.end,
                 children: [
@@ -138,18 +138,18 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.Text(
                     'Style',
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     style,
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
               ),
-              pw.SizedBox(width: 5.5),
+              pw.SizedBox(height: 8.5),
               pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.end,
                 children: [
@@ -157,18 +157,18 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.Text(
                     'Styler:',
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     name,
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
               ),
-              pw.SizedBox(width: 5.5),
+              pw.SizedBox(height: 8.5),
               pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.end,
                 children: [
@@ -176,18 +176,18 @@ buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Pa
                   pw.Text(
                     'Amount:',
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     amount,
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 7.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
               ),
-              pw.SizedBox(width: 5.5),
+              pw.SizedBox(height: 8.5),
             ],
           ),
         ],
