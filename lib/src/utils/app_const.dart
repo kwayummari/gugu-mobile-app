@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 abstract class AppConst {
-  static Color primary = HexColor('#150572');
+  static Color primary = HexColor('#eb008b');
   static Color red = Colors.red;
   static Color white = HexColor('#ffffff');
   static Color black = HexColor('#000000');
