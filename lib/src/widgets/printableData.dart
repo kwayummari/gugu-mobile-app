@@ -117,13 +117,13 @@ buildPrintableData(image, style, amount, name) => pw.Padding(
                   pw.Text(
                     'Styler:',
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 3.00),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     name,
                     style: const pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 12.00),
+                        color: PdfColor(0, 0, 0, 0), fontSize: 3.00),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
