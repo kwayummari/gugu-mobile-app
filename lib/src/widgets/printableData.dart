@@ -19,7 +19,7 @@ String getCurrentDate() {
 
 int randomNumber = generateRandomSixDigitNumber();
 String currentDate = getCurrentDate();
-buildPrintableData(image, style, amount, name) => pw.Padding(
+buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Padding(
       padding: const pw.EdgeInsets.all(16.00),
       child: pw.Column(
         children: [
@@ -86,6 +86,42 @@ buildPrintableData(image, style, amount, name) => pw.Padding(
                   pw.Spacer(),
                   pw.Text(
                     randomNumber.toString(),
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 3.00),
+                  ),
+                  pw.SizedBox(width: 5.5),
+                ],
+              ),
+              pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.end,
+                children: [
+                  pw.SizedBox(width: 5.5),
+                  pw.Text(
+                    'Customer:',
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 3.00),
+                  ),
+                  pw.Spacer(),
+                  pw.Text(
+                    customer,
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 3.00),
+                  ),
+                  pw.SizedBox(width: 5.5),
+                ],
+              ),
+              pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.end,
+                children: [
+                  pw.SizedBox(width: 5.5),
+                  pw.Text(
+                    'Customer Phone:',
+                    style: const pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0), fontSize: 3.00),
+                  ),
+                  pw.Spacer(),
+                  pw.Text(
+                    customerPhone,
                     style: const pw.TextStyle(
                         color: PdfColor(0, 0, 0, 0), fontSize: 3.00),
                   ),

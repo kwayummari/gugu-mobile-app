@@ -56,7 +56,7 @@ class _contentsByIdState extends State<contentsById> {
     });
   }
 
-  Future<void> printDoc(style, amount, name) async {
+  Future<void> printDoc(style, amount, name, customer, customerPhone) async {
     final image = await imageFromAssetBundle(
       "assets/logo.jpg",
     );
@@ -65,7 +65,8 @@ class _contentsByIdState extends State<contentsById> {
         // pageFormat: PdfPageFormat.a4,
         pageFormat: PdfPageFormat(58 * PdfPageFormat.mm, double.infinity),
         build: (pw.Context context) {
-          return buildPrintableData(image, style, amount, name);
+          return buildPrintableData(
+              image, style, amount, name, customer, customerPhone);
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
@@ -202,17 +203,18 @@ class _contentsByIdState extends State<contentsById> {
                                                           height: 55,
                                                           child: AppButton(
                                                               onPress: () {
-                                                                // print(widget
-                                                                //     .name);
-                                                                // print(widget
-                                                                //     .amount);
-                                                                // print(data[index]['hairDresserName']);
                                                                 printDoc(
                                                                     widget.name,
                                                                     widget
                                                                         .amount,
                                                                     data[index][
-                                                                        'hairDresserName']);
+                                                                        'hairDresserName'],
+                                                                    nameController
+                                                                        .text
+                                                                        .toString(),
+                                                                    phoneController
+                                                                        .text
+                                                                        .toString());
                                                                 AppSnackbar(
                                                                   isError:
                                                                       false,
