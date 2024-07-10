@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
               ),
               Image.asset(
                 'assets/icon.png',
-                height: 50,
+                height: 100,
               ),
               SizedBox(
                 height: 20,
