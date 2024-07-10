@@ -64,25 +64,6 @@ class _settingsState extends State<settings> {
             height: 15,
           ),
           ListTile(
-            onTap: () {
-              // Navigator.of(context)
-              //   .push(MaterialPageRoute(builder: (context) => Language()));
-            },
-            leading: Icon(Icons.language),
-            title: AppText(
-              txt: 'Language',
-              size: 15,
-              weight: FontWeight.bold,
-            ),
-            subtitle: AppText(
-                txt:
-                    'Choose the language you prefer to use in the application. The language chosen will affect all content of the app.',
-                size: 14),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          ListTile(
             onTap: () => phonecall(),
             leading: Icon(Icons.phone),
             title: AppText(
@@ -92,7 +73,7 @@ class _settingsState extends State<settings> {
             ),
             subtitle: AppText(
                 txt:
-                    'Communicate through our office phone number incase of any emergency.',
+                    'Communicate through our office phone number incase of any emergency.(0762996305)',
                 size: 14),
           ),
           SizedBox(
