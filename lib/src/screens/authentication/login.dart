@@ -122,31 +122,6 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: () =>
-                    Navigator.pushNamed(context, RouteNames.registration),
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'Don\'t have an account? ',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: AppConst.grey),
-                      ),
-                      TextSpan(
-                        text: 'Sign up',
-                        style: TextStyle(
-                          color: AppConst.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 40, right: 40),
                 child: Divider(
