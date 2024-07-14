@@ -115,7 +115,6 @@ class AppInputText extends StatelessWidget {
               return null;
             } else if (value.isEmpty) {
               return "THis field cannot be empty";
-              ;
             }
           }
         },

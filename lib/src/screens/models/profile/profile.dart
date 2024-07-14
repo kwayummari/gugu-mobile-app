@@ -1,4 +1,3 @@
-import 'package:gugu/src/functions/splash.dart';
 import 'package:gugu/src/gateway/profile-service.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
