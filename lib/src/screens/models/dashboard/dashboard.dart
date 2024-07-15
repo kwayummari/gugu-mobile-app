@@ -3,6 +3,7 @@ import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,8 @@ class dashboard extends StatefulWidget {
 
 class _dashboardState extends State<dashboard> {
   var fullname;
+  TextEditingController search = TextEditingController();
+  String searchQuery = '';
   @override
   void initState() {
     getName();
@@ -30,8 +33,6 @@ class _dashboardState extends State<dashboard> {
     });
     return name.toString();
   }
-
-  TextEditingController search = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +135,27 @@ class _dashboardState extends State<dashboard> {
             SizedBox(
               height: 20,
             ),
-            availableCourses(),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: AppInputText(
+                  textsColor: AppConst.black,
+                  textfieldcontroller: search,
+                  ispassword: false,
+                  fillcolor: AppConst.white,
+                  label: 'Search by name',
+                  obscure: false,
+                  icon: null,
+                  suffixicon:
+                      IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+                  onChange: (value) {
+                    setState(() {
+                      searchQuery = value;
+                    });
+                  },
+                  isemail: false,
+                  isPhone: false,
+                )),
+            availableCourses(searchQuery: searchQuery),
             SizedBox(
               height: 50,
             ),

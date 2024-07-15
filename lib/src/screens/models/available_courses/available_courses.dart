@@ -7,7 +7,8 @@ import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 
 class availableCourses extends StatefulWidget {
-  const availableCourses({Key? key}) : super(key: key);
+  final String searchQuery;
+  const availableCourses({Key? key, this.searchQuery = ''}) : super(key: key);
 
   @override
   State<availableCourses> createState() => _availableCoursesState();
@@ -15,12 +16,23 @@ class availableCourses extends StatefulWidget {
 
 class _availableCoursesState extends State<availableCourses> {
   List data = [];
+  List filteredData = [];
 
   void fetchData() async {
     hairDressers HairDresserServices = hairDressers();
     final datas = await HairDresserServices.getStyles(context);
     setState(() {
       data = datas['hairStyle'];
+      filterData();
+    });
+  }
+
+  void filterData() {
+    setState(() {
+      filteredData = data
+          .where((item) =>
+              item['name'].toLowerCase().contains(widget.searchQuery.toLowerCase()))
+          .toList();
     });
   }
 
@@ -31,8 +43,16 @@ class _availableCoursesState extends State<availableCourses> {
   }
 
   @override
+  void didUpdateWidget(covariant availableCourses oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.searchQuery != widget.searchQuery) {
+      filterData();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return data.isEmpty
+    return filteredData.isEmpty
         ? availableCoursesShimmerLoad(
             width: 400,
             height: 200,
@@ -43,7 +63,7 @@ class _availableCoursesState extends State<availableCourses> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
-                itemCount: data.length,
+                itemCount: filteredData.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // Number of columns
                   crossAxisSpacing: 10,
@@ -56,9 +76,9 @@ class _availableCoursesState extends State<availableCourses> {
                       context,
                       RouteNames.getContentsById,
                       arguments: {
-                        'styleId': data[index]['id'],
-                        'name': data[index]['name'],
-                        'amount': data[index]['amount'],
+                        'styleId': filteredData[index]['id'],
+                        'name': filteredData[index]['name'],
+                        'amount': filteredData[index]['amount'],
                       },
                     ),
                     child: Container(
@@ -88,13 +108,13 @@ class _availableCoursesState extends State<availableCourses> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           AppText(
-                            txt: data[index]['name'],
+                            txt: filteredData[index]['name'],
                             size: 18,
                             color: AppConst.white,
                           ),
                           FutureBuilder<String>(
                             future: formatPrice(
-                                data[index]['amount'] ?? '50000', 'Tzs'),
+                                filteredData[index]['amount'] ?? '50000', 'Tzs'),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                       ConnectionState.waiting ||
