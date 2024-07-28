@@ -1,6 +1,5 @@
 import 'package:gugu/src/screens/introduction/intro.dart';
 import 'package:gugu/src/screens/models/bottomNavigationBar/bottomNavigationBar.dart';
-import 'package:gugu/src/screens/models/orders/allOrders.dart';
 import 'package:gugu/src/screens/models/orders/orders_by_id.dart';
 import 'package:gugu/src/screens/models/dashboard/allStyles.dart';
 import 'package:gugu/src/screens/models/dashboard/dashboard.dart';
@@ -20,14 +19,6 @@ final Map<String, WidgetBuilder> routes = {
   RouteNames.allStyles: (context) => allStyles(),
   RouteNames.profile: (context) => profile(),
   RouteNames.bottomNavigationBar: (context) => bottomNavigation(),
-  RouteNames.getContentsByCategory: (context) {
-    final Map<String, dynamic>? args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    return contentsByCategoryId(
-      id: args?['content_id'],
-      title: args?['title'],
-    );
-  },
   RouteNames.getContentsById: (context) {
     final Map<String, dynamic>? args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
