@@ -1,4 +1,4 @@
-import 'package:gugu/src/screens/models/available_courses/available_courses.dart';
+import 'package:gugu/src/screens/models/available_hairStyle/available_hairStyle.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
@@ -155,7 +155,7 @@ class _dashboardState extends State<dashboard> {
                   isemail: false,
                   isPhone: false,
                 )),
-            availableCourses(searchQuery: searchQuery),
+            availableHairStyles(searchQuery: searchQuery),
             SizedBox(
               height: 50,
             ),

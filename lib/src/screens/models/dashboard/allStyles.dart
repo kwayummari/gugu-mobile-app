@@ -1,4 +1,4 @@
-import 'package:gugu/src/screens/models/available_courses/available_courses.dart';
+import 'package:gugu/src/screens/models/available_hairStyle/available_hairStyle.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _allStylesState extends State<allStyles> {
                 isPhone: false,
               )),
           SizedBox(height: 20),
-          availableCourses(searchQuery: searchQuery),
+          availableHairStyles(searchQuery: searchQuery),
         ],
       ),
     );

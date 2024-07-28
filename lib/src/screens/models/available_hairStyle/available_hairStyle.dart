@@ -6,15 +6,15 @@ import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 
-class availableCourses extends StatefulWidget {
+class availableHairStyles extends StatefulWidget {
   final String searchQuery;
-  const availableCourses({Key? key, this.searchQuery = ''}) : super(key: key);
+  const availableHairStyles({Key? key, this.searchQuery = ''}) : super(key: key);
 
   @override
-  State<availableCourses> createState() => _availableCoursesState();
+  State<availableHairStyles> createState() => _availableHairStylesState();
 }
 
-class _availableCoursesState extends State<availableCourses> {
+class _availableHairStylesState extends State<availableHairStyles> {
   List data = [];
   List filteredData = [];
 
@@ -43,7 +43,7 @@ class _availableCoursesState extends State<availableCourses> {
   }
 
   @override
-  void didUpdateWidget(covariant availableCourses oldWidget) {
+  void didUpdateWidget(covariant availableHairStyles oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.searchQuery != widget.searchQuery) {
       filterData();
@@ -53,11 +53,33 @@ class _availableCoursesState extends State<availableCourses> {
   @override
   Widget build(BuildContext context) {
     return filteredData.isEmpty
-        ? availableCoursesShimmerLoad(
-            width: 400,
-            height: 200,
+        ? Column(
+  children: List.generate(
+    5, // Number of rows you want to generate
+    (index) => Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: availableCoursesShimmerLoad(
+            width: 195,
+            height: 100,
             borderRadius: 15,
-          )
+          ),
+        ),
+        Spacer(),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: availableCoursesShimmerLoad(
+            width: 195,
+            height: 100,
+            borderRadius: 15,
+          ),
+        ),
+      ],
+    ),
+  ),
+)
+
         : SizedBox(
             height: 500,
             child: Padding(
