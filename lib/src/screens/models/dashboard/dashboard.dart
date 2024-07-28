@@ -133,7 +133,7 @@ class _dashboardState extends State<dashboard> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),

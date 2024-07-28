@@ -8,7 +8,8 @@ import 'package:gugu/src/widgets/app_text.dart';
 
 class availableHairStyles extends StatefulWidget {
   final String searchQuery;
-  const availableHairStyles({Key? key, this.searchQuery = ''}) : super(key: key);
+  const availableHairStyles({Key? key, this.searchQuery = ''})
+      : super(key: key);
 
   @override
   State<availableHairStyles> createState() => _availableHairStylesState();
@@ -21,6 +22,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
   void fetchData() async {
     hairDressers HairDresserServices = hairDressers();
     final datas = await HairDresserServices.getStyles(context);
+    print(datas);
     setState(() {
       data = datas['hairStyle'];
       filterData();
@@ -30,8 +32,9 @@ class _availableHairStylesState extends State<availableHairStyles> {
   void filterData() {
     setState(() {
       filteredData = data
-          .where((item) =>
-              item['name'].toLowerCase().contains(widget.searchQuery.toLowerCase()))
+          .where((item) => item['name']
+              .toLowerCase()
+              .contains(widget.searchQuery.toLowerCase()))
           .toList();
     });
   }
@@ -54,32 +57,31 @@ class _availableHairStylesState extends State<availableHairStyles> {
   Widget build(BuildContext context) {
     return filteredData.isEmpty
         ? Column(
-  children: List.generate(
-    5, // Number of rows you want to generate
-    (index) => Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: availableCoursesShimmerLoad(
-            width: 195,
-            height: 100,
-            borderRadius: 15,
-          ),
-        ),
-        Spacer(),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: availableCoursesShimmerLoad(
-            width: 195,
-            height: 100,
-            borderRadius: 15,
-          ),
-        ),
-      ],
-    ),
-  ),
-)
-
+            children: List.generate(
+              5, // Number of rows you want to generate
+              (index) => Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: availableCoursesShimmerLoad(
+                      width: 195,
+                      height: 100,
+                      borderRadius: 15,
+                    ),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: availableCoursesShimmerLoad(
+                      width: 195,
+                      height: 100,
+                      borderRadius: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
         : SizedBox(
             height: 500,
             child: Padding(
@@ -131,12 +133,13 @@ class _availableHairStylesState extends State<availableHairStyles> {
                         children: [
                           AppText(
                             txt: filteredData[index]['name'],
-                            size: 18,
+                            size: 15,
                             color: AppConst.white,
                           ),
                           FutureBuilder<String>(
                             future: formatPrice(
-                                filteredData[index]['amount'] ?? '50000', 'Tzs'),
+                                filteredData[index]['amount'] ?? '50000',
+                                'Tzs'),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                       ConnectionState.waiting ||
