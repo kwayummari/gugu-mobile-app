@@ -11,14 +11,14 @@ import '../widgets/app_snackbar.dart';
 class loginService {
   final Api api = Api();
 
-  Future<void> login(
-      BuildContext context, String name, String password) async {
+  Future<void> login(BuildContext context, String name, String password) async {
     final myProvider = Provider.of<MyProvider>(context, listen: false);
     myProvider.updateLoging(!myProvider.myLoging);
     Map<String, dynamic> data = {
       'name': name,
       'password': password,
     };
+    print(data);
 
     final response = await api.post(context, 'loginHairDresser', data);
     final newResponse = jsonDecode(response.body);
@@ -28,10 +28,9 @@ class loginService {
         isError: false,
         response: newResponse['message'],
       ).show(context);
-
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('name', name);
-      await prefs.setString('id', newResponse['id'].toString());
+      await prefs.setString('id', newResponse['user']['id'].toString());
 
       Navigator.pushNamedAndRemoveUntil(
         context,

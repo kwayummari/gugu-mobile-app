@@ -106,8 +106,8 @@ class _LoginState extends State<Login> {
                           if (!_formKey.currentState!.validate()) {
                             return;
                           }
-                          loginService()
-                              .login(context, name.text, password.text);
+                          loginService().login(context, name.text.toString(),
+                              password.text.toString());
                         },
                         label: 'LOGIN',
                         borderRadius: 5,

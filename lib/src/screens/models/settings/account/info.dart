@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gugu/src/functions/splash.dart';
 import 'package:gugu/src/gateway/profile-service.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
@@ -46,7 +45,7 @@ class _infoState extends State<info> {
                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
               ),
               TextSpan(
-                text: '\n@${data[0]['full_name']}',
+                text: data != null ? '\n@${data['name']}' : '',
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 14,
@@ -84,45 +83,7 @@ class _infoState extends State<info> {
                   ),
                   Spacer(),
                   AppText(
-                    txt: '@${data[0]['full_name']}',
-                    size: 15,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.grey,
-                    size: 15,
-                  )
-                ],
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => changePhonenumber(
-              //           phone: data[0]['phone'],
-              //         )));
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 15,
-                right: 15,
-                bottom: 20,
-              ),
-              child: Row(
-                children: [
-                  AppText(
-                    txt: 'Phone',
-                    size: 15,
-                    weight: FontWeight.bold,
-                  ),
-                  Spacer(),
-                  AppText(
-                    txt: data[0]['phone_number'],
+                    txt: data != null ? '@${data['name']}' : '',
                     size: 15,
                     color: Colors.grey,
                   ),
@@ -169,7 +130,7 @@ class _infoState extends State<info> {
             ),
           ),
           GestureDetector(
-            onTap: () => Uri.parse('https://flutter.dev'),
+            onTap: () => Uri.parse('https://aurorawavelabs.com'),
             child: Padding(
               padding: const EdgeInsets.only(
                 left: 15,
@@ -183,11 +144,11 @@ class _infoState extends State<info> {
                   text: TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Select the country you live in. ',
+                        text: 'Designed and Maintained by ',
                         style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                       TextSpan(
-                        text: 'Learn more',
+                        text: 'Aurorawave labs',
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.normal,

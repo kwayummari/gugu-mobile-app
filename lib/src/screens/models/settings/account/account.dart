@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gugu/src/functions/splash.dart';
 import 'package:gugu/src/gateway/profile-service.dart';
 import 'package:gugu/src/screens/models/settings/account/info.dart';
 import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,7 +47,7 @@ class _accountState extends State<account> {
                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
               ),
               TextSpan(
-                text: '\n@${data[0]['full_name']}',
+                text: data != null ? '\n@${data['name']}' : '',
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 14,
@@ -98,23 +98,6 @@ class _accountState extends State<account> {
             height: 15,
           ),
           ListTile(
-            onTap: () {
-              // Navigator.of(context).push(
-              //     MaterialPageRoute(builder: (context) => changePassword()));
-            },
-            leading: Icon(Icons.key),
-            title: AppText(
-              txt: 'Change your password',
-              size: 15,
-              weight: FontWeight.bold,
-            ),
-            subtitle:
-                AppText(txt: 'change your password at any time', size: 14),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          ListTile(
             onTap: () => Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => account())),
             leading: Icon(Icons.download),
@@ -147,6 +130,23 @@ class _accountState extends State<account> {
           ),
           SizedBox(
             height: 15,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.logout,
+            ),
+            title: AppText(
+              txt: 'Sign out',
+              size: 15,
+              color: AppConst.black,
+              weight: FontWeight.bold,
+            ),
+            onTap: () async {
+              final SharedPreferences sharedPreferences =
+                  await SharedPreferences.getInstance();
+              await sharedPreferences.clear();
+              Navigator.pushReplacementNamed(context, RouteNames.login);
+            },
           ),
         ],
       ),

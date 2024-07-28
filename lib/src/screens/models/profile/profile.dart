@@ -54,7 +54,7 @@ class _profileState extends State<profile> {
               ),
               ListTile(
                 title: AppText(
-                  txt: data != null ? data[0]['full_name'] : 'loading...',
+                  txt: data != null ? data[0]['name'] : 'loading...',
                   size: 25,
                   color: AppConst.white,
                   weight: FontWeight.w900,
