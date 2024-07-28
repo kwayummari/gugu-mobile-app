@@ -133,8 +133,22 @@ class _availableHairStylesState extends State<availableHairStyles> {
                         children: [
                           AppText(
                             txt: filteredData[index]['name'],
-                            size: 15,
+                            size: 12,
                             color: AppConst.white,
+                            weight: FontWeight.bold,
+                          ),
+                          AppText(
+                            txt: filteredData[index]['description'],
+                            size: 12,
+                            color: AppConst.white,
+                            weight: FontWeight.bold,
+                          ),
+                          AppText(
+                            txt: 'Vishanga: ' +
+                                filteredData[index]['description'],
+                            size: 12,
+                            color: AppConst.white,
+                            weight: FontWeight.bold,
                           ),
                           FutureBuilder<String>(
                             future: formatPrice(
