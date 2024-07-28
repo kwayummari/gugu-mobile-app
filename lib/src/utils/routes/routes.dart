@@ -1,7 +1,7 @@
 import 'package:gugu/src/screens/introduction/intro.dart';
 import 'package:gugu/src/screens/models/bottomNavigationBar/bottomNavigationBar.dart';
-import 'package:gugu/src/screens/models/contents/contents_by_category.dart';
-import 'package:gugu/src/screens/models/contents/contents_by_id.dart';
+import 'package:gugu/src/screens/models/orders/contents_by_category.dart';
+import 'package:gugu/src/screens/models/orders/contents_by_id.dart';
 import 'package:gugu/src/screens/models/dashboard/allStyles.dart';
 import 'package:gugu/src/screens/models/dashboard/dashboard.dart';
 import 'package:gugu/src/screens/models/profile/profile.dart';
