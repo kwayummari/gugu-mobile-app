@@ -38,12 +38,8 @@ class hairDressers {
     return decodedResponse;
   }
 
-  Future makeOrder(
-      BuildContext context,
-      String name,
-      String phone,
-      String hairStyleId,
-      String hairDresserId, String randomNumber) async {
+  Future makeOrder(BuildContext context, String name, String phone,
+      String hairStyleId, String hairDresserId, String randomNumber) async {
     Map<String, dynamic> dataValue = {
       'name': name,
       'phone': phone,
@@ -51,6 +47,7 @@ class hairDressers {
       'hairDresserId': hairDresserId,
       'randomNumber': randomNumber,
     };
+    print(randomNumber);
     final response = await api.post(context, 'addOrder', dataValue);
     final decodedResponse = jsonDecode(response.body);
     return decodedResponse;

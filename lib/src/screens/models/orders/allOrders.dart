@@ -39,11 +39,20 @@ class _contentsByIdState extends State<contentsById> {
   List data = [];
   List inventory = [];
   bool isLoading = false;
+  int generateRandomSixDigitNumber() {
+    final random = Random();
+    return 100000 + random.nextInt(900000);
+  }
+
+  var randomNumber;
 
   @override
   void initState() {
     super.initState();
     fetchData();
+    setState(() {
+      randomNumber = generateRandomSixDigitNumber();
+    });
   }
 
   void fetchData() async {
@@ -60,17 +69,7 @@ class _contentsByIdState extends State<contentsById> {
     });
   }
 
-  int generateRandomSixDigitNumber() {
-    final random = Random();
-    return 100000 + random.nextInt(900000);
-  }
-
-  var randomNumber;
-
   Future<void> printDoc(style, amount, name, customer, customerPhone) async {
-    setState(() {
-      randomNumber = generateRandomSixDigitNumber();
-    });
     final image = await imageFromAssetBundle(
       "assets/logo.jpg",
     );
