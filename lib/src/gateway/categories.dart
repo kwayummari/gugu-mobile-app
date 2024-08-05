@@ -47,7 +47,6 @@ class hairDressers {
       'hairDresserId': hairDresserId,
       'randomNumber': randomNumber,
     };
-    print(randomNumber);
     final response = await api.post(context, 'addOrder', dataValue);
     final decodedResponse = jsonDecode(response.body);
     return decodedResponse;
