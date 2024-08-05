@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/gateway/categories.dart';
@@ -58,7 +60,17 @@ class _contentsByIdState extends State<contentsById> {
     });
   }
 
+  int generateRandomSixDigitNumber() {
+    final random = Random();
+    return 100000 + random.nextInt(900000);
+  }
+
+  var randomNumber;
+
   Future<void> printDoc(style, amount, name, customer, customerPhone) async {
+    setState(() {
+      randomNumber = generateRandomSixDigitNumber();
+    });
     final image = await imageFromAssetBundle(
       "assets/logo.jpg",
     );
@@ -67,8 +79,8 @@ class _contentsByIdState extends State<contentsById> {
         // pageFormat: PdfPageFormat.a4,
         pageFormat: PdfPageFormat(58 * PdfPageFormat.mm, double.infinity),
         build: (pw.Context context) {
-          return buildPrintableData(
-              image, style, amount, name, customer, customerPhone);
+          return buildPrintableData(image, style, amount, name, customer,
+              customerPhone, randomNumber);
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
@@ -189,6 +201,7 @@ class _contentsByIdState extends State<contentsById> {
                                                     widget.styleId.toString(),
                                                     data[index]['hairdresserId']
                                                         .toString(),
+                                                        randomNumber.toString()
                                                   );
                                                   if (datas['message'] ==
                                                       'Order created successfully') {

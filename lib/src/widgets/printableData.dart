@@ -1,15 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:math';
-
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-int generateRandomSixDigitNumber() {
-  final random = Random();
-  return 100000 + random.nextInt(900000);
-}
+
 
 String getCurrentDate() {
   DateTime now = DateTime.now();
@@ -17,9 +12,9 @@ String getCurrentDate() {
   return formatter.format(now);
 }
 
-int randomNumber = generateRandomSixDigitNumber();
+
 String currentDate = getCurrentDate();
-buildPrintableData(image, style, amount, name, customer, customerPhone) => pw.Padding(
+buildPrintableData(image, style, amount, name, customer, customerPhone, randomNumber) => pw.Padding(
       padding: const pw.EdgeInsets.all(16.00),
       child: pw.Column(
         children: [
