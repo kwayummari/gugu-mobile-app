@@ -43,7 +43,7 @@ dependencies:
   fluttertoast: ^8.0.9
   hexcolor: ^3.0.1
   bubble: ^1.2.1
-  share_plus: ^6.3.0
+  share_plus: ^10.0.1
   flutter_rating_bar: ^4.0.1
   url_launcher: ^6.1.7
   connectivity: ^3.0.6

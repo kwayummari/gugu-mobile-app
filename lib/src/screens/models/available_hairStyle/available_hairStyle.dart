@@ -22,7 +22,6 @@ class _availableHairStylesState extends State<availableHairStyles> {
   void fetchData() async {
     hairDressers HairDresserServices = hairDressers();
     final datas = await HairDresserServices.getStyles(context);
-    print(datas);
     setState(() {
       data = datas['hairStyle'];
       filterData();
