@@ -16,6 +16,7 @@ class _bottomNavigationState extends State<bottomNavigation> {
   int index = 0;
   final Screen = [
     dashboard(),
+    dashboard(),
     settings(),
   ];
 
@@ -41,6 +42,8 @@ class _bottomNavigationState extends State<bottomNavigation> {
                 items: [
                   BottomNavigationBarItem(
                       icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.explore), label: 'Add Expenses'),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.settings_suggest_outlined),
                       label: 'My Account'),
