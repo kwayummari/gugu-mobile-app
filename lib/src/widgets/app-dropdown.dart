@@ -10,6 +10,7 @@ class DropdownTextFormField extends StatefulWidget {
   final String apiUrl;
   final String valueField;
   final String displayField;
+  final bool getMethod;
   final void Function(String?)? onChanged;
 
   DropdownTextFormField({
@@ -20,6 +21,7 @@ class DropdownTextFormField extends StatefulWidget {
     required this.apiUrl,
     required this.valueField,
     required this.displayField,
+    required this.getMethod,
     this.onChanged,
   });
 
@@ -30,7 +32,10 @@ class DropdownTextFormField extends StatefulWidget {
 class _DropdownTextFormFieldState extends State<DropdownTextFormField> {
   Future<List<DropdownMenuItem<String>>> _getItems() async {
     final dropdownService _dropdownService = await dropdownService();
-    final data = await _dropdownService.dropdown(context, widget.apiUrl);
+    final data = widget.getMethod
+        ? await _dropdownService.dropdownPost(context, widget.apiUrl)
+        : await _dropdownService.dropdown(context, widget.apiUrl);
+    print(data);
     return data
         .map<DropdownMenuItem<String>>((item) => DropdownMenuItem(
               value: item[widget.valueField].toString(),

@@ -59,7 +59,7 @@ class _expensesState extends State<expenses> {
                 fillcolor: AppConst.white,
                 apiUrl: 'getExpenses',
                 valueField: 'id',
-                displayField: 'name')
+                displayField: 'name', getMethod: true,)
           ],
         ));
   }
