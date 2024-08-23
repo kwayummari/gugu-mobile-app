@@ -35,7 +35,6 @@ class _DropdownTextFormFieldState extends State<DropdownTextFormField> {
     final data = widget.getMethod
         ? await _dropdownService.dropdownPost(context, widget.apiUrl)
         : await _dropdownService.dropdown(context, widget.apiUrl);
-    print(data);
     return data
         .map<DropdownMenuItem<String>>((item) => DropdownMenuItem(
               value: item[widget.valueField].toString(),
