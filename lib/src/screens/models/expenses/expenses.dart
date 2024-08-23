@@ -54,7 +54,12 @@ class _expensesState extends State<expenses> {
             SizedBox(
               height: 20,
             ),
-            DropdownTextFormField(labelText: 'Expense Type', fillcolor: AppConst.white, apiUrl: 'getExpenses', valueField: 'id', displayField: 'name')
+            DropdownTextFormField(
+                labelText: 'Expense Type',
+                fillcolor: AppConst.white,
+                apiUrl: 'getExpenses',
+                valueField: 'id',
+                displayField: 'name')
           ],
         ));
   }
