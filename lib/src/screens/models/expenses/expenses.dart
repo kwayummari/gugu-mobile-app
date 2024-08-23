@@ -1,4 +1,5 @@
 import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/widgets/app-dropdown.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,7 +54,7 @@ class _expensesState extends State<expenses> {
             SizedBox(
               height: 20,
             ),
-            
+            DropdownTextFormField(labelText: 'Expense Type', fillcolor: AppConst.white, apiUrl: 'getExpenses', valueField: 'id', displayField: 'name')
           ],
         ));
   }
