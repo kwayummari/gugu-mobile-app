@@ -106,17 +106,28 @@ class _expensesState extends State<expenses> {
                       width: MediaQuery.of(context).size.width - 20,
                       height: 55,
                       child: AppButton(
-                        onPress: () {
-                          // setState(() {
-                          //   isLoading = true;
-                          // });
+                        onPress: () async {
+                          setState(() {
+                            isLoading = true;
+                          });
                           if (!_formKey.currentState!.validate()) {
                             return;
                           }
-                          print(valueHolder.toString());
-                          print(amount.text.toString());
-                          expensesServices().expenses(context, valueHolder.toString(),
-                              amount.text.toString());
+                          final String result =
+                              await expensesServices().expenses(
+                            context,
+                            valueHolder.toString(),
+                            amount.text.toString(),
+                          );
+                          if (result == 'success') {
+                            setState(() {
+                              isLoading = false;
+                            });
+                          } else {
+                            setState(() {
+                              isLoading = false;
+                            });
+                          }
                         },
                         label: 'Submit',
                         borderRadius: 5,
