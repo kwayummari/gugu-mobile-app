@@ -18,6 +18,7 @@ class AppInputText extends StatelessWidget {
   final bool? isPhone;
   final double? circle;
   final labelWeight;
+  final TextInputType? keyboardType;
   AppInputText(
       {Key? key,
       this.isPhone,
@@ -34,6 +35,7 @@ class AppInputText extends StatelessWidget {
       this.validate,
       this.enabled,
       this.circle,
+      this.keyboardType,
       this.labelWeight})
       : super(key: key);
 
@@ -48,6 +50,7 @@ class AppInputText extends StatelessWidget {
         obscureText: obscure,
         obscuringCharacter: '*',
         controller: textfieldcontroller,
+        keyboardType: keyboardType ?? TextInputType.text,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(circle ?? 5.0),
