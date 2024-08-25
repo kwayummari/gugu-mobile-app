@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 
 class hairDressers {
   Api api = Api();
+  static String branchId = dotenv.env['BRANCH_ID'] ?? '1';
+  static String companyId = dotenv.env['COMPANY_ID'] ?? '1';
   Map<String, dynamic> data = {
-    'companyId': '1',
+    'companyId': companyId,
+    'branchId': branchId
   };
   Future getHairDresser(BuildContext context) async {
     final response = await api.post(context, 'getHairDresser', data);
@@ -31,8 +34,9 @@ class hairDressers {
   }
 
   Future getProducts(BuildContext context) async {
+    String companyId = dotenv.env['COMPANY_ID'] ?? '1';
     Map<String, dynamic> dataValue = {
-      'companyId': '1',
+      'companyId': companyId,
     };
     final response = await api.post(context, 'products', dataValue);
     final decodedResponse = jsonDecode(response.body);
