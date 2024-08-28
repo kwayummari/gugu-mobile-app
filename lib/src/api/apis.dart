@@ -22,14 +22,14 @@ class Api {
     if (response.statusCode != 200 &&
         response.statusCode != 400 &&
         response.statusCode != 300) {
-      throw Exception("Failed to fetch data");
+      throw Exception("Something went wrong, Please try again");
     }
   }
 
   Future<dynamic> get(BuildContext context, String endPoint) async {
-    // if (!(await hasInternetConnection())) {
-    //   throw Exception("No internet connection");
-    // }
+    if (!(await hasInternetConnection())) {
+      throw Exception("No internet connection");
+    }
     try {
       final response = await http
           .get(Uri.parse("$baseUrl$endPoint"))
@@ -41,16 +41,16 @@ class Api {
         isError: true,
         response: e.toString(),
       ).show(context);
-      throw Exception("Failed to fetch data");
+      throw Exception("Something went wrong, Please try again");
     }
   }
 
   // POST Request
   Future<dynamic> post(
       BuildContext context, String endPoint, Map<String, dynamic> data) async {
-    // if (!(await hasInternetConnection())) {
-    //   throw Exception("No internet connection");
-    // } else {
+    if (!(await hasInternetConnection())) {
+      throw Exception("No internet connection");
+    } else {
     try {
       final response = await http
           .post(
@@ -68,7 +68,7 @@ class Api {
         response: e.toString(),
       ).show(context);
     }
-    // }
+    }
   }
 
   // PUT Request
