@@ -177,6 +177,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
                     },
                   ),
                 ),
+                SizedBox(height: 50,)
               ],
             ),
           );
