@@ -157,8 +157,8 @@ class _availableHairStylesState extends State<availableHairStyles> {
                                     return AppText(
                                       txt: snapshot.data ?? '',
                                       color: Colors.white,
-                                      weight: FontWeight.w700,
-                                      size: 16,
+                                      weight: FontWeight.normal,
+                                      size: 12,
                                     );
                                   }
                                 },
