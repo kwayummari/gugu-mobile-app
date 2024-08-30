@@ -144,13 +144,6 @@ class _availableHairStylesState extends State<availableHairStyles> {
                                 color: AppConst.white,
                                 weight: FontWeight.bold,
                               ),
-                              AppText(
-                                txt: 'Vishanga: ' +
-                                    filteredData[index]['description'],
-                                size: 12,
-                                color: AppConst.white,
-                                weight: FontWeight.bold,
-                              ),
                               FutureBuilder<String>(
                                 future: formatPrice(
                                     filteredData[index]['amount'] ?? '50000',
