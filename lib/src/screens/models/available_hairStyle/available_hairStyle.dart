@@ -107,7 +107,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
                           },
                         ),
                         child: Container(
-                          height: 100,
+                          height: 150,
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             boxShadow: [
