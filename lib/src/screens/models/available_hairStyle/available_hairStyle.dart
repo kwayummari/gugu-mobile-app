@@ -139,7 +139,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
                                 weight: FontWeight.bold,
                               ),
                               AppText(
-                                txt: filteredData[index]['description'],
+                                txt: filteredData[index]['description'] ?? '',
                                 size: 12,
                                 color: AppConst.white,
                                 weight: FontWeight.bold,
