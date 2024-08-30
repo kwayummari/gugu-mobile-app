@@ -77,6 +77,7 @@ class _allStylesState extends State<allStyles> {
               )),
           SizedBox(height: 20),
           availableHairStyles(searchQuery: searchQuery),
+          SizedBox(height: 200),
         ],
       ),
     );

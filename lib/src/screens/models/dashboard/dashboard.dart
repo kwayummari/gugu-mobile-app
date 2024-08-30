@@ -157,7 +157,7 @@ class _dashboardState extends State<dashboard> {
                 )),
             availableHairStyles(searchQuery: searchQuery),
             SizedBox(
-              height: 50,
+              height: 200,
             ),
           ],
         ));
