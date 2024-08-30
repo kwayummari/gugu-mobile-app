@@ -81,100 +81,105 @@ class _availableHairStylesState extends State<availableHairStyles> {
               ),
             ),
           )
-        : SizedBox(
-            height: 500,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                itemCount: filteredData.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of columns
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: 1.6,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      RouteNames.getContentsById,
-                      arguments: {
-                        'styleId': filteredData[index]['id'],
-                        'name': filteredData[index]['name'],
-                        'amount': filteredData[index]['amount'],
-                      },
+        : Column(
+          children: [
+            SizedBox(
+                height: 500,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GridView.builder(
+                    itemCount: filteredData.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Number of columns
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 20,
+                      childAspectRatio: 1.6,
                     ),
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            AppConst.primary,
-                            AppConst.red,
-                          ],
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          RouteNames.getContentsById,
+                          arguments: {
+                            'styleId': filteredData[index]['id'],
+                            'name': filteredData[index]['name'],
+                            'amount': filteredData[index]['amount'],
+                          },
                         ),
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey[200],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AppText(
-                            txt: filteredData[index]['name'],
-                            size: 12,
-                            color: AppConst.white,
-                            weight: FontWeight.bold,
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                AppConst.primary,
+                                AppConst.red,
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.grey[200],
                           ),
-                          AppText(
-                            txt: filteredData[index]['description'],
-                            size: 12,
-                            color: AppConst.white,
-                            weight: FontWeight.bold,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppText(
+                                txt: filteredData[index]['name'],
+                                size: 12,
+                                color: AppConst.white,
+                                weight: FontWeight.bold,
+                              ),
+                              AppText(
+                                txt: filteredData[index]['description'],
+                                size: 12,
+                                color: AppConst.white,
+                                weight: FontWeight.bold,
+                              ),
+                              AppText(
+                                txt: 'Vishanga: ' +
+                                    filteredData[index]['description'],
+                                size: 12,
+                                color: AppConst.white,
+                                weight: FontWeight.bold,
+                              ),
+                              FutureBuilder<String>(
+                                future: formatPrice(
+                                    filteredData[index]['amount'] ?? '50000',
+                                    'Tzs'),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                          ConnectionState.waiting ||
+                                      !snapshot.hasData) {
+                                    return CircularProgressIndicator();
+                                  } else {
+                                    return AppText(
+                                      txt: snapshot.data ?? '',
+                                      color: Colors.white,
+                                      weight: FontWeight.w700,
+                                      size: 16,
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
                           ),
-                          AppText(
-                            txt: 'Vishanga: ' +
-                                filteredData[index]['description'],
-                            size: 12,
-                            color: AppConst.white,
-                            weight: FontWeight.bold,
-                          ),
-                          FutureBuilder<String>(
-                            future: formatPrice(
-                                filteredData[index]['amount'] ?? '50000',
-                                'Tzs'),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                      ConnectionState.waiting ||
-                                  !snapshot.hasData) {
-                                return CircularProgressIndicator();
-                              } else {
-                                return AppText(
-                                  txt: snapshot.data ?? '',
-                                  color: Colors.white,
-                                  weight: FontWeight.w700,
-                                  size: 16,
-                                );
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
-          );
+              SizedBox(height: 100,)
+          ],
+        );
   }
 }
