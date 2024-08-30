@@ -93,7 +93,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
                       crossAxisCount: 2, // Number of columns
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 20,
-                      childAspectRatio: 1.2,
+                      childAspectRatio: 1,
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
