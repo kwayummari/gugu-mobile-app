@@ -156,9 +156,6 @@ class _dashboardState extends State<dashboard> {
                   isPhone: false,
                 )),
             availableHairStyles(searchQuery: searchQuery),
-            SizedBox(
-              height: 200,
-            ),
           ],
         ));
   }
