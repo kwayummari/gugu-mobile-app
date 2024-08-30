@@ -11,7 +11,8 @@ class Api {
   // Check for internet connection
   Future<bool> hasInternetConnection() async {
     try {
-      final response = await http.head(Uri.parse(baseUrl));
+      final url = "https://google.com";
+      final response = await http.head(Uri.parse(url));
       return response.statusCode == 200;
     } catch (e) {
       throw Exception("Check your internet connection");
@@ -51,23 +52,25 @@ class Api {
     if (!(await hasInternetConnection())) {
       throw Exception("No internet connection");
     } else {
-    try {
-      final response = await http
-          .post(
-            Uri.parse('$baseUrl$endPoint'),
-            body: data,
-          )
-          .timeout(Duration(seconds: 10));
-      _handleError(response);
-      return response;
-    } catch (e) {
-      final myProvider = Provider.of<MyProvider>(context, listen: false);
-      if(myProvider.myLoging == true) {myProvider.updateLoging(!myProvider.myLoging);}
-      AppSnackbar(
-        isError: true,
-        response: e.toString(),
-      ).show(context);
-    }
+      try {
+        final response = await http
+            .post(
+              Uri.parse('$baseUrl$endPoint'),
+              body: data,
+            )
+            .timeout(Duration(seconds: 10));
+        _handleError(response);
+        return response;
+      } catch (e) {
+        final myProvider = Provider.of<MyProvider>(context, listen: false);
+        if (myProvider.myLoging == true) {
+          myProvider.updateLoging(!myProvider.myLoging);
+        }
+        AppSnackbar(
+          isError: true,
+          response: e.toString(),
+        ).show(context);
+      }
     }
   }
 
