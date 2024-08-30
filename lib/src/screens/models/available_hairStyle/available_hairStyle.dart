@@ -130,8 +130,8 @@ class _availableHairStylesState extends State<availableHairStyles> {
                             color: Colors.grey[200],
                           ),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               AppText(
                                 txt: filteredData[index]['name'],
