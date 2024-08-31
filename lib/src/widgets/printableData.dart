@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -14,6 +15,7 @@ String getCurrentDate() {
 
 
 String currentDate = getCurrentDate();
+String branchId = dotenv.env['BRANCH_ID'] ?? '1';
 buildPrintableData(image, style, amount, name, customer, customerPhone, randomNumber) => pw.Padding(
       padding: const pw.EdgeInsets.all(16.00),
       child: pw.Column(
@@ -45,7 +47,7 @@ buildPrintableData(image, style, amount, name, customer, customerPhone, randomNu
           pw.Align(
             alignment: pw.Alignment.center,
             child: pw.Text(
-              'Tanzania',
+              branchId == '2' ? 'Mwananyamala,Tanzania' : 'Kinondoni,Tanzania',
               style:
                   pw.TextStyle(fontSize: 8.00, fontWeight: pw.FontWeight.bold),
             ),
@@ -53,7 +55,7 @@ buildPrintableData(image, style, amount, name, customer, customerPhone, randomNu
           pw.Align(
             alignment: pw.Alignment.center,
             child: pw.Text(
-              'Tel: 0712673638',
+              branchId == '2' ? 'Tel: 0712673638' : '0678673638',
               style:
                   pw.TextStyle(fontSize: 8.00, fontWeight: pw.FontWeight.bold),
             ),
