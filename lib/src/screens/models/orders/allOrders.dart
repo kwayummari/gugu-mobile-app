@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/gateway/categories.dart';
+import 'package:gugu/src/provider/login-provider.dart';
 import 'package:gugu/src/utils/animations/shimmers/available_courses.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
@@ -14,6 +15,7 @@ import 'package:gugu/src/widgets/printableData.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:provider/provider.dart';
 
 class contentsById extends StatefulWidget {
   final dynamic styleId;
@@ -104,6 +106,7 @@ class _contentsByIdState extends State<contentsById> {
 
   @override
   Widget build(BuildContext context) {
+    final myProvider = Provider.of<MyProvider>(context);
     return AppBaseScreen(
       appBar: AppBar(
         title: AppText(
@@ -203,7 +206,7 @@ class _contentsByIdState extends State<contentsById> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          isLoading
+                                          myProvider.myLoging == true
                                               ? SpinKitCircle(
                                                   color: AppConst.primary,
                                                 )
@@ -217,103 +220,131 @@ class _contentsByIdState extends State<contentsById> {
                                                           .validate()) {
                                                         return;
                                                       }
-                                                      setState(() {
-                                                        isLoading = true;
-                                                      });
-                                                      // hairDressers
-                                                      //     hairDresserServices =
-                                                      //     hairDressers();
-                                                      // final datas =
-                                                      //     await hairDresserServices
-                                                      //         .makeOrder(
-                                                      //   context,
-                                                      //   nameController.text
-                                                      //       .toString(),
-                                                      //   phoneController.text
-                                                      //       .toString(),
-                                                      //   widget.styleId
-                                                      //       .toString(),
-                                                      //   filteredData[index][
-                                                      //           'hairdresserId']
-                                                      //       .toString(),
-                                                      //   randomNumber.toString(),
-                                                      // );
-                                                      // if (datas['message'] ==
-                                                      //     'Order created successfully') {
-                                                      //   Navigator.of(context)
-                                                      //       .pop();
-                                                      //   showDialog(
-                                                      //     context: context,
-                                                      //     builder: (BuildContext
-                                                      //         context) {
-                                                      //       return AlertDialog(
-                                                      //         backgroundColor:
-                                                      //             AppConst
-                                                      //                 .whiteOpacity,
-                                                      //         title: AppText(
-                                                      //           txt:
-                                                      //               'Print receipt',
-                                                      //           size: 20,
-                                                      //           weight:
-                                                      //               FontWeight
-                                                      //                   .bold,
-                                                      //         ),
-                                                      //         actions: [
-                                                      //           Padding(
-                                                      //             padding:
-                                                      //                 const EdgeInsets
-                                                      //                     .all(
-                                                      //                     8.0),
-                                                      //             child:
-                                                      //                 Container(
-                                                      //               width: 350,
-                                                      //               height: 55,
-                                                      //               child:
-                                                      //                   AppButton(
-                                                      //                 onPress:
-                                                      //                     () {
-                                                      //                   setState(
-                                                      //                       () {
-                                                      //                     isLoading =
-                                                      //                         false;
-                                                      //                   });
-                                                      //                   printDoc(
-                                                      //                       widget.name,
-                                                      //                       widget.amount,
-                                                      //                       filteredData[index]['hairDresserName'],
-                                                      //                       nameController.text.toString(),
-                                                      //                       phoneController.text.toString());
-                                                      //                   Navigator.of(context)
-                                                      //                       .pop();
-                                                      //                   AppSnackbar(
-                                                      //                     isError:
-                                                      //                         false,
-                                                      //                     response:
-                                                      //                         'Printing',
-                                                      //                   ).show(
-                                                      //                       context);
-                                                      //                 },
-                                                      //                 label:
-                                                      //                     'Print Receipts',
-                                                      //                 borderRadius:
-                                                      //                     5,
-                                                      //                 textColor:
-                                                      //                     AppConst
-                                                      //                         .white,
-                                                      //                 bcolor: AppConst
-                                                      //                     .primary,
-                                                      //               ),
-                                                      //             ),
-                                                      //           )
-                                                      //         ],
-                                                      //       );
-                                                      //     },
-                                                      //   );
-                                                      // } else {
-                                                      //   setState(() {
-                                                      //     isLoading = false;
-                                                      //   });
-                                                      // }
+                                                      showDialog(
+                                                        context: context,
+                                                        barrierDismissible:
+                                                            false,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            backgroundColor:
+                                                                AppConst
+                                                                    .whiteOpacity,
+                                                            content: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                SpinKitCircle(
+                                                                  color: AppConst
+                                                                      .primary,
+                                                                  size: 50.0,
+                                                                ),
+                                                                SizedBox(
+                                                                    height: 20),
+                                                                AppText(
+                                                                  txt:
+                                                                      'Processing your order...',
+                                                                  size: 18,
+                                                                  color: AppConst
+                                                                      .black,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                      hairDressers
+                                                          hairDresserServices =
+                                                          hairDressers();
+                                                      final datas =
+                                                          await hairDresserServices
+                                                              .makeOrder(
+                                                        context,
+                                                        nameController.text
+                                                            .toString(),
+                                                        phoneController.text
+                                                            .toString(),
+                                                        widget.styleId
+                                                            .toString(),
+                                                        filteredData[index][
+                                                                'hairdresserId']
+                                                            .toString(),
+                                                        randomNumber.toString(),
+                                                      );
+                                                      if (datas['message'] ==
+                                                          'Order created successfully') {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              backgroundColor:
+                                                                  AppConst
+                                                                      .whiteOpacity,
+                                                              title: AppText(
+                                                                txt:
+                                                                    'Print receipt',
+                                                                size: 20,
+                                                                weight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                              actions: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 350,
+                                                                    height: 55,
+                                                                    child:
+                                                                        AppButton(
+                                                                      onPress:
+                                                                          () {
+                                                                        myProvider
+                                                                            .updateLoging(!myProvider.myLoging);
+                                                                        printDoc(
+                                                                            widget.name,
+                                                                            widget.amount,
+                                                                            filteredData[index]['hairDresserName'],
+                                                                            nameController.text.toString(),
+                                                                            phoneController.text.toString());
+                                                                        Navigator.of(context)
+                                                                            .pop();
+                                                                        AppSnackbar(
+                                                                          isError:
+                                                                              false,
+                                                                          response:
+                                                                              'Printing',
+                                                                        ).show(
+                                                                            context);
+                                                                      },
+                                                                      label:
+                                                                          'Print Receipts',
+                                                                      borderRadius:
+                                                                          5,
+                                                                      textColor:
+                                                                          AppConst
+                                                                              .white,
+                                                                      bcolor: AppConst
+                                                                          .primary,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            );
+                                                          },
+                                                        );
+                                                      } else {
+                                                        myProvider.updateLoging(
+                                                            !myProvider
+                                                                .myLoging);
+                                                      }
                                                     },
                                                     label: 'Add order',
                                                     borderRadius: 5,
