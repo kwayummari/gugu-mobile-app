@@ -206,152 +206,138 @@ class _contentsByIdState extends State<contentsById> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          myProvider.myLoging == true
-                                              ? SpinKitCircle(
-                                                  color: AppConst.primary,
-                                                )
-                                              : Container(
-                                                  width: 350,
-                                                  height: 55,
-                                                  child: AppButton(
-                                                    onPress: () async {
-                                                      if (!_formKey
-                                                          .currentState!
-                                                          .validate()) {
-                                                        return;
-                                                      }
-                                                      showDialog(
-                                                        context: context,
-                                                        barrierDismissible:
-                                                            false,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return AlertDialog(
-                                                            backgroundColor:
-                                                                AppConst
-                                                                    .whiteOpacity,
-                                                            content: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              children: [
-                                                                SpinKitCircle(
-                                                                  color: AppConst
-                                                                      .primary,
-                                                                  size: 50.0,
-                                                                ),
-                                                                SizedBox(
-                                                                    height: 20),
-                                                                AppText(
-                                                                  txt:
-                                                                      'Processing your order...',
-                                                                  size: 18,
-                                                                  color: AppConst
-                                                                      .black,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          );
-                                                        },
-                                                      );
-                                                      hairDressers
-                                                          hairDresserServices =
-                                                          hairDressers();
-                                                      final datas =
-                                                          await hairDresserServices
-                                                              .makeOrder(
-                                                        context,
-                                                        nameController.text
-                                                            .toString(),
-                                                        phoneController.text
-                                                            .toString(),
-                                                        widget.styleId
-                                                            .toString(),
-                                                        filteredData[index][
-                                                                'hairdresserId']
-                                                            .toString(),
-                                                        randomNumber.toString(),
-                                                      );
-                                                      if (datas['message'] ==
-                                                          'Order created successfully') {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return AlertDialog(
-                                                              backgroundColor:
-                                                                  AppConst
-                                                                      .whiteOpacity,
-                                                              title: AppText(
-                                                                txt:
-                                                                    'Print receipt',
-                                                                size: 20,
-                                                                weight:
-                                                                    FontWeight
-                                                                        .bold,
+                                          Container(
+                                            width: 350,
+                                            height: 55,
+                                            child: AppButton(
+                                              onPress: () async {
+                                                if (!_formKey.currentState!
+                                                    .validate()) {
+                                                  return;
+                                                }
+                                                showDialog(
+                                                  context: context,
+                                                  barrierDismissible: false,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      backgroundColor:
+                                                          AppConst.whiteOpacity,
+                                                      content: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          SpinKitCircle(
+                                                            color: AppConst
+                                                                .primary,
+                                                            size: 50.0,
+                                                          ),
+                                                          SizedBox(height: 20),
+                                                          AppText(
+                                                            txt:
+                                                                'Processing your order...',
+                                                            size: 18,
+                                                            color:
+                                                                AppConst.black,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                                hairDressers
+                                                    hairDresserServices =
+                                                    hairDressers();
+                                                final datas =
+                                                    await hairDresserServices
+                                                        .makeOrder(
+                                                  context,
+                                                  nameController.text
+                                                      .toString(),
+                                                  phoneController.text
+                                                      .toString(),
+                                                  widget.styleId.toString(),
+                                                  filteredData[index]
+                                                          ['hairdresserId']
+                                                      .toString(),
+                                                  randomNumber.toString(),
+                                                );
+                                                if (datas['message'] ==
+                                                    'Order created successfully') {
+                                                  Navigator.of(context).pop();
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        backgroundColor:
+                                                            AppConst
+                                                                .whiteOpacity,
+                                                        title: AppText(
+                                                          txt: 'Print receipt',
+                                                          size: 20,
+                                                          weight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                        actions: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Container(
+                                                              width: 350,
+                                                              height: 55,
+                                                              child: AppButton(
+                                                                onPress: () {
+                                                                  printDoc(
+                                                                      widget
+                                                                          .name,
+                                                                      widget
+                                                                          .amount,
+                                                                      filteredData[
+                                                                              index]
+                                                                          [
+                                                                          'hairDresserName'],
+                                                                      nameController
+                                                                          .text
+                                                                          .toString(),
+                                                                      phoneController
+                                                                          .text
+                                                                          .toString());
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                  AppSnackbar(
+                                                                    isError:
+                                                                        false,
+                                                                    response:
+                                                                        'Printing',
+                                                                  ).show(
+                                                                      context);
+                                                                },
+                                                                label:
+                                                                    'Print Receipts',
+                                                                borderRadius: 5,
+                                                                textColor:
+                                                                    AppConst
+                                                                        .white,
+                                                                bcolor: AppConst
+                                                                    .primary,
                                                               ),
-                                                              actions: [
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(
-                                                                          8.0),
-                                                                  child:
-                                                                      Container(
-                                                                    width: 350,
-                                                                    height: 55,
-                                                                    child:
-                                                                        AppButton(
-                                                                      onPress:
-                                                                          () {
-                                                                        myProvider
-                                                                            .updateLoging(!myProvider.myLoging);
-                                                                        printDoc(
-                                                                            widget.name,
-                                                                            widget.amount,
-                                                                            filteredData[index]['hairDresserName'],
-                                                                            nameController.text.toString(),
-                                                                            phoneController.text.toString());
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                        AppSnackbar(
-                                                                          isError:
-                                                                              false,
-                                                                          response:
-                                                                              'Printing',
-                                                                        ).show(
-                                                                            context);
-                                                                      },
-                                                                      label:
-                                                                          'Print Receipts',
-                                                                      borderRadius:
-                                                                          5,
-                                                                      textColor:
-                                                                          AppConst
-                                                                              .white,
-                                                                      bcolor: AppConst
-                                                                          .primary,
-                                                                    ),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            );
-                                                          },
-                                                        );
-                                                      } else {
-                                                        myProvider.updateLoging(
-                                                            !myProvider
-                                                                .myLoging);
-                                                      }
+                                                            ),
+                                                          )
+                                                        ],
+                                                      );
                                                     },
-                                                    label: 'Add order',
-                                                    borderRadius: 5,
-                                                    textColor: AppConst.white,
-                                                    bcolor: AppConst.primary,
-                                                  ),
-                                                ),
+                                                  );
+                                                }
+                                              },
+                                              label: 'Add order',
+                                              borderRadius: 5,
+                                              textColor: AppConst.white,
+                                              bcolor: AppConst.primary,
+                                            ),
+                                          ),
                                           SizedBox(
                                             height: 10,
                                           ),
