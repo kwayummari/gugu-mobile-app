@@ -171,9 +171,7 @@ class _contentsByIdState extends State<contentsById> {
                                       key: _formKey,
                                       child: Column(
                                         children: [
-                                          SizedBox(
-                                            height: 5,
-                                          ),
+                                          SizedBox(height: 5),
                                           AppInputText(
                                             textsColor: AppConst.black,
                                             textfieldcontroller: nameController,
@@ -203,9 +201,7 @@ class _contentsByIdState extends State<contentsById> {
                                             isemail: false,
                                             isPhone: true,
                                           ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
+                                          SizedBox(height: 20),
                                           Container(
                                             width: 350,
                                             height: 55,
@@ -215,7 +211,8 @@ class _contentsByIdState extends State<contentsById> {
                                                     .validate()) {
                                                   return;
                                                 }
-                                                Navigator.pop(context);
+
+                                                // Show the loading dialog
                                                 showDialog(
                                                   context: context,
                                                   barrierDismissible: false,
@@ -246,6 +243,8 @@ class _contentsByIdState extends State<contentsById> {
                                                     );
                                                   },
                                                 );
+
+                                                // Perform the order operation
                                                 hairDressers
                                                     hairDresserServices =
                                                     hairDressers();
@@ -263,6 +262,11 @@ class _contentsByIdState extends State<contentsById> {
                                                       .toString(),
                                                   randomNumber.toString(),
                                                 );
+
+                                                // Close the loading dialog
+                                                Navigator.pop(context);
+
+                                                // If the order is successful
                                                 if (datas['message'] ==
                                                     'Order created successfully') {
                                                   Navigator.of(context).pop();
@@ -339,9 +343,7 @@ class _contentsByIdState extends State<contentsById> {
                                               bcolor: AppConst.primary,
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          SizedBox(height: 10),
                                         ],
                                       ),
                                     ),
