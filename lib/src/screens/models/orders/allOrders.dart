@@ -215,6 +215,7 @@ class _contentsByIdState extends State<contentsById> {
                                                     .validate()) {
                                                   return;
                                                 }
+                                                Navigator.pop(context);
                                                 showDialog(
                                                   context: context,
                                                   barrierDismissible: false,
