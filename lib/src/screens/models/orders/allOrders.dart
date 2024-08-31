@@ -212,14 +212,14 @@ class _contentsByIdState extends State<contentsById> {
                                                   height: 55,
                                                   child: AppButton(
                                                     onPress: () async {
-                                                      setState(() {
-                                                        isLoading = true;
-                                                      });
                                                       if (!_formKey
                                                           .currentState!
                                                           .validate()) {
                                                         return;
                                                       }
+                                                      setState(() {
+                                                        isLoading = true;
+                                                      });
                                                       hairDressers
                                                           hairDresserServices =
                                                           hairDressers();
@@ -309,6 +309,10 @@ class _contentsByIdState extends State<contentsById> {
                                                             );
                                                           },
                                                         );
+                                                      } else {
+                                                        setState(() {
+                                                          isLoading = false;
+                                                        });
                                                       }
                                                     },
                                                     label: 'Add order',
