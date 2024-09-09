@@ -42,7 +42,6 @@ class _contentsByIdState extends State<contentsById> {
   String selectedValue = '';
   List data = [];
   List filteredData = [];
-  List inventory = [];
   bool isLoading = false;
   int generateRandomSixDigitNumber() {
     final random = Random();
@@ -67,14 +66,9 @@ class _contentsByIdState extends State<contentsById> {
     hairDressers hairDresserServices = hairDressers();
     final datas = await hairDresserServices.getHairDresserById(
         context, widget.styleId.toString());
-    final dataValues = await hairDresserServices.getProducts(context);
     setState(() {
       data = datas['hairDresser'];
-      filteredData = data; // Initialize filteredData with all data
-      inventory = dataValues['products'];
-      if (inventory.isNotEmpty) {
-        selectedValue = '${inventory[0]['id']}-${inventory[0]['name']}';
-      }
+      filteredData = data;
     });
   }
 
