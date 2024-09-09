@@ -8,10 +8,7 @@ class hairDressers {
   Api api = Api();
   static String branchId = dotenv.env['BRANCH_ID'] ?? '1';
   static String companyId = dotenv.env['COMPANY_ID'] ?? '1';
-  Map<String, dynamic> data = {
-    'companyId': companyId,
-    'branchId': branchId
-  };
+  Map<String, dynamic> data = {'companyId': companyId, 'branchId': branchId};
   Future getHairDresser(BuildContext context) async {
     final response = await api.post(context, 'getHairDresser', data);
     final decodedResponse = jsonDecode(response.body);
@@ -30,6 +27,7 @@ class hairDressers {
     };
     final response = await api.post(context, 'getHairDresserById', dataValue);
     final decodedResponse = jsonDecode(response.body);
+    print('hairdressers' + decodedResponse);
     return decodedResponse;
   }
 
