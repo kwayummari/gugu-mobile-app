@@ -27,7 +27,7 @@ class hairDressers {
     };
     final response = await api.post(context, 'getHairDresserById', dataValue);
     final decodedResponse = jsonDecode(response.body);
-    print('hairdressers' + decodedResponse);
+    print('hairdressers' + decodedResponse.toString());
     return decodedResponse;
   }
 
