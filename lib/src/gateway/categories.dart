@@ -25,9 +25,9 @@ class hairDressers {
     Map<String, dynamic> dataValue = {
       'styleId': id,
     };
+    print(id);
     final response = await api.post(context, 'getHairDresserById', dataValue);
     final decodedResponse = jsonDecode(response.body);
-    print('hairdressers' + decodedResponse.toString());
     return decodedResponse;
   }
 
