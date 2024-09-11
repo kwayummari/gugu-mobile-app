@@ -108,6 +108,16 @@ class _contentsByIdState extends State<contentsById> {
           size: 20,
           weight: FontWeight.bold,
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                fetchData();
+              },
+              icon: Icon(
+                Icons.refresh,
+                color: AppConst.primary,
+              ))
+        ],
         centerTitle: true,
       ),
       bgcolor: AppConst.white,
