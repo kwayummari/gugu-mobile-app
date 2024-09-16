@@ -91,8 +91,8 @@ class _contentsByIdState extends State<contentsById> {
         // pageFormat: PdfPageFormat.a4,
         pageFormat: PdfPageFormat(58 * PdfPageFormat.mm, double.infinity),
         build: (pw.Context context) {
-          return buildPrintableData(image, style, amount, name, customer,
-              customerPhone, randomNumber);
+          return buildPrintableData(
+              image, style, amount, name, customer, randomNumber);
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
