@@ -8,9 +8,10 @@ import 'package:pdf/widgets.dart' as pw;
 
 
 String getCurrentDate() {
-  DateTime now = DateTime.now();
-  DateFormat formatter = DateFormat('dd/MM/yyyy');
-  return formatter.format(now);
+  DateTime nowUtc = DateTime.now().toUtc();
+  DateFormat format = DateFormat('dd/MM/yyyy');
+  String formattedDate = format.format(nowUtc.add(Duration(hours: 3)));
+  return formattedDate;
 }
 
 
