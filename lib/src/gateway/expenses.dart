@@ -9,10 +9,11 @@ class expensesServices {
   static String branchId = dotenv.env['BRANCH_ID'] ?? '1';
   static String companyId = dotenv.env['COMPANY_ID'] ?? '1';
   Future<String> expenses(
-      BuildContext context, String valueHolder, String amount) async {
+      BuildContext context, String valueHolder, String amount, String description) async {
     Map<String, dynamic> data = {
       'valueHolder': valueHolder,
       'amount': amount,
+      'description': description,
       'companyId': companyId,
       'branchId': branchId
     };

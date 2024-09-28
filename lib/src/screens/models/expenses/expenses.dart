@@ -17,6 +17,7 @@ class expenses extends StatefulWidget {
 
 class _expensesState extends State<expenses> {
   TextEditingController amount = TextEditingController();
+  TextEditingController description = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   var fullname;
@@ -82,6 +83,24 @@ class _expensesState extends State<expenses> {
               ),
               AppInputText(
                 textsColor: AppConst.black,
+                textfieldcontroller: description,
+                ispassword: false,
+                fillcolor: AppConst.white,
+                label: 'Description',
+                obscure: false,
+                icon: Icon(
+                  Icons.text_fields,
+                  color: AppConst.black,
+                ),
+                isemail: false,
+                isPhone: false,
+                keyboardType: TextInputType.number,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              AppInputText(
+                textsColor: AppConst.black,
                 textfieldcontroller: amount,
                 ispassword: false,
                 fillcolor: AppConst.white,
@@ -118,6 +137,7 @@ class _expensesState extends State<expenses> {
                             context,
                             valueHolder.toString(),
                             amount.text.toString(),
+                            description.text.toString(),
                           );
                           if (result == 'success') {
                             setState(() {
