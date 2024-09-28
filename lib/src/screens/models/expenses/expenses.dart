@@ -83,24 +83,6 @@ class _expensesState extends State<expenses> {
               ),
               AppInputText(
                 textsColor: AppConst.black,
-                textfieldcontroller: description,
-                ispassword: false,
-                fillcolor: AppConst.white,
-                label: 'Description',
-                obscure: false,
-                icon: Icon(
-                  Icons.text_fields,
-                  color: AppConst.black,
-                ),
-                isemail: false,
-                isPhone: false,
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              AppInputText(
-                textsColor: AppConst.black,
                 textfieldcontroller: amount,
                 ispassword: false,
                 fillcolor: AppConst.white,
@@ -113,6 +95,24 @@ class _expensesState extends State<expenses> {
                 isemail: false,
                 isPhone: false,
                 keyboardType: TextInputType.number,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              AppInputText(
+                textsColor: AppConst.black,
+                textfieldcontroller: description,
+                ispassword: false,
+                fillcolor: AppConst.white,
+                label: 'Description',
+                obscure: false,
+                icon: Icon(
+                  Icons.text_fields,
+                  color: AppConst.black,
+                ),
+                isemail: false,
+                isPhone: false,
+                keyboardType: TextInputType.text,
               ),
               SizedBox(
                 height: 20,
