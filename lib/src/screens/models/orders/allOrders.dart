@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/gateway/categories.dart';
-import 'package:gugu/src/provider/login-provider.dart';
 import 'package:gugu/src/utils/animations/shimmers/available_courses.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
@@ -15,7 +14,6 @@ import 'package:gugu/src/widgets/printableData.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:provider/provider.dart';
 
 class contentsById extends StatefulWidget {
   final dynamic styleId;
@@ -100,7 +98,6 @@ class _contentsByIdState extends State<contentsById> {
 
   @override
   Widget build(BuildContext context) {
-    final myProvider = Provider.of<MyProvider>(context);
     return AppBaseScreen(
       appBar: AppBar(
         title: AppText(
