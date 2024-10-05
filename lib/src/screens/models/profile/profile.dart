@@ -5,14 +5,14 @@ import 'package:gugu/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class profile extends StatefulWidget {
-  const profile({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  State<profile> createState() => _profileState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _profileState extends State<profile> {
+class _ProfileState extends State<Profile> {
   var data;
   void fetchData() async {
     profileService ProfileService = profileService();

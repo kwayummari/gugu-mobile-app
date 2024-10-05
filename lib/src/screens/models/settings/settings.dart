@@ -5,15 +5,15 @@ import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class settings extends StatefulWidget {
-  const settings({super.key});
+class Settings extends StatefulWidget {
+  const Settings({super.key});
 
   @override
-  State<settings> createState() => _settingsState();
+  State<Settings> createState() => _SettingsState();
 }
 
-class _settingsState extends State<settings> {
-  Future<void> phonecall() async {
+class _SettingsState extends State<Settings> {
+  Future<void> phoneCall() async {
     final Uri launchUri = Uri(
       scheme: 'tel',
       path: '0743469680',
@@ -63,7 +63,7 @@ class _settingsState extends State<settings> {
             height: 15,
           ),
           ListTile(
-            onTap: () => phonecall(),
+            onTap: () => phoneCall(),
             leading: Icon(Icons.phone),
             title: AppText(
               txt: 'Contact us',

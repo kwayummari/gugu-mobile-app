@@ -11,4 +11,5 @@ class RouteNames {
   static const String videoPlayer = '/videoPlayer';
   static const String payment = '/payment';
   static const String allStyles = '/allStyles';
+  static const String payroll = '/payroll';
 }

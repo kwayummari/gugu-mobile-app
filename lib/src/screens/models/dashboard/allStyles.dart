@@ -6,14 +6,14 @@ import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class allStyles extends StatefulWidget {
-  const allStyles({Key? key}) : super(key: key);
+class AllStyles extends StatefulWidget {
+  const AllStyles({Key? key}) : super(key: key);
 
   @override
-  State<allStyles> createState() => _allStylesState();
+  State<AllStyles> createState() => _AllStylesState();
 }
 
-class _allStylesState extends State<allStyles> {
+class _AllStylesState extends State<AllStyles> {
   var fullname;
   TextEditingController search = TextEditingController();
   String searchQuery = '';

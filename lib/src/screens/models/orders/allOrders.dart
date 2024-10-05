@@ -15,12 +15,12 @@ import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class contentsById extends StatefulWidget {
+class ContentsById extends StatefulWidget {
   final dynamic styleId;
   final String name;
   final String amount;
 
-  const contentsById(
+  const ContentsById(
       {Key? key,
       required this.styleId,
       required this.name,
@@ -28,10 +28,10 @@ class contentsById extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<contentsById> createState() => _contentsByIdState();
+  State<ContentsById> createState() => _ContentsByIdState();
 }
 
-class _contentsByIdState extends State<contentsById> {
+class _ContentsByIdState extends State<ContentsById> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();

@@ -7,14 +7,14 @@ import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class dashboard extends StatefulWidget {
-  const dashboard({Key? key}) : super(key: key);
+class Dashboard extends StatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
-  State<dashboard> createState() => _dashboardState();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _dashboardState extends State<dashboard> {
+class _DashboardState extends State<Dashboard> {
   var fullname;
   TextEditingController search = TextEditingController();
   String searchQuery = '';

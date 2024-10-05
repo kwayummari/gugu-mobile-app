@@ -2,23 +2,25 @@
 
 import 'package:gugu/src/screens/models/dashboard/dashboard.dart';
 import 'package:gugu/src/screens/models/expenses/expenses.dart';
+import 'package:gugu/src/screens/models/payroll/payroll.dart';
 import 'package:gugu/src/screens/models/settings/settings.dart';
 import 'package:gugu/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
 
-class bottomNavigation extends StatefulWidget {
-  const bottomNavigation({Key? key}) : super(key: key);
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({Key? key}) : super(key: key);
 
   @override
-  _bottomNavigationState createState() => _bottomNavigationState();
+  _BottomNavigationState createState() => _BottomNavigationState();
 }
 
-class _bottomNavigationState extends State<bottomNavigation> {
+class _BottomNavigationState extends State<BottomNavigation> {
   int index = 0;
   final Screen = [
-    dashboard(),
-    expenses(),
-    settings(),
+    Dashboard(),
+    Expenses(),
+    Payroll(),
+    Settings(),
   ];
 
   @override
@@ -45,6 +47,8 @@ class _bottomNavigationState extends State<bottomNavigation> {
                       icon: Icon(Icons.home), label: 'Home'),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.explore), label: 'Add Expenses'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.payment), label: 'Payroll'),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.settings_suggest_outlined),
                       label: 'My Account'),

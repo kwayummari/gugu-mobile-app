@@ -8,14 +8,14 @@ import 'package:gugu/src/widgets/app_button.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class expenses extends StatefulWidget {
-  const expenses({Key? key}) : super(key: key);
+class Expenses extends StatefulWidget {
+  const Expenses({Key? key}) : super(key: key);
 
   @override
-  State<expenses> createState() => _expensesState();
+  State<Expenses> createState() => _ExpensesState();
 }
 
-class _expensesState extends State<expenses> {
+class _ExpensesState extends State<Expenses> {
   TextEditingController amount = TextEditingController();
   TextEditingController description = TextEditingController();
   final _formKey = GlobalKey<FormState>();
