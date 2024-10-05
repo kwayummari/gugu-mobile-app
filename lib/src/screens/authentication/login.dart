@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
     final myProvider = Provider.of<MyProvider>(context);
     return AppBaseScreen(
       isFlexible: false,
-          showAppBar: false,
+      showAppBar: false,
       bgcolor: AppConst.white,
       isvisible: false,
       backgroundImage: false,
@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
           child: Column(
             children: [
               SizedBox(
-                height: 20,
+                height: 100,
               ),
               Image.asset(
                 'assets/icon.png',
