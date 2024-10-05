@@ -4,7 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 abstract class AppConst {
   static Color primary = HexColor('#eb008b');
   static Gradient primaryGradient = LinearGradient(
-    colors: [HexColor('#150572'), HexColor('#2eb2be')],
+    colors: [HexColor('#000000'), HexColor('#eb008b')],
     begin: Alignment.bottomCenter,
     end: Alignment.topRight,
   );
