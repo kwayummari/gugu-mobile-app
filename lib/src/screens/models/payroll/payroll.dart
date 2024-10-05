@@ -26,7 +26,7 @@ class _PayrollState extends State<Payroll> {
   String formatPrice(String number, String currencySymbol) {
     int price = int.parse(number);
     String formattedPrice = NumberFormat('#,###').format(price);
-    return 'Amount: ' + formattedPrice + currencySymbol;
+    return formattedPrice + currencySymbol;
   }
 
   void fetchData() async {
@@ -62,20 +62,23 @@ class _PayrollState extends State<Payroll> {
             AppListviewBuilder(
                 itemnumber: data.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return AppListTile(
-                    title: AppText(
-                      txt: data[index]['hairDresserName'],
-                      size: 15,
-                      color: AppConst.black,
-                      weight: FontWeight.bold,
-                    ),
-                    trailing: AppText(
-                      txt: formatPrice(
-                          data[index]['totalHairDresserAmount'].toString(),
-                          'Tsh'),
-                      size: 15,
-                      color: AppConst.black,
-                      weight: FontWeight.normal,
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: AppListTile(
+                      title: AppText(
+                        txt: data[index]['hairDresserName'],
+                        size: 15,
+                        color: AppConst.black,
+                        weight: FontWeight.bold,
+                      ),
+                      trailing: AppText(
+                        txt: formatPrice(
+                            data[index]['totalHairDresserAmount'].toString(),
+                            'Tsh'),
+                        size: 15,
+                        color: AppConst.black,
+                        weight: FontWeight.normal,
+                      ),
                     ),
                   );
                 })
