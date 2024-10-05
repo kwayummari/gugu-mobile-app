@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_text.dart';
@@ -47,6 +48,7 @@ class AppBaseScreen extends StatefulWidget {
 class _AppBaseScreenState extends State<AppBaseScreen> {
   var fullname;
   var roles;
+  static String branchId = dotenv.env['BRANCH_ID'] ?? '1';
   OverlayEntry? sideSheetOverlayEntry;
   final sideSheetOverlayLayerLink = LayerLink();
   bool isSidebarShown = false;
@@ -149,7 +151,7 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
                                     ),
                                   ),
                                   AppText(
-                                    txt: '(${roles})',
+                                    txt: branchId == '1' ? 'Kinondoni' : 'Mwananyamala',
                                     size: 15,
                                     weight: FontWeight.w600,
                                     color: AppConst.white,
