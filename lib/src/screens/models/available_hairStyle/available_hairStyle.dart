@@ -57,7 +57,7 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
     return filteredData.isEmpty
         ? Column(
             children: List.generate(
-              5, // Number of rows you want to generate
+              5,
               (index) => Row(
                 children: [
                   Padding(
@@ -82,8 +82,8 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
             ),
           )
         : Column(
-          children: [
-            SizedBox(
+            children: [
+              SizedBox(
                 height: 400,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -117,14 +117,7 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
                                 offset: Offset(0, 3),
                               ),
                             ],
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                AppConst.primary,
-                                AppConst.red,
-                              ],
-                            ),
+                            gradient: AppConst.primaryGradient,
                             borderRadius: BorderRadius.circular(15),
                             color: Colors.grey[200],
                           ),
@@ -134,7 +127,7 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
                             children: [
                               AppText(
                                 txt: filteredData[index]['name'],
-                                size: 12,
+                                size: 15,
                                 color: AppConst.white,
                                 weight: FontWeight.bold,
                               ),
@@ -158,7 +151,7 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
                                       txt: snapshot.data ?? '',
                                       color: Colors.white,
                                       weight: FontWeight.normal,
-                                      size: 12,
+                                      size: 15,
                                     );
                                   }
                                 },
@@ -171,8 +164,10 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
                   ),
                 ),
               ),
-              SizedBox(height: 100,)
-          ],
-        );
+              SizedBox(
+                height: 100,
+              )
+            ],
+          );
   }
 }
