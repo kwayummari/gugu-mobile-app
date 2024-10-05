@@ -78,7 +78,7 @@ class _AllStylesState extends State<AllStyles> {
                 isPhone: false,
               )),
           SizedBox(height: 20),
-          availableHairStyles(searchQuery: searchQuery),
+          AvailableHairStyles(searchQuery: searchQuery),
         ],
       ),
     );

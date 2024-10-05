@@ -157,7 +157,7 @@ class _DashboardState extends State<Dashboard> {
                   isemail: false,
                   isPhone: false,
                 )),
-            availableHairStyles(searchQuery: searchQuery),
+            AvailableHairStyles(searchQuery: searchQuery),
           ],
         ));
   }

@@ -6,16 +6,16 @@ import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 
-class availableHairStyles extends StatefulWidget {
+class AvailableHairStyles extends StatefulWidget {
   final String searchQuery;
-  const availableHairStyles({Key? key, this.searchQuery = ''})
+  const AvailableHairStyles({Key? key, this.searchQuery = ''})
       : super(key: key);
 
   @override
-  State<availableHairStyles> createState() => _availableHairStylesState();
+  State<AvailableHairStyles> createState() => _AvailableHairStylesState();
 }
 
-class _availableHairStylesState extends State<availableHairStyles> {
+class _AvailableHairStylesState extends State<AvailableHairStyles> {
   List data = [];
   List filteredData = [];
 
@@ -45,7 +45,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
   }
 
   @override
-  void didUpdateWidget(covariant availableHairStyles oldWidget) {
+  void didUpdateWidget(covariant AvailableHairStyles oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.searchQuery != widget.searchQuery) {
       filterData();
