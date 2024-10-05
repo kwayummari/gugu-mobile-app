@@ -1,4 +1,4 @@
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +24,8 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(bcolor),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          backgroundColor: WidgetStateProperty.all<Color>(bcolor),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius),
               side: borderColor != null
@@ -41,7 +41,8 @@ class AppButton extends StatelessWidget {
         child: AppText(
           txt: label,
           color: textColor,
-          size: 15,
+          size: 20,
+          weight: FontWeight.bold,
         ));
   }
 }

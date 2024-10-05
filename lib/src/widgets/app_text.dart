@@ -10,6 +10,7 @@ class AppText extends StatelessWidget {
   var weight;
   double size;
   TextDecoration? textdecoration;
+  final TextOverflow? overflow;
   final bool? softWrap;
   AppText(
       {Key? key,
@@ -17,6 +18,7 @@ class AppText extends StatelessWidget {
       this.color,
       this.align,
       this.weight,
+      this.overflow,
       this.textdecoration,
       required this.size,
       this.softWrap
@@ -29,6 +31,7 @@ class AppText extends StatelessWidget {
       txt.toString(),
       textAlign: align ?? null,
       softWrap: softWrap,
+      overflow: overflow ?? null,
       style: TextStyle(
         decoration: textdecoration,
         color: color,

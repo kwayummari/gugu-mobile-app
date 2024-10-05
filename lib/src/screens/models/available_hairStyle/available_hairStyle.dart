@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:gugu/src/functions/moneyFormatter.dart';
 import 'package:gugu/src/gateway/categories.dart';
 import 'package:gugu/src/utils/animations/shimmers/available_courses.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 
-class availableHairStyles extends StatefulWidget {
+class AvailableHairStyles extends StatefulWidget {
   final String searchQuery;
-  const availableHairStyles({Key? key, this.searchQuery = ''})
+  const AvailableHairStyles({Key? key, this.searchQuery = ''})
       : super(key: key);
 
   @override
-  State<availableHairStyles> createState() => _availableHairStylesState();
+  State<AvailableHairStyles> createState() => _AvailableHairStylesState();
 }
 
-class _availableHairStylesState extends State<availableHairStyles> {
+class _AvailableHairStylesState extends State<AvailableHairStyles> {
   List data = [];
   List filteredData = [];
 
@@ -45,7 +45,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
   }
 
   @override
-  void didUpdateWidget(covariant availableHairStyles oldWidget) {
+  void didUpdateWidget(covariant AvailableHairStyles oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.searchQuery != widget.searchQuery) {
       filterData();
@@ -57,7 +57,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
     return filteredData.isEmpty
         ? Column(
             children: List.generate(
-              5, // Number of rows you want to generate
+              5,
               (index) => Row(
                 children: [
                   Padding(
@@ -82,8 +82,8 @@ class _availableHairStylesState extends State<availableHairStyles> {
             ),
           )
         : Column(
-          children: [
-            SizedBox(
+            children: [
+              SizedBox(
                 height: 400,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -117,14 +117,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
                                 offset: Offset(0, 3),
                               ),
                             ],
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                AppConst.primary,
-                                AppConst.red,
-                              ],
-                            ),
+                            gradient: AppConst.primaryGradient,
                             borderRadius: BorderRadius.circular(15),
                             color: Colors.grey[200],
                           ),
@@ -134,7 +127,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
                             children: [
                               AppText(
                                 txt: filteredData[index]['name'],
-                                size: 12,
+                                size: 15,
                                 color: AppConst.white,
                                 weight: FontWeight.bold,
                               ),
@@ -158,7 +151,7 @@ class _availableHairStylesState extends State<availableHairStyles> {
                                       txt: snapshot.data ?? '',
                                       color: Colors.white,
                                       weight: FontWeight.normal,
-                                      size: 12,
+                                      size: 15,
                                     );
                                   }
                                 },
@@ -171,8 +164,10 @@ class _availableHairStylesState extends State<availableHairStyles> {
                   ),
                 ),
               ),
-              SizedBox(height: 100,)
-          ],
-        );
+              SizedBox(
+                height: 100,
+              )
+            ],
+          );
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/gateway/categories.dart';
 import 'package:gugu/src/utils/animations/shimmers/available_courses.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_button.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
@@ -15,12 +15,12 @@ import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class contentsById extends StatefulWidget {
+class ContentsById extends StatefulWidget {
   final dynamic styleId;
   final String name;
   final String amount;
 
-  const contentsById(
+  const ContentsById(
       {Key? key,
       required this.styleId,
       required this.name,
@@ -28,10 +28,10 @@ class contentsById extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<contentsById> createState() => _contentsByIdState();
+  State<ContentsById> createState() => _ContentsByIdState();
 }
 
-class _contentsByIdState extends State<contentsById> {
+class _ContentsByIdState extends State<ContentsById> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -121,6 +121,8 @@ class _contentsByIdState extends State<contentsById> {
       isvisible: false,
       backgroundImage: false,
       backgroundAuth: false,
+      isFlexible: true,
+      showAppBar: true,
       child: Column(
         children: [
           Padding(
@@ -364,14 +366,7 @@ class _contentsByIdState extends State<contentsById> {
                                   offset: Offset(0, 3),
                                 ),
                               ],
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  AppConst.primary,
-                                  AppConst.red,
-                                ],
-                              ),
+                              gradient: AppConst.primaryGradient,
                               borderRadius: BorderRadius.circular(15),
                               color: Colors.grey[200],
                             ),
@@ -383,6 +378,7 @@ class _contentsByIdState extends State<contentsById> {
                                   txt: filteredData[index]['hairDresserName'],
                                   size: 18,
                                   color: AppConst.white,
+                                  weight: FontWeight.bold,
                                 ),
                               ],
                             ),

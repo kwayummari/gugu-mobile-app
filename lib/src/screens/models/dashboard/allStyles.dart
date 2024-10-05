@@ -1,19 +1,19 @@
 import 'package:gugu/src/screens/models/available_hairStyle/available_hairStyle.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class allStyles extends StatefulWidget {
-  const allStyles({Key? key}) : super(key: key);
+class AllStyles extends StatefulWidget {
+  const AllStyles({Key? key}) : super(key: key);
 
   @override
-  State<allStyles> createState() => _allStylesState();
+  State<AllStyles> createState() => _AllStylesState();
 }
 
-class _allStylesState extends State<allStyles> {
+class _AllStylesState extends State<AllStyles> {
   var fullname;
   TextEditingController search = TextEditingController();
   String searchQuery = '';
@@ -52,9 +52,11 @@ class _allStylesState extends State<allStyles> {
           weight: FontWeight.bold,
         ),
       ),
+      isFlexible: false,
+      showAppBar: false,
       child: Column(
         children: [
-          SizedBox(height: 20),
+          SizedBox(height: 30),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: AppInputText(
@@ -75,8 +77,7 @@ class _allStylesState extends State<allStyles> {
                 isemail: false,
                 isPhone: false,
               )),
-          SizedBox(height: 20),
-          availableHairStyles(searchQuery: searchQuery),
+          AvailableHairStyles(searchQuery: searchQuery),
         ],
       ),
     );

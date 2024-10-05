@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gugu/src/gateway/categories.dart';
 import 'package:gugu/src/utils/animations/shimmers/available_courses.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_listview_builder.dart';
 import 'package:gugu/src/widgets/app_text.dart';
@@ -94,15 +94,6 @@ class _topSearchState extends State<topSearch> {
                                 }),
                             child: Stack(
                               children: [
-                                // ColorFiltered(
-                                //   colorFilter: ColorFilter.mode(
-                                //     Colors.black.withOpacity(0.6),
-                                //     BlendMode.srcOver,
-                                //   ),
-                                //   child: Image.network(
-                                //     '${dotenv.env['IMAGE_SERVER']}${data[index]['image']}',
-                                //   ),
-                                // ),
                                 Positioned(
                                   left: 20,
                                   right: 20,

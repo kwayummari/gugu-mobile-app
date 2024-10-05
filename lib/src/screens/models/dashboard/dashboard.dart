@@ -1,5 +1,5 @@
 import 'package:gugu/src/screens/models/available_hairStyle/available_hairStyle.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +7,14 @@ import 'package:gugu/src/widgets/app_input_text.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class dashboard extends StatefulWidget {
-  const dashboard({Key? key}) : super(key: key);
+class Dashboard extends StatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
-  State<dashboard> createState() => _dashboardState();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _dashboardState extends State<dashboard> {
+class _DashboardState extends State<Dashboard> {
   var fullname;
   TextEditingController search = TextEditingController();
   String searchQuery = '';
@@ -47,8 +47,8 @@ class _dashboardState extends State<dashboard> {
           backgroundColor: AppConst.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(0),
             ),
           ),
           toolbarHeight: 100,
@@ -94,6 +94,8 @@ class _dashboardState extends State<dashboard> {
             ),
           ),
         ),
+        isFlexible: true,
+        showAppBar: true,
         child: Column(
           children: [
             SizedBox(
@@ -155,7 +157,7 @@ class _dashboardState extends State<dashboard> {
                   isemail: false,
                   isPhone: false,
                 )),
-            availableHairStyles(searchQuery: searchQuery),
+            AvailableHairStyles(searchQuery: searchQuery),
           ],
         ));
   }

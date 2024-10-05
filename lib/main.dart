@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gugu/src/functions/createMaterialColor.dart';
 import 'package:gugu/src/provider/login-provider.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/utils/routes/routes.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'GUGU BEAUTY SALOONv',
         theme: ThemeData(
-            // timePickerTheme: Theme.of(context).primaryColor,
             cardColor: AppConst.primary,
             highlightColor: AppConst.primary,
             splashColor: AppConst.primary,
@@ -50,6 +49,6 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             colorScheme: ColorScheme.fromSwatch(
               primarySwatch: createMaterialColor(AppConst.primary),
-            ).copyWith(background: AppConst.primary)),
+            ).copyWith(surface: AppConst.primary)),
       ));
 }
