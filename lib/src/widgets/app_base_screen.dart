@@ -72,8 +72,8 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
   Future<String> getName() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var name = sharedPreferences.getString('fullname');
-    var role = sharedPreferences.getString('rolesName');
+    var name = sharedPreferences.getString('name');
+    var role = 'Manager';
     setState(() {
       fullname = name.toString();
       roles = role.toString();
