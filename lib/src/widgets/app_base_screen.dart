@@ -151,7 +151,9 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
                                     ),
                                   ),
                                   AppText(
-                                    txt: branchId == '1' ? 'Kinondoni' : 'Mwananyamala',
+                                    txt: branchId == '1'
+                                        ? '(Kinondoni)'
+                                        : '(Mwananyamala)',
                                     size: 15,
                                     weight: FontWeight.w600,
                                     color: AppConst.white,
