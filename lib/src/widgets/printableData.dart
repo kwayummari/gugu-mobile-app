@@ -5,8 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-
-
 String getCurrentDate() {
   DateTime nowUtc = DateTime.now().toUtc();
   DateFormat format = DateFormat('dd/MM/yyyy');
@@ -14,10 +12,10 @@ String getCurrentDate() {
   return formattedDate;
 }
 
-
 String currentDate = getCurrentDate();
 String branchId = dotenv.env['BRANCH_ID'] ?? '1';
-buildPrintableData(image, style, amount, name, customer, randomNumber) => pw.Padding(
+buildPrintableData(image, style, amount, name, customer, randomNumber) =>
+    pw.Padding(
       padding: const pw.EdgeInsets.all(16.00),
       child: pw.Column(
         children: [
@@ -78,14 +76,18 @@ buildPrintableData(image, style, amount, name, customer, randomNumber) => pw.Pad
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Receipt no:',
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     randomNumber.toString(),
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -97,14 +99,18 @@ buildPrintableData(image, style, amount, name, customer, randomNumber) => pw.Pad
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Customer:',
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     customer,
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -116,14 +122,18 @@ buildPrintableData(image, style, amount, name, customer, randomNumber) => pw.Pad
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Style',
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     style,
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -135,14 +145,18 @@ buildPrintableData(image, style, amount, name, customer, randomNumber) => pw.Pad
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Styler:',
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     name,
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
@@ -154,17 +168,29 @@ buildPrintableData(image, style, amount, name, customer, randomNumber) => pw.Pad
                   pw.SizedBox(width: 5.5),
                   pw.Text(
                     'Total:',
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.Spacer(),
                   pw.Text(
                     amount,
-                    style:  pw.TextStyle(
-                        color: PdfColor(0, 0, 0, 0), fontSize: 8.00, fontWeight: pw.FontWeight.bold),
+                    style: pw.TextStyle(
+                        color: PdfColor(0, 0, 0, 0),
+                        fontSize: 8.00,
+                        fontWeight: pw.FontWeight.bold),
                   ),
                   pw.SizedBox(width: 5.5),
                 ],
+              ),
+              pw.SizedBox(height: 20),
+              pw.Text(
+                'Powered by Aurorawave labs @${DateTime.now().year}',
+                style: pw.TextStyle(
+                    color: PdfColor(0, 0, 0, 0),
+                    fontSize: 8.00,
+                    fontWeight: pw.FontWeight.bold),
               ),
               pw.SizedBox(height: 8.5),
             ],
