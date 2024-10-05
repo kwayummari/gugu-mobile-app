@@ -97,19 +97,6 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
                   child: widget.title,
                 ),
               ),
-              actions: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.notifications_none_sharp,
-                      color: widget.iconColor ?? AppConst.white,
-                      size: 30,
-                    ),
-                  ),
-                ),
-              ],
               flexibleSpace: widget.isFlexible == true
                   ? Container(
                       decoration:
@@ -125,26 +112,22 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
                                 width: 30,
                               ),
                               CircleAvatar(
-                                radius: 50,
-                                backgroundColor: AppConst.white,
+                                backgroundColor: AppConst.primary,
+                                radius: 45,
                                 child: CircleAvatar(
-                                  backgroundColor: AppConst.primary,
-                                  radius: 45,
-                                  child: CircleAvatar(
-                                    backgroundColor: AppConst.brightWhite,
-                                    radius: 40,
-                                    child: AppText(
-                                      txt: fullname == null
-                                          ? ''
-                                          : fullname
-                                              .split(' ')
-                                              .map((word) =>
-                                                  word[0].toUpperCase())
-                                              .join(''),
-                                      size: 25,
-                                      weight: FontWeight.w700,
-                                      color: AppConst.white,
-                                    ),
+                                  backgroundColor: AppConst.black,
+                                  radius: 40,
+                                  child: AppText(
+                                    txt: fullname == null
+                                        ? ''
+                                        : fullname
+                                            .split(' ')
+                                            .map(
+                                                (word) => word[0].toUpperCase())
+                                            .join(''),
+                                    size: 25,
+                                    weight: FontWeight.w700,
+                                    color: AppConst.white,
                                   ),
                                 ),
                               ),
