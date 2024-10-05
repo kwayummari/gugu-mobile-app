@@ -25,8 +25,17 @@ class hairDressers {
     Map<String, dynamic> dataValue = {
       'styleId': id,
     };
-    print(id);
     final response = await api.post(context, 'getHairDresserById', dataValue);
+    final decodedResponse = jsonDecode(response.body);
+    return decodedResponse;
+  }
+
+  Future getPayroll(BuildContext context) async {
+    Map<String, dynamic> dataValue = {
+      'companyId': companyId,
+      'branchId': branchId
+    };
+    final response = await api.post(context, 'getPayroll', dataValue);
     final decodedResponse = jsonDecode(response.body);
     return decodedResponse;
   }

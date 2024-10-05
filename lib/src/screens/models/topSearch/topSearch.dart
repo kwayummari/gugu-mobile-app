@@ -94,15 +94,6 @@ class _topSearchState extends State<topSearch> {
                                 }),
                             child: Stack(
                               children: [
-                                // ColorFiltered(
-                                //   colorFilter: ColorFilter.mode(
-                                //     Colors.black.withOpacity(0.6),
-                                //     BlendMode.srcOver,
-                                //   ),
-                                //   child: Image.network(
-                                //     '${dotenv.env['IMAGE_SERVER']}${data[index]['image']}',
-                                //   ),
-                                // ),
                                 Positioned(
                                   left: 20,
                                   right: 20,

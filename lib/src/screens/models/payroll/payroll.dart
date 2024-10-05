@@ -1,6 +1,10 @@
+import 'package:gugu/src/gateway/categories.dart';
 import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:gugu/src/widgets/app_listtile.dart';
+import 'package:gugu/src/widgets/app_listview_builder.dart';
+import 'package:gugu/src/widgets/app_text.dart';
 
 class Payroll extends StatefulWidget {
   const Payroll({Key? key}) : super(key: key);
@@ -11,7 +15,22 @@ class Payroll extends StatefulWidget {
 
 class _PayrollState extends State<Payroll> {
   bool isLoading = false;
+  List data = [];
   @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  void fetchData() async {
+    hairDressers hairDresserServices = hairDressers();
+    final datas = await hairDresserServices.getPayroll(context);
+    print(datas);
+    setState(() {
+      data = datas['payroll'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
@@ -33,7 +52,26 @@ class _PayrollState extends State<Payroll> {
           ),
         ),
         child: Column(
-          children: [],
+          children: [
+            AppListviewBuilder(
+                itemnumber: data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return AppListTile(
+                    title: AppText(
+                      txt: data[index]['hairDresserName'],
+                      size: 20,
+                      color: AppConst.black,
+                      weight: FontWeight.bold,
+                    ),
+                    trailing: AppText(
+                      txt: data[index]['totalHairDresserAmount'].toString(),
+                      size: 20,
+                      color: AppConst.black,
+                      weight: FontWeight.normal,
+                    ),
+                  );
+                })
+          ],
         ));
   }
 }
