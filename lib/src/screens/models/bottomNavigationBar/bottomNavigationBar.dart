@@ -39,14 +39,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 primaryColor: AppConst.black,
               ),
               child: BottomNavigationBar(
-                selectedItemColor: AppConst.red,
+                selectedItemColor: AppConst.primary,
                 unselectedItemColor: AppConst.grey,
                 backgroundColor: AppConst.black,
                 items: [
                   BottomNavigationBarItem(
                       icon: Icon(Icons.home), label: 'Home'),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.explore), label: 'Add Expenses'),
+                      icon: Icon(Icons.add_box), label: 'Add Expenses'),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.payment), label: 'Payroll'),
                   BottomNavigationBarItem(
