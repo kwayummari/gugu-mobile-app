@@ -1,4 +1,3 @@
-import 'package:gugu/src/screens/introduction/intro.dart';
 import 'package:gugu/src/screens/models/bottomNavigationBar/bottomNavigationBar.dart';
 import 'package:gugu/src/screens/models/orders/allOrders.dart';
 import 'package:gugu/src/screens/models/dashboard/allStyles.dart';
@@ -14,7 +13,6 @@ final Map<String, WidgetBuilder> routes = {
   RouteNames.login: (context) => Login(),
   RouteNames.registration: (context) => Registration(),
   RouteNames.splash: (context) => Splash(),
-  RouteNames.intro: (context) => IntroScreen(),
   RouteNames.dashboard: (context) => dashboard(),
   RouteNames.allStyles: (context) => allStyles(),
   RouteNames.profile: (context) => profile(),

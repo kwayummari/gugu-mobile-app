@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'GUGU BEAUTY SALOONv',
         theme: ThemeData(
-            // timePickerTheme: Theme.of(context).primaryColor,
             cardColor: AppConst.primary,
             highlightColor: AppConst.primary,
             splashColor: AppConst.primary,
@@ -50,6 +49,6 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             colorScheme: ColorScheme.fromSwatch(
               primarySwatch: createMaterialColor(AppConst.primary),
-            ).copyWith(background: AppConst.primary)),
+            ).copyWith(surface: AppConst.primary)),
       ));
 }
