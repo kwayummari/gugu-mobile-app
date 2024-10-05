@@ -52,11 +52,11 @@ class _AllStylesState extends State<AllStyles> {
           weight: FontWeight.bold,
         ),
       ),
-      isFlexible: true,
-      showAppBar: true,
+      isFlexible: false,
+      showAppBar: false,
       child: Column(
         children: [
-          SizedBox(height: 20),
+          SizedBox(height: 30),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: AppInputText(
@@ -77,7 +77,6 @@ class _AllStylesState extends State<AllStyles> {
                 isemail: false,
                 isPhone: false,
               )),
-          SizedBox(height: 20),
           AvailableHairStyles(searchQuery: searchQuery),
         ],
       ),
