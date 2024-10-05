@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gugu/src/screens/models/settings/account/account.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,6 +24,8 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
+      isFlexible: true,
+      showAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: AppText(

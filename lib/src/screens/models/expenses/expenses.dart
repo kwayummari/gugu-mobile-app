@@ -1,6 +1,6 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/gateway/expenses.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app-dropdown.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +65,8 @@ class _ExpensesState extends State<Expenses> {
               ),
             ),
           ),
+          isFlexible: true,
+          showAppBar: true,
           child: Column(
             children: [
               SizedBox(

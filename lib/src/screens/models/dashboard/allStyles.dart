@@ -1,5 +1,5 @@
 import 'package:gugu/src/screens/models/available_hairStyle/available_hairStyle.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
@@ -52,6 +52,8 @@ class _AllStylesState extends State<AllStyles> {
           weight: FontWeight.bold,
         ),
       ),
+      isFlexible: true,
+      showAppBar: true,
       child: Column(
         children: [
           SizedBox(height: 20),

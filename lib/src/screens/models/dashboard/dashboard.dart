@@ -1,5 +1,5 @@
 import 'package:gugu/src/screens/models/available_hairStyle/available_hairStyle.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +94,8 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
         ),
+        isFlexible: true,
+        showAppBar: true,
         child: Column(
           children: [
             SizedBox(

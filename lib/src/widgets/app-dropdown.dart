@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gugu/src/gateway/dropdown-service.dart';
 import 'package:gugu/src/utils/animations/shimmers/dropdown.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 
 // ignore: must_be_immutable

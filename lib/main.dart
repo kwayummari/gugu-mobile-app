@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gugu/src/functions/createMaterialColor.dart';
 import 'package:gugu/src/provider/login-provider.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/utils/routes/routes.dart';
 import 'package:provider/provider.dart';

@@ -4,7 +4,7 @@ import 'package:gugu/src/screens/models/dashboard/dashboard.dart';
 import 'package:gugu/src/screens/models/expenses/expenses.dart';
 import 'package:gugu/src/screens/models/payroll/payroll.dart';
 import 'package:gugu/src/screens/models/settings/settings.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatefulWidget {

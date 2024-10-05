@@ -1,6 +1,6 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/provider/login-provider.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/socialMedia.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +32,8 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     final myProvider = Provider.of<MyProvider>(context);
     return AppBaseScreen(
+      isFlexible: false,
+      showAppBar: false,
       bgcolor: AppConst.white,
       isvisible: false,
       backgroundImage: false,

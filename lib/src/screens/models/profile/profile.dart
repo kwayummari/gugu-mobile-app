@@ -1,5 +1,5 @@
 import 'package:gugu/src/gateway/profile-service.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +34,8 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
+        isFlexible: true,
+        showAppBar: true,
         isvisible: false,
         backgroundImage: false,
         backgroundAuth: false,

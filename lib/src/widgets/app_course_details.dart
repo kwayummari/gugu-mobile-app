@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gugu/src/utils/app_const.dart';
+import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 
 class AppCourseDetails extends StatelessWidget {
