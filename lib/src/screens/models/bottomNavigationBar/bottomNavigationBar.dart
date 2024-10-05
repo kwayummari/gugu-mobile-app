@@ -26,7 +26,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColor,
+      color: AppConst.black,
       child: SafeArea(
         top: false,
         child: ClipRect(

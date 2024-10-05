@@ -84,7 +84,7 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
         : Column(
             children: [
               SizedBox(
-                height: 400,
+                height: MediaQuery.of(context).size.height,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.builder(
