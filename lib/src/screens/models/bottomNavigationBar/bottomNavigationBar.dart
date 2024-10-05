@@ -72,6 +72,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                             'Powered by Aurorawave labs @${DateTime.now().year}',
                         size: 12,
                         color: AppConst.white,
+                        weight: FontWeight.bold,
                       ),
                     ),
                   )
