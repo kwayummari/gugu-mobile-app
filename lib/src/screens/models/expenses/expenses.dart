@@ -6,6 +6,7 @@ import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gugu/src/widgets/app_button.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
+import 'package:gugu/src/widgets/app_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Expenses extends StatefulWidget {
@@ -49,12 +50,18 @@ class _ExpensesState extends State<Expenses> {
           backgroundAuth: false,
           padding: EdgeInsets.all(0),
           appBar: AppBar(
+            title: AppText(
+              txt: 'Add Expenses',
+              size: 20,
+              weight: FontWeight.bold,
+              color: AppConst.white,
+            ),
             automaticallyImplyLeading: false,
             backgroundColor: AppConst.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10),
+                bottomLeft: Radius.circular(0),
+                bottomRight: Radius.circular(0),
               ),
             ),
           ),

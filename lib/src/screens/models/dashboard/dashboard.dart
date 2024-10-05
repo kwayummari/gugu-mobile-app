@@ -47,8 +47,8 @@ class _DashboardState extends State<Dashboard> {
           backgroundColor: AppConst.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(0),
             ),
           ),
           toolbarHeight: 100,
