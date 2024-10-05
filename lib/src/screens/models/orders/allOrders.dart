@@ -366,14 +366,7 @@ class _ContentsByIdState extends State<ContentsById> {
                                   offset: Offset(0, 3),
                                 ),
                               ],
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  AppConst.primary,
-                                  AppConst.red,
-                                ],
-                              ),
+                              gradient: AppConst.primaryGradient,
                               borderRadius: BorderRadius.circular(15),
                               color: Colors.grey[200],
                             ),
@@ -385,6 +378,7 @@ class _ContentsByIdState extends State<ContentsById> {
                                   txt: filteredData[index]['hairDresserName'],
                                   size: 18,
                                   color: AppConst.white,
+                                  weight: FontWeight.bold,
                                 ),
                               ],
                             ),
