@@ -2,9 +2,10 @@ import 'package:gugu/src/gateway/categories.dart';
 import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:gugu/src/widgets/app_listtile.dart';
+import 'package:gugu/src/widgets/app_listTile.dart';
 import 'package:gugu/src/widgets/app_listview_builder.dart';
 import 'package:gugu/src/widgets/app_text.dart';
+import 'package:intl/intl.dart';
 
 class Payroll extends StatefulWidget {
   const Payroll({Key? key}) : super(key: key);
@@ -22,10 +23,15 @@ class _PayrollState extends State<Payroll> {
     fetchData();
   }
 
+  String formatPrice(String number, String currencySymbol) {
+    int price = int.parse(number);
+    String formattedPrice = NumberFormat('#,###').format(price);
+    return 'Amount: ' + formattedPrice + currencySymbol;
+  }
+
   void fetchData() async {
     hairDressers hairDresserServices = hairDressers();
     final datas = await hairDresserServices.getPayroll(context);
-    print(datas);
     setState(() {
       data = datas['payroll'];
     });
@@ -59,13 +65,15 @@ class _PayrollState extends State<Payroll> {
                   return AppListTile(
                     title: AppText(
                       txt: data[index]['hairDresserName'],
-                      size: 20,
+                      size: 15,
                       color: AppConst.black,
                       weight: FontWeight.bold,
                     ),
                     trailing: AppText(
-                      txt: data[index]['totalHairDresserAmount'].toString(),
-                      size: 20,
+                      txt: formatPrice(
+                          data[index]['totalHairDresserAmount'].toString(),
+                          'Tsh'),
+                      size: 15,
                       color: AppConst.black,
                       weight: FontWeight.normal,
                     ),
