@@ -90,6 +90,7 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
       backgroundColor: widget.bgcolor ?? AppConst.black,
       appBar: widget.showAppBar == true
           ? AppBar(
+              automaticallyImplyLeading: false,
               centerTitle: widget.centerTitle,
               title: Padding(
                 padding: EdgeInsets.only(
@@ -106,7 +107,7 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 120,
+                            height: 80,
                           ),
                           Row(
                             children: [
@@ -179,28 +180,8 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
                         bottomRight: Radius.circular(10),
                       ),
                     )
-                  : null,
-              leading: Align(
-                alignment: Alignment.topLeft,
-                child: Builder(
-                  builder: (BuildContext context) {
-                    return Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.menu),
-                          onPressed: () {
-                            Scaffold.of(context).openDrawer();
-                          },
-                          tooltip: MaterialLocalizations.of(context)
-                              .openAppDrawerTooltip,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              leadingWidth: 50, // Adjust this value according to your needs
-              toolbarHeight: widget.isFlexible == true ? 200 : null,
+                  : null, // Adjust this value according to your needs
+              toolbarHeight: widget.isFlexible == true ? 150 : null,
               backgroundColor: widget.appBarBgColor ?? AppConst.transparent,
             )
           : null,

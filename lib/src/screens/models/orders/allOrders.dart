@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/gateway/categories.dart';
@@ -35,8 +34,7 @@ class _ContentsByIdState extends State<ContentsById> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController searchController =
-      TextEditingController(); // Search controller
+  TextEditingController searchController = TextEditingController();
   String selectedValue = '';
   List data = [];
   List filteredData = [];
@@ -86,7 +84,6 @@ class _ContentsByIdState extends State<ContentsById> {
     );
     final doc = pw.Document();
     doc.addPage(pw.Page(
-        // pageFormat: PdfPageFormat.a4,
         pageFormat: PdfPageFormat(58 * PdfPageFormat.mm, double.infinity),
         build: (pw.Context context) {
           return buildPrintableData(
@@ -132,20 +129,46 @@ class _ContentsByIdState extends State<ContentsById> {
               decoration: InputDecoration(
                 hintText: 'Search Hairdresser...',
                 prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(color: AppConst.black, width: 1.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(color: AppConst.black, width: 1.0),
                 ),
               ),
             ),
           ),
           data.isEmpty
-              ? availableCoursesShimmerLoad(
-                  width: 400,
-                  height: 200,
-                  borderRadius: 15,
+              ? Column(
+                  children: List.generate(
+                    5,
+                    (index) => Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: availableCoursesShimmerLoad(
+                            width: 190,
+                            height: 100,
+                            borderRadius: 15,
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: availableCoursesShimmerLoad(
+                            width: 190,
+                            height: 100,
+                            borderRadius: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 )
               : SizedBox(
-                  height: 500,
+                  height: MediaQuery.of(context).size.height,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GridView.builder(
