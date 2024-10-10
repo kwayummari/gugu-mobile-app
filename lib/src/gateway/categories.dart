@@ -40,6 +40,16 @@ class hairDressers {
     return decodedResponse;
   }
 
+  Future reconciliation(BuildContext context) async {
+    Map<String, dynamic> dataValue = {
+      'companyId': companyId,
+      'branchId': branchId
+    };
+    final response = await api.post(context, 'reconciliation', dataValue);
+    final decodedResponse = jsonDecode(response.body);
+    return decodedResponse;
+  }
+
   Future getProducts(BuildContext context) async {
     String companyId = dotenv.env['COMPANY_ID'] ?? '1';
     Map<String, dynamic> dataValue = {

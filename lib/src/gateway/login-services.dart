@@ -18,7 +18,6 @@ class loginService {
       'name': name,
       'password': password,
     };
-    print(data);
 
     final response = await api.post(context, 'loginHairDresser', data);
     final newResponse = jsonDecode(response.body);
