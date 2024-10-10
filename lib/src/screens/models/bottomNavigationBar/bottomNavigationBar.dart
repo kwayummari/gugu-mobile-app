@@ -38,45 +38,25 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 canvasColor: AppConst.black,
                 primaryColor: AppConst.black,
               ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height - 112,
-                  ),
-                  BottomNavigationBar(
-                    selectedItemColor: AppConst.primary,
-                    unselectedItemColor: AppConst.grey,
-                    backgroundColor: AppConst.black,
-                    items: [
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: 'Home'),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.add_box), label: 'Add Expenses'),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.payment), label: 'Payroll'),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.settings_suggest_outlined),
-                          label: 'My Account'),
-                    ],
-                    currentIndex: index,
-                    onTap: (index) {
-                      if (mounted) setState(() => this.index = index);
-                    },
-                  ),
-                  Container(
-                    color: AppConst.black,
-                    height: 20,
-                    child: Center(
-                      child: AppText(
-                        txt:
-                            'Powered by Aurorawave labs @${DateTime.now().year}',
-                        size: 12,
-                        color: AppConst.white,
-                        weight: FontWeight.bold,
-                      ),
-                    ),
-                  )
+              child: BottomNavigationBar(
+                selectedItemColor: AppConst.primary,
+                unselectedItemColor: AppConst.grey,
+                backgroundColor: AppConst.black,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.add_box), label: 'Add Expenses'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.payment), label: 'Payroll'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.settings_suggest_outlined),
+                      label: 'My Account'),
                 ],
+                currentIndex: index,
+                onTap: (index) {
+                  if (mounted) setState(() => this.index = index);
+                },
               ),
             ),
           ),
