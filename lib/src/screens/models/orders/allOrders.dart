@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/gateway/categories.dart';
 import 'package:gugu/src/utils/animations/shimmers/available_courses.dart';
 import 'package:gugu/src/utils/constants/app_const.dart';
+import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_button.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
@@ -335,16 +336,24 @@ class _ContentsByIdState extends State<ContentsById> {
                                                                       phoneController
                                                                           .text
                                                                           .toString());
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-                                                                  AppSnackbar(
-                                                                    isError:
+                                                                  Navigator
+                                                                      .pushNamedAndRemoveUntil(
+                                                                    context,
+                                                                    RouteNames
+                                                                        .bottomNavigationBar,
+                                                                    (_) =>
                                                                         false,
-                                                                    response:
-                                                                        'Printing',
-                                                                  ).show(
-                                                                      context);
+                                                                  );
+                                                                  // Navigator.of(
+                                                                  //         context)
+                                                                  //     .pop();
+                                                                  // AppSnackbar(
+                                                                  //   isError:
+                                                                  //       false,
+                                                                  //   response:
+                                                                  //       'Printing',
+                                                                  // ).show(
+                                                                  //     context);
                                                                 },
                                                                 label:
                                                                     'Print Receipts',
