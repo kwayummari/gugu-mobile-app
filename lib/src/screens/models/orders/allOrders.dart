@@ -8,7 +8,6 @@ import 'package:gugu/src/utils/routes/route-names.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
 import 'package:gugu/src/widgets/app_button.dart';
 import 'package:gugu/src/widgets/app_input_text.dart';
-import 'package:gugu/src/widgets/app_snackbar.dart';
 import 'package:gugu/src/widgets/app_text.dart';
 import 'package:gugu/src/widgets/printableData.dart';
 import 'package:printing/printing.dart';
