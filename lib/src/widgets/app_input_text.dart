@@ -89,7 +89,7 @@ class AppInputText extends StatelessWidget {
                 return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
               }
             } else if (value.isEmpty) {
-              return "THis field cannot be empty";
+              return "This field cannot be empty";
             } else {
               return null;
             }
@@ -99,7 +99,7 @@ class AppInputText extends StatelessWidget {
             if (value!.isEmpty || !emailRegex.hasMatch(value)) {
               return 'Please enter a valid email address';
             } else if (value.isEmpty) {
-              return "THis field cannot be empty";
+              return "This field cannot be empty";
             } else {
               return null;
             }

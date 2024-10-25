@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
-  // final Widget child;
   final String? txt;
   final TextAlign? align;
   var color;
