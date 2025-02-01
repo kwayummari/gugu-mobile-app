@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gugu/src/api/apis.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class hairDressers {
   Api api = Api();
@@ -64,6 +65,9 @@ class hairDressers {
       String hairStyleId, String hairDresserId, String randomNumber) async {
     String branchId = dotenv.env['BRANCH_ID'] ?? '1';
     String companyId = dotenv.env['COMPANY_ID'] ?? '1';
+          final prefs = await SharedPreferences.getInstance();
+          final managerId = prefs.getString('id');
+
     Map<String, dynamic> dataValue = {
       'name': name,
       'phone': phone,
@@ -71,7 +75,8 @@ class hairDressers {
       'hairDresserId': hairDresserId,
       'randomNumber': randomNumber,
       'branchId': branchId,
-      'companyId': companyId
+      'companyId': companyId,
+      'managerId': managerId
     };
     final response = await api.post(context, 'addOrder', dataValue);
     final decodedResponse = jsonDecode(response.body);
