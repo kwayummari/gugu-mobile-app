@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../api/apis.dart';
 import '../widgets/app_snackbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class expensesServices {
   final Api api = Api();
@@ -10,12 +11,15 @@ class expensesServices {
   static String companyId = dotenv.env['COMPANY_ID'] ?? '1';
   Future<String> expenses(
       BuildContext context, String valueHolder, String amount, String description) async {
+        final prefs = await SharedPreferences.getInstance();
+          final managerId = prefs.getString('id');
     Map<String, dynamic> data = {
       'valueHolder': valueHolder,
       'amount': amount,
       'description': description,
       'companyId': companyId,
-      'branchId': branchId
+      'branchId': branchId,
+      'managerId': managerId
     };
     final response = await api.post(context, 'add_expenses', data);
     final newResponse = jsonDecode(response.body);
