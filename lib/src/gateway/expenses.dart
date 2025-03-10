@@ -23,6 +23,7 @@ class expensesServices {
     };
     final response = await api.post(context, 'add_expenses', data);
     final newResponse = jsonDecode(response.body);
+    
 
     if (response.statusCode == 200) {
       AppSnackbar(
