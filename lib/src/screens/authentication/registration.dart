@@ -2,7 +2,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gugu/src/provider/login-provider.dart';
 import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:gugu/src/utils/routes/route-names.dart';
-import 'package:gugu/src/widgets/socialMedia.dart';
 import 'package:flutter/material.dart';
 import 'package:gugu/src/gateway/registration-services.dart';
 import 'package:gugu/src/widgets/app_base_screen.dart';
@@ -31,59 +30,57 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     final myProvider = Provider.of<MyProvider>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return AppBaseScreen(
       isFlexible: false,
-      showAppBar: false,
+      showAppBar: true,
       bgcolor: AppConst.white,
       isvisible: false,
       backgroundImage: false,
       backgroundAuth: false,
       appBar: AppBar(
-        toolbarHeight: 70,
+        elevation: 0,
         leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppConst.black,
-            )),
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: AppConst.black,
+            size: screenWidth * 0.05,
+          ),
+        ),
         backgroundColor: AppConst.white,
         centerTitle: true,
         title: AppText(
-          weight: FontWeight.w700,
-          txt: 'Registration',
-          size: 20,
+          weight: FontWeight.w600,
+          txt: 'Create Account',
+          size: screenWidth * 0.045,
           color: AppConst.black,
         ),
       ),
-      child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              AppText(
-                txt:
-                    'Welcome to our community of K-Structure, where you can join our growing network of like-minded individuals, discover new and exciting features,and create your own content and resource that will help you get the most out of our app.',
-                size: 15,
-                color: AppConst.black,
-                weight: FontWeight.w900,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Column(
+      child: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  SizedBox(height: screenHeight * 0.025),
+                  // Fullname input
                   AppInputText(
                     textsColor: AppConst.black,
                     isemail: false,
                     textfieldcontroller: fullname,
                     ispassword: false,
                     fillcolor: AppConst.white,
-                    label: 'Fullname',
+                    label: 'Full Name',
                     obscure: false,
-                    icon: Icon(
-                      Icons.person,
-                      color: AppConst.black,
-                    ),
                   ),
+                  SizedBox(height: screenHeight * 0.015),
+                  // Phone input
                   AppInputText(
                     textsColor: AppConst.black,
                     isemail: false,
@@ -91,130 +88,130 @@ class _RegistrationState extends State<Registration> {
                     textfieldcontroller: phone,
                     ispassword: false,
                     fillcolor: AppConst.white,
-                    label: 'Phone number',
+                    label: 'Phone Number',
                     obscure: false,
-                    icon: Icon(
-                      Icons.phone,
-                      color: AppConst.black,
-                    ),
+                    keyboardType: TextInputType.phone,
                   ),
+                  SizedBox(height: screenHeight * 0.015),
+                  // Password input
                   AppInputText(
                     textsColor: AppConst.black,
                     isemail: false,
                     suffixicon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            obscure = !obscure;
-                          });
-                        },
-                        icon: obscure == true
-                            ? Icon(Icons.visibility_off)
-                            : Icon(Icons.visibility)),
+                      onPressed: () {
+                        setState(() {
+                          obscure = !obscure;
+                        });
+                      },
+                      icon: Icon(
+                        obscure
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: AppConst.grey,
+                        size: screenWidth * 0.05,
+                      ),
+                    ),
                     textfieldcontroller: password,
                     ispassword: true,
                     fillcolor: AppConst.white,
                     label: 'Password',
                     obscure: obscure,
-                    icon: Icon(
-                      Icons.lock,
-                      color: AppConst.black,
-                    ),
                   ),
+                  SizedBox(height: screenHeight * 0.015),
+                  // Confirm Password input
                   AppInputText(
                     textsColor: AppConst.black,
                     isemail: false,
                     suffixicon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            obscure1 = !obscure1;
-                          });
-                        },
-                        icon: obscure1 == true
-                            ? Icon(Icons.visibility_off)
-                            : Icon(Icons.visibility)),
+                      onPressed: () {
+                        setState(() {
+                          obscure1 = !obscure1;
+                        });
+                      },
+                      icon: Icon(
+                        obscure1
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: AppConst.grey,
+                        size: screenWidth * 0.05,
+                      ),
+                    ),
                     textfieldcontroller: rpassword,
                     ispassword: false,
                     fillcolor: AppConst.white,
-                    label: 'Password',
+                    label: 'Confirm Password',
                     obscure: obscure1,
-                    icon: Icon(
-                      Icons.lock,
-                      color: AppConst.black,
-                    ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  SizedBox(height: screenHeight * 0.04),
+                  // Sign up button
                   myProvider.myLoging == true
-                      ? SpinKitCircle(
+                      ? Center(
+                        child: SpinKitCircle(
                           color: AppConst.primary,
-                        )
-                      : Container(
-                          width: 350,
-                          height: 49,
-                          child: AppButton(
-                            onPress: () {
-                              if (!_formKey.currentState!.validate()) {
-                                return;
-                              }
-                              registrationService().registration(
-                                  context,
-                                  password.text,
-                                  rpassword.text,
-                                  fullname.text,
-                                  phone.text);
-                            },
-                            label: 'SIGN UP',
-                            borderRadius: 5,
-                            textColor: AppConst.white,
-                            bcolor: AppConst.primary,
-                          ),
+                          size: screenWidth * 0.1,
                         ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Align(
-                            alignment: Alignment.center,
-                            child: AppText(
-                              txt: 'By continuing you accept ',
-                              size: 15,
-                              color: AppConst.primary,
-                            )),
-                        AppText(
-                          txt: 'terms and conditions and our privacy policy',
-                          size: 15,
-                          color: AppConst.primary,
-                        )
-                      ],
-                    ),
-                  ),
-                  socialMedia(),
+                      )
+                      : SizedBox(
+                        height: screenHeight * 0.065,
+                        child: AppButton(
+                          onPress: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+                            registrationService().registration(
+                              context,
+                              password.text,
+                              rpassword.text,
+                              fullname.text,
+                              phone.text,
+                            );
+                          },
+                          label: 'SIGN UP',
+                          borderRadius: 8,
+                          textColor: AppConst.white,
+                          bcolor: AppConst.primary,
+                        ),
+                      ),
+                  SizedBox(height: screenHeight * 0.035),
+                  // Sign in link
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, RouteNames.login),
-                    child: Row(
-                      children: [
-                        Spacer(),
-                        AppText(
-                          txt: 'Already have an account?',
-                          size: 15,
-                          color: AppConst.primary,
-                          weight: FontWeight.w400,
-                        ),
-                        AppText(
-                          txt: 'Sign In',
-                          size: 15,
-                          color: AppConst.primary,
-                          weight: FontWeight.bold,
-                        ),
-                        Spacer(),
-                      ],
+                    child: Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AppText(
+                            txt: 'Already have an account? ',
+                            size: screenWidth * 0.035,
+                            color: AppConst.grey,
+                            weight: FontWeight.w400,
+                          ),
+                          AppText(
+                            txt: 'Sign In',
+                            size: screenWidth * 0.035,
+                            color: AppConst.primary,
+                            weight: FontWeight.w600,
+                          ),
+                        ],
+                      ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: screenHeight * 0.025),
+                  // Terms
+                  Center(
+                    child: AppText(
+                      txt: 'By continuing you agree to Terms and Conditions',
+                      size: screenWidth * 0.028,
+                      color: AppConst.grey,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.035),
                 ],
-              )
-            ],
-          )),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -22,24 +22,24 @@ class AppBaseScreen extends StatefulWidget {
   final Color? appBarBgColor;
   final Color? iconColor;
 
-  const AppBaseScreen(
-      {Key? key,
-      required this.child,
-      required this.isvisible,
-      required this.isFlexible,
-      required this.showAppBar,
-      this.isLoading = false,
-      required this.backgroundImage,
-      required this.backgroundAuth,
-      this.appBar,
-      this.padding,
-      this.floatingAction,
-      this.title,
-      this.bgcolor,
-      this.appBarBgColor,
-      this.iconColor,
-      this.centerTitle})
-      : super(key: key);
+  const AppBaseScreen({
+    Key? key,
+    required this.child,
+    required this.isvisible,
+    required this.isFlexible,
+    required this.showAppBar,
+    this.isLoading = false,
+    required this.backgroundImage,
+    required this.backgroundAuth,
+    this.appBar,
+    this.padding,
+    this.floatingAction,
+    this.title,
+    this.bgcolor,
+    this.appBarBgColor,
+    this.iconColor,
+    this.centerTitle,
+  }) : super(key: key);
 
   @override
   State<AppBaseScreen> createState() => _AppBaseScreenState();
@@ -52,6 +52,7 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
   OverlayEntry? sideSheetOverlayEntry;
   final sideSheetOverlayLayerLink = LayerLink();
   bool isSidebarShown = false;
+
   @override
   void initState() {
     getName();
@@ -88,113 +89,90 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
     String greeting = _getGreeting();
     return Scaffold(
       backgroundColor: widget.bgcolor ?? AppConst.black,
-      appBar: widget.showAppBar == true
-          ? AppBar(
-              automaticallyImplyLeading: false,
-              centerTitle: widget.centerTitle,
-              title: Padding(
-                padding: EdgeInsets.only(
-                    bottom: widget.isFlexible == true ? 150 : 0),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: widget.title,
-                ),
-              ),
-              flexibleSpace: widget.isFlexible == true
-                  ? Container(
-                      decoration:
-                          BoxDecoration(gradient: AppConst.primaryGradient),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 80,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                              ),
-                              CircleAvatar(
-                                backgroundColor: AppConst.primary,
-                                radius: 45,
-                                child: CircleAvatar(
-                                  backgroundColor: AppConst.black,
-                                  radius: 40,
-                                  child: AppText(
-                                    txt: fullname == null
-                                        ? ''
-                                        : fullname
-                                            .split(' ')
-                                            .map(
-                                                (word) => word[0].toUpperCase())
-                                            .join(''),
-                                    size: 25,
-                                    weight: FontWeight.w700,
-                                    color: AppConst.white,
+      appBar:
+          widget.showAppBar == true
+              ? widget.appBar ??
+                  AppBar(
+                    automaticallyImplyLeading: false,
+                    centerTitle: widget.centerTitle,
+                    title: Padding(
+                      padding: EdgeInsets.only(
+                        bottom: widget.isFlexible == true ? 150 : 0,
+                      ),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: widget.title,
+                      ),
+                    ),
+                    flexibleSpace:
+                        widget.isFlexible == true
+                            ? Container(
+                              decoration: BoxDecoration(
+                                color: AppConst.white,
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: AppConst.grey.withOpacity(0.2),
+                                    width: 1,
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Column(
                                 children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width - 200,
-                                    child: AppText(
-                                      txt: '$greeting $fullname',
-                                      size: 20,
-                                      weight: FontWeight.w600,
-                                      color: AppConst.white,
-                                      overflow: TextOverflow.clip,
+                                  SizedBox(height: 50),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            AppText(
+                                              txt: greeting,
+                                              size: 14,
+                                              weight: FontWeight.w400,
+                                              color: AppConst.grey,
+                                            ),
+                                            SizedBox(height: 4),
+                                            AppText(
+                                              txt: fullname ?? 'Guest',
+                                              size: 20,
+                                              weight: FontWeight.w600,
+                                              color: AppConst.black,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  AppText(
-                                    txt: branchId == '1'
-                                        ? '(Kinondoni)'
-                                        : '(Mwananyamala)',
-                                    size: 15,
-                                    weight: FontWeight.w600,
-                                    color: AppConst.white,
-                                  ),
+                                  SizedBox(height: 20),
                                 ],
                               ),
-                              Spacer(),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    )
-                  : null,
-              iconTheme:
-                  IconThemeData(color: widget.iconColor ?? AppConst.white),
-              shape: widget.isFlexible == true
-                  ? RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                      ),
-                    )
-                  : null, // Adjust this value according to your needs
-              toolbarHeight: widget.isFlexible == true ? 150 : null,
-              backgroundColor: widget.appBarBgColor ?? AppConst.transparent,
-            )
-          : null,
+                            )
+                            : null,
+                    iconTheme: IconThemeData(
+                      color: widget.iconColor ?? AppConst.white,
+                    ),
+                    shape: null,
+                    toolbarHeight: widget.isFlexible == true ? 100 : null,
+                    backgroundColor:
+                        widget.appBarBgColor ?? AppConst.transparent,
+                  )
+              : null,
       body: SingleChildScrollView(
         child: Container(
-          decoration: widget.backgroundAuth
-              ? BoxDecoration(
-                  image: DecorationImage(
+          decoration:
+              widget.backgroundAuth
+                  ? BoxDecoration(
+                    image: DecorationImage(
                       image: AssetImage('assets/login.jpg'),
                       fit: BoxFit.cover,
-                      opacity: 0.4),
-                )
-              : null,
+                      opacity: 0.4,
+                    ),
+                  )
+                  : null,
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
@@ -204,24 +182,14 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
               ),
               if (widget.backgroundImage == true)
                 Positioned.fill(
-                  child: Image.asset(
-                    'assets/intro.png',
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.asset('assets/intro.png', fit: BoxFit.cover),
                 ),
               if (widget.backgroundAuth == true)
-                Container(
-                  color: AppConst.black.withOpacity(0.85),
-                ),
+                Container(color: AppConst.black.withOpacity(0.85)),
               if (widget.backgroundImage == true)
-                Container(
-                  color: AppConst.black.withOpacity(0.85),
-                ),
+                Container(color: AppConst.black.withOpacity(0.85)),
               if (widget.isLoading == true)
-                Center(
-                    child: SpinKitCircle(
-                  color: AppConst.primary,
-                )),
+                Center(child: SpinKitCircle(color: AppConst.primary)),
               if (widget.isvisible == true)
                 Positioned(
                   top: 0,
@@ -233,9 +201,10 @@ class _AppBaseScreenState extends State<AppBaseScreen> {
                     decoration: BoxDecoration(
                       color: AppConst.primary,
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(26),
-                          bottomLeft: Radius.circular(126),
-                          bottomRight: Radius.circular(0)),
+                        topLeft: Radius.circular(26),
+                        bottomLeft: Radius.circular(126),
+                        bottomRight: Radius.circular(0),
+                      ),
                     ),
                   ),
                 ),

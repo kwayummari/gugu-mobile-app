@@ -41,42 +41,79 @@ class _ExpensesState extends State<Expenses> {
   }
 
   Future<void> showConfirmationDialog(BuildContext context) async {
+    final screenWidth = MediaQuery.of(context).size.width;
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppConst.white,
-          title: const Text('Confirm Submission'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          title: AppText(
+            txt: 'Confirm Submission',
+            size: screenWidth * 0.045,
+            color: AppConst.black,
+            weight: FontWeight.w600,
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText(
-                txt: 'Amount: ${amount.text}',
-                size: 20,
-                color: AppConst.black,
-                weight: FontWeight.bold,
+              Row(
+                children: [
+                  AppText(
+                    txt: 'Amount: ',
+                    size: screenWidth * 0.035,
+                    color: AppConst.grey,
+                    weight: FontWeight.w400,
+                  ),
+                  AppText(
+                    txt: '${amount.text}',
+                    size: screenWidth * 0.038,
+                    color: AppConst.black,
+                    weight: FontWeight.w600,
+                  ),
+                ],
               ),
+              SizedBox(height: 8),
               AppText(
-                txt: 'Description: ${description.text}',
-                size: 15,
+                txt: 'Description: ',
+                size: screenWidth * 0.035,
+                color: AppConst.grey,
+                weight: FontWeight.w400,
+              ),
+              SizedBox(height: 4),
+              AppText(
+                txt: '${description.text}',
+                size: screenWidth * 0.035,
                 color: AppConst.black,
-                weight: FontWeight.normal,
+                weight: FontWeight.w400,
               ),
             ],
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: AppText(
+                txt: 'Cancel',
+                size: screenWidth * 0.035,
+                color: AppConst.grey,
+                weight: FontWeight.w500,
+              ),
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Confirm'),
+              child: AppText(
+                txt: 'Confirm',
+                size: screenWidth * 0.035,
+                color: AppConst.primary,
+                weight: FontWeight.w600,
+              ),
               onPressed: () async {
-                Navigator.of(context).pop(); // Close the dialog
-                await submitExpense(); // Proceed with submission
+                Navigator.of(context).pop();
+                await submitExpense();
               },
             ),
           ],
@@ -86,20 +123,33 @@ class _ExpensesState extends State<Expenses> {
   }
 
   Future<void> submitExpense() async {
-    setState(() {
-      isLoading = true;
-    });
-    final String result = await expensesServices().expenses(
-      context,
-      valueHolder.toString(),
-      amount.text.toString(),
-      description.text.toString(),
-    );
-    if (result == 'success') {
+    try {
       setState(() {
-        isLoading = false;
+        isLoading = true;
       });
-    } else {
+      final String result = await expensesServices().expenses(
+        context,
+        valueHolder.toString(),
+        amount.text.toString(),
+        description.text.toString(),
+      );
+      if (result == 'success') {
+        setState(() {
+          isLoading = false;
+        });
+        // Clear form fields on success
+        amount.clear();
+        description.clear();
+        setState(() {
+          valueHolder = null;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('Expense submission error: ${e.toString()}');
       setState(() {
         isLoading = false;
       });
@@ -108,6 +158,9 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Form(
       key: _formKey,
       child: AppBaseScreen(
@@ -118,86 +171,88 @@ class _ExpensesState extends State<Expenses> {
         padding: EdgeInsets.all(0),
         appBar: AppBar(
           title: AppText(
-            txt: 'Add Expenses',
-            size: 20,
-            weight: FontWeight.bold,
-            color: AppConst.white,
+            txt: 'Expenses',
+            size: screenWidth * 0.045,
+            weight: FontWeight.w600,
+            color: AppConst.black,
           ),
           automaticallyImplyLeading: false,
-          backgroundColor: AppConst.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-            ),
-          ),
+          backgroundColor: AppConst.white,
+          elevation: 0,
+          centerTitle: true,
         ),
-        isFlexible: true,
+        isFlexible: false,
         showAppBar: true,
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            DropdownTextFormField(
-              labelText: 'Expense Type',
-              fillcolor: AppConst.white,
-              apiUrl: 'getExpenses',
-              valueField: 'id',
-              valueHolder: valueHolder,
-              displayField: 'name',
-              dropdownColor: AppConst.white,
-              dataOrigin: 'data',
-              onChanged: (value) {
-                setState(() {
-                  valueHolder = value;
-                });
-              },
-            ),
-            SizedBox(height: 20),
-            AppInputText(
-              textsColor: AppConst.black,
-              textfieldcontroller: amount,
-              ispassword: false,
-              fillcolor: AppConst.white,
-              label: 'Amount',
-              obscure: false,
-              icon: Icon(Icons.money, color: AppConst.black),
-              isemail: false,
-              isPhone: false,
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            AppInputText(
-              textsColor: AppConst.black,
-              textfieldcontroller: description,
-              ispassword: false,
-              fillcolor: AppConst.white,
-              label: 'Description',
-              obscure: false,
-              icon: Icon(Icons.text_fields, color: AppConst.black),
-              isemail: false,
-              isPhone: false,
-              keyboardType: TextInputType.text,
-            ),
-            SizedBox(height: 20),
-            isLoading
-                ? SpinKitCircle(color: AppConst.primary)
-                : Container(
-                    width: MediaQuery.of(context).size.width - 20,
-                    height: 55,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: screenHeight * 0.03),
+              DropdownTextFormField(
+                labelText: 'Expense Type',
+                fillcolor: AppConst.white,
+                apiUrl: 'getExpenses',
+                valueField: 'id',
+                valueHolder: valueHolder,
+                displayField: 'name',
+                dropdownColor: AppConst.white,
+                dataOrigin: 'data',
+                onChanged: (value) {
+                  setState(() {
+                    valueHolder = value;
+                  });
+                },
+              ),
+              SizedBox(height: screenHeight * 0.02),
+              AppInputText(
+                textsColor: AppConst.black,
+                textfieldcontroller: amount,
+                ispassword: false,
+                fillcolor: AppConst.white,
+                label: 'Amount',
+                obscure: false,
+                isemail: false,
+                isPhone: false,
+                keyboardType: TextInputType.number,
+              ),
+              SizedBox(height: screenHeight * 0.02),
+              AppInputText(
+                textsColor: AppConst.black,
+                textfieldcontroller: description,
+                ispassword: false,
+                fillcolor: AppConst.white,
+                label: 'Description',
+                obscure: false,
+                isemail: false,
+                isPhone: false,
+                keyboardType: TextInputType.text,
+              ),
+              SizedBox(height: screenHeight * 0.04),
+              isLoading
+                  ? Center(
+                    child: SpinKitCircle(
+                      color: AppConst.primary,
+                      size: screenWidth * 0.1,
+                    ),
+                  )
+                  : SizedBox(
+                    height: screenHeight * 0.065,
                     child: AppButton(
                       onPress: () async {
                         if (_formKey.currentState!.validate()) {
                           await showConfirmationDialog(context);
                         }
                       },
-                      label: 'Submit',
-                      borderRadius: 5,
+                      label: 'SUBMIT',
+                      borderRadius: 8,
                       textColor: AppConst.white,
                       bcolor: AppConst.primary,
                     ),
                   ),
-            SizedBox(height: 20),
-          ],
+              SizedBox(height: screenHeight * 0.02),
+            ],
+          ),
         ),
       ),
     );

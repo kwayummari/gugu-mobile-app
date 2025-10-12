@@ -9,7 +9,7 @@ import 'package:gugu/src/widgets/app_text.dart';
 class AvailableHairStyles extends StatefulWidget {
   final String searchQuery;
   const AvailableHairStyles({Key? key, this.searchQuery = ''})
-      : super(key: key);
+    : super(key: key);
 
   @override
   State<AvailableHairStyles> createState() => _AvailableHairStylesState();
@@ -30,11 +30,14 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
 
   void filterData() {
     setState(() {
-      filteredData = data
-          .where((item) => item['name']
-              .toLowerCase()
-              .contains(widget.searchQuery.toLowerCase()))
-          .toList();
+      filteredData =
+          data
+              .where(
+                (item) => item['name'].toLowerCase().contains(
+                  widget.searchQuery.toLowerCase(),
+                ),
+              )
+              .toList();
     });
   }
 
@@ -54,120 +57,151 @@ class _AvailableHairStylesState extends State<AvailableHairStyles> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return filteredData.isEmpty
         ? Column(
-            children: List.generate(
-              5,
-              (index) => Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: availableCoursesShimmerLoad(
-                      width: 195,
-                      height: 100,
-                      borderRadius: 15,
-                    ),
-                  ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: availableCoursesShimmerLoad(
-                      width: 195,
-                      height: 100,
-                      borderRadius: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        : Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GridView.builder(
-                    itemCount: filteredData.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Number of columns
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 20,
-                      childAspectRatio: 1,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          RouteNames.getContentsById,
-                          arguments: {
-                            'styleId': filteredData[index]['id'],
-                            'name': filteredData[index]['name'],
-                            'amount': filteredData[index]['amount'],
-                          },
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: Offset(0, 3),
-                              ),
-                            ],
-                            gradient: AppConst.primaryGradient,
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.grey[200],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AppText(
-                                txt: filteredData[index]['name'],
-                                size: 15,
-                                color: AppConst.white,
-                                weight: FontWeight.bold,
-                              ),
-                              AppText(
-                                txt: filteredData[index]['description'] ?? '',
-                                size: 12,
-                                color: AppConst.white,
-                                weight: FontWeight.normal,
-                              ),
-                              FutureBuilder<String>(
-                                future: formatPrice(
-                                    filteredData[index]['amount'] ?? '50000',
-                                    'Tzs'),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                          ConnectionState.waiting ||
-                                      !snapshot.hasData) {
-                                    return CircularProgressIndicator();
-                                  } else {
-                                    return AppText(
-                                      txt: snapshot.data ?? '',
-                                      color: Colors.white,
-                                      weight: FontWeight.normal,
-                                      size: 15,
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+          children: List.generate(
+            5,
+            (index) => Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(screenWidth * 0.02),
+                  child: availableCoursesShimmerLoad(
+                    width: screenWidth * 0.45,
+                    height: screenHeight * 0.15,
+                    borderRadius: 12,
                   ),
                 ),
+                Spacer(),
+                Padding(
+                  padding: EdgeInsets.all(screenWidth * 0.02),
+                  child: availableCoursesShimmerLoad(
+                    width: screenWidth * 0.45,
+                    height: screenHeight * 0.15,
+                    borderRadius: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+        : Column(
+          children: [
+            SizedBox(
+              height: screenHeight,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+                child: GridView.builder(
+                  itemCount: filteredData.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: screenWidth * 0.03,
+                    mainAxisSpacing: screenHeight * 0.02,
+                    childAspectRatio: 0.85,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap:
+                          () => Navigator.pushNamed(
+                            context,
+                            RouteNames.getContentsById,
+                            arguments: {
+                              'styleId': filteredData[index]['id'],
+                              'name': filteredData[index]['name'],
+                              'amount': filteredData[index]['amount'],
+                            },
+                          ),
+                      child: Container(
+                        padding: EdgeInsets.all(screenWidth * 0.04),
+                        decoration: BoxDecoration(
+                          color: AppConst.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: AppConst.grey.withOpacity(0.2),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppConst.grey.withOpacity(0.08),
+                              blurRadius: 8,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Service name
+                            Text(
+                              filteredData[index]['name'],
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: screenWidth * 0.038,
+                                color: AppConst.black,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: screenHeight * 0.008),
+                            // Description (if exists)
+                            if (filteredData[index]['description'] != null &&
+                                filteredData[index]['description']
+                                    .toString()
+                                    .isNotEmpty)
+                              Expanded(
+                                child: Text(
+                                  filteredData[index]['description'],
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.03,
+                                    color: AppConst.grey,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            SizedBox(height: screenHeight * 0.01),
+                            // Price
+                            FutureBuilder<String>(
+                              future: formatPrice(
+                                filteredData[index]['amount'] ?? '50000',
+                                'Tzs',
+                              ),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.waiting ||
+                                    !snapshot.hasData) {
+                                  return SizedBox(
+                                    height: screenHeight * 0.02,
+                                    width: screenHeight * 0.02,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: AppConst.primary,
+                                    ),
+                                  );
+                                } else {
+                                  return AppText(
+                                    txt: snapshot.data ?? '',
+                                    color: AppConst.primary,
+                                    weight: FontWeight.w700,
+                                    size: screenWidth * 0.04,
+                                  );
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
-              SizedBox(
-                height: 100,
-              )
-            ],
-          );
+            ),
+            SizedBox(height: screenHeight * 0.12),
+          ],
+        );
   }
 }

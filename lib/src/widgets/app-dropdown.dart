@@ -68,74 +68,119 @@ class _DropdownTextFormFieldState extends State<DropdownTextFormField> {
 
   Future<List<DropdownMenuItem<String>>> _getItems() async {
     final dropdownService _dropdownService = await dropdownService();
-    final apiResponse =
-        await _dropdownService.dropdownPost(context, widget.apiUrl);
+    final apiResponse = await _dropdownService.dropdownPost(
+      context,
+      widget.apiUrl,
+    );
     _apiData = List<Map<String, dynamic>>.from(apiResponse[widget.dataOrigin]);
 
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return _apiData
-        .map<DropdownMenuItem<String>>((item) => DropdownMenuItem<String>(
-              value: item[widget.valueField].toString(),
-              child: AppText(
-                txt: item[widget.displayField],
-                size: 15,
-                color: AppConst.black,
-              ),
-            ))
+        .map<DropdownMenuItem<String>>(
+          (item) => DropdownMenuItem<String>(
+            value: item[widget.valueField].toString(),
+            child: AppText(
+              txt: item[widget.displayField],
+              size: screenWidth * 0.038,
+              color: AppConst.black,
+            ),
+          ),
+        )
         .toList();
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+      padding: const EdgeInsets.only(top: 5, left: 0, right: 0),
       child: FutureBuilder<List<DropdownMenuItem<String>>>(
         future: _itemsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return dropdownShimmer(width: 400, height: 50, borderRadius: 5.0);
+            return dropdownShimmer(
+              width: screenWidth,
+              height: 56,
+              borderRadius: 8.0,
+            );
           } else if (snapshot.hasError) {
             return Text('Failed to fetch items: ${snapshot.error}');
           } else if (snapshot.hasData) {
             final items = snapshot.data!;
             if (items.isNotEmpty) {
               return DropdownButtonFormField<String>(
-                  value: _selectedValue,
-                  dropdownColor: widget.dropdownColor,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.circle ?? 5.0),
-                    ),
-                    label: Container(
-                      color: widget.fillcolor,
-                      child: AppText(
-                        txt: widget.labelText,
-                        size: 15,
-                        weight: widget.labelWeight ?? FontWeight.w700,
-                        color: widget.textsColor ?? AppConst.black,
-                      ),
-                    ),
-                    filled: true,
-                    fillColor: widget.fillcolor,
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.circle ?? 5.0),
-                      borderSide: BorderSide(color: AppConst.black),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.circle ?? 5.0),
-                      borderSide: BorderSide(color: AppConst.black),
-                    ),
-                    prefixIcon: widget.icon,
-                    suffixIcon: widget.suffixicon,
+                value: _selectedValue,
+                dropdownColor: widget.dropdownColor,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
                   ),
-                  items: items,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = value;
-                    });
-                    if (widget.onChanged != null) {
-                      widget.onChanged!(value);
-                    }
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(widget.circle ?? 8.0),
+                    borderSide: BorderSide(
+                      color: AppConst.grey.withOpacity(0.3),
+                      width: 1,
+                    ),
+                  ),
+                  label: Container(
+                    color: widget.fillcolor,
+                    child: AppText(
+                      txt: widget.labelText,
+                      size: screenWidth * 0.035,
+                      weight: widget.labelWeight ?? FontWeight.w400,
+                      color: AppConst.grey,
+                    ),
+                  ),
+                  filled: true,
+                  fillColor: widget.fillcolor,
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(widget.circle ?? 8.0),
+                    borderSide: BorderSide(
+                      color: AppConst.grey.withOpacity(0.2),
+                      width: 1,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(widget.circle ?? 8.0),
+                    borderSide: BorderSide(
+                      color: AppConst.grey.withOpacity(0.3),
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(widget.circle ?? 8.0),
+                    borderSide: BorderSide(color: AppConst.primary, width: 1.5),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(widget.circle ?? 8.0),
+                    borderSide: BorderSide(
+                      color: Colors.red.shade300,
+                      width: 1,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(widget.circle ?? 8.0),
+                    borderSide: BorderSide(
+                      color: Colors.red.shade400,
+                      width: 1.5,
+                    ),
+                  ),
+                  prefixIcon: widget.icon,
+                  suffixIcon: widget.suffixicon,
+                ),
+                items: items,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedValue = value;
                   });
+                  if (widget.onChanged != null) {
+                    widget.onChanged!(value);
+                  }
+                },
+              );
             } else {
               return Text('No items found');
             }

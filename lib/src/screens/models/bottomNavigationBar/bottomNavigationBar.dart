@@ -5,7 +5,6 @@ import 'package:gugu/src/screens/models/payroll/payroll.dart';
 import 'package:gugu/src/screens/models/settings/settings.dart';
 import 'package:gugu/src/utils/constants/app_const.dart';
 import 'package:flutter/material.dart';
-import 'package:gugu/src/widgets/app_text.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -16,42 +15,72 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int index = 0;
-  final Screen = [
-    Dashboard(),
-    Expenses(),
-    Payroll(),
-    Settings(),
-  ];
+  final Screen = [Dashboard(), Expenses(), Payroll(), Settings()];
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
-      color: AppConst.black,
+      color: AppConst.white,
       child: SafeArea(
         top: false,
         child: ClipRect(
           child: Scaffold(
             body: Screen[index],
-            extendBody: true,
-            bottomNavigationBar: Theme(
-              data: Theme.of(context).copyWith(
-                canvasColor: AppConst.black,
-                primaryColor: AppConst.black,
+            extendBody: false,
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: AppConst.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppConst.grey.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: Offset(0, -5),
+                  ),
+                ],
               ),
               child: BottomNavigationBar(
+                elevation: 0,
                 selectedItemColor: AppConst.primary,
-                unselectedItemColor: AppConst.grey,
-                backgroundColor: AppConst.black,
+                unselectedItemColor: AppConst.grey.withOpacity(0.6),
+                backgroundColor: AppConst.white,
+                selectedFontSize: screenWidth * 0.03,
+                unselectedFontSize: screenWidth * 0.028,
+                type: BottomNavigationBarType.fixed,
                 items: [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: 'Home'),
+                    icon: Icon(Icons.home_outlined, size: screenWidth * 0.06),
+                    activeIcon: Icon(Icons.home, size: screenWidth * 0.06),
+                    label: 'Home',
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.add_box), label: 'Add Expenses'),
+                    icon: Icon(
+                      Icons.receipt_long_outlined,
+                      size: screenWidth * 0.06,
+                    ),
+                    activeIcon: Icon(
+                      Icons.receipt_long,
+                      size: screenWidth * 0.06,
+                    ),
+                    label: 'Expenses',
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.payment), label: 'Payroll'),
+                    icon: Icon(
+                      Icons.payments_outlined,
+                      size: screenWidth * 0.06,
+                    ),
+                    activeIcon: Icon(Icons.payments, size: screenWidth * 0.06),
+                    label: 'Payroll',
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.settings_suggest_outlined),
-                      label: 'My Account'),
+                    icon: Icon(
+                      Icons.settings_outlined,
+                      size: screenWidth * 0.06,
+                    ),
+                    activeIcon: Icon(Icons.settings, size: screenWidth * 0.06),
+                    label: 'Settings',
+                  ),
                 ],
                 currentIndex: index,
                 onTap: (index) {

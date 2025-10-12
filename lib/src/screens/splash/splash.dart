@@ -22,23 +22,28 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: AppConst.primary,
+      backgroundColor: AppConst.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SpinKitPouringHourGlass(
-              duration: const Duration(seconds: 3),
-              size: 100,
-              color: AppConst.white,
-            ),
+            // Logo - larger and responsive
+            Image.asset('assets/icon.png', height: screenHeight * 0.25),
+            SizedBox(height: screenHeight * 0.04),
+            // Loading indicator
+            SpinKitCircle(size: screenWidth * 0.1, color: AppConst.primary),
+            SizedBox(height: screenHeight * 0.1),
+            // Footer
             AppText(
-              txt: 'Powered by Aurorawave labs @${DateTime.now().year}',
-              size: 15,
-              color: AppConst.white,
-              weight: FontWeight.bold,
+              txt: 'Powered by Aurorawave Labs',
+              size: screenWidth * 0.028,
+              color: AppConst.grey,
+              weight: FontWeight.w400,
             ),
           ],
         ),

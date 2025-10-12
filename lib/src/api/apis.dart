@@ -5,9 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
+
+  // Get authentication headers with JWT token
+  Future<Map<String, String>> _getHeaders() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('authToken');
+
+    if (token != null && token.isNotEmpty) {
+      return {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer $token',
+      };
+    }
+    return {'Content-Type': 'application/x-www-form-urlencoded'};
+  }
+
   // Check for internet connection
   Future<bool> hasInternetConnection() async {
     try {
@@ -32,32 +48,31 @@ class Api {
       throw Exception("No internet connection");
     }
     try {
+      final headers = await _getHeaders();
       final response = await http
-          .get(Uri.parse("$baseUrl$endPoint"))
+          .get(Uri.parse("$baseUrl$endPoint"), headers: headers)
           .timeout(Duration(seconds: 5));
       _handleError(response);
       return response;
     } catch (e) {
-      AppSnackbar(
-        isError: true,
-        response: e.toString(),
-      ).show(context);
+      AppSnackbar(isError: true, response: e.toString()).show(context);
       throw Exception("Something went wrong, Please try again");
     }
   }
 
   // POST Request
   Future<dynamic> post(
-      BuildContext context, String endPoint, Map<String, dynamic> data) async {
+    BuildContext context,
+    String endPoint,
+    Map<String, dynamic> data,
+  ) async {
     if (!(await hasInternetConnection())) {
       throw Exception("No internet connection");
     } else {
       try {
+        final headers = await _getHeaders();
         final response = await http
-            .post(
-              Uri.parse('$baseUrl$endPoint'),
-              body: data,
-            )
+            .post(Uri.parse('$baseUrl$endPoint'), headers: headers, body: data)
             .timeout(Duration(seconds: 10));
         _handleError(response);
         return response;
@@ -66,10 +81,7 @@ class Api {
         if (myProvider.myLoging == true) {
           myProvider.updateLoging(!myProvider.myLoging);
         }
-        AppSnackbar(
-          isError: true,
-          response: e.toString(),
-        ).show(context);
+        AppSnackbar(isError: true, response: e.toString()).show(context);
       }
     }
   }

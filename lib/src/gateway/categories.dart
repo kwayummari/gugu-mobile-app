@@ -23,9 +23,7 @@ class hairDressers {
   }
 
   Future getHairDresserById(BuildContext context, String id) async {
-    Map<String, dynamic> dataValue = {
-      'styleId': id,
-    };
+    Map<String, dynamic> dataValue = {'styleId': id};
     final response = await api.post(context, 'getHairDresserById', dataValue);
     final decodedResponse = jsonDecode(response.body);
     return decodedResponse;
@@ -34,7 +32,7 @@ class hairDressers {
   Future getPayroll(BuildContext context) async {
     Map<String, dynamic> dataValue = {
       'companyId': companyId,
-      'branchId': branchId
+      'branchId': branchId,
     };
     final response = await api.post(context, 'getPayroll', dataValue);
     final decodedResponse = jsonDecode(response.body);
@@ -44,7 +42,7 @@ class hairDressers {
   Future reconciliation(BuildContext context) async {
     Map<String, dynamic> dataValue = {
       'companyId': companyId,
-      'branchId': branchId
+      'branchId': branchId,
     };
     final response = await api.post(context, 'reconciliation', dataValue);
     final decodedResponse = jsonDecode(response.body);
@@ -53,21 +51,40 @@ class hairDressers {
 
   Future getProducts(BuildContext context) async {
     String companyId = dotenv.env['COMPANY_ID'] ?? '1';
-    Map<String, dynamic> dataValue = {
-      'companyId': companyId,
-    };
+    Map<String, dynamic> dataValue = {'companyId': companyId};
     final response = await api.post(context, 'products', dataValue);
     final decodedResponse = jsonDecode(response.body);
     return decodedResponse;
   }
 
-  Future makeOrder(BuildContext context, String name, String phone,
-      String hairStyleId, String hairDresserId, String randomNumber) async {
+  Future makeOrder(
+    BuildContext context,
+    String name,
+    String phone,
+    String hairStyleId,
+    String hairDresserId,
+    String randomNumber,
+  ) async {
     String branchId = dotenv.env['BRANCH_ID'] ?? '1';
     String companyId = dotenv.env['COMPANY_ID'] ?? '1';
-          final prefs = await SharedPreferences.getInstance();
-          final managerId = prefs.getString('id');
+    final prefs = await SharedPreferences.getInstance();
+    final managerId = prefs.getString('id');
+    final managerName = prefs.getString('name');
 
+    // First, ensure shift is active (create if needed)
+    try {
+      Map<String, dynamic> shiftData = {
+        'branchId': branchId,
+        'managerId': managerId,
+        'managerName': managerName ?? 'Manager',
+      };
+      await api.post(context, 'startShift', shiftData);
+    } catch (e) {
+      // Shift may already exist, continue
+      print('Shift check: ${e.toString()}');
+    }
+
+    // Now create the order
     Map<String, dynamic> dataValue = {
       'name': name,
       'phone': phone,
@@ -76,7 +93,7 @@ class hairDressers {
       'randomNumber': randomNumber,
       'branchId': branchId,
       'companyId': companyId,
-      'managerId': managerId
+      'managerId': managerId,
     };
     final response = await api.post(context, 'addOrder', dataValue);
     final decodedResponse = jsonDecode(response.body);

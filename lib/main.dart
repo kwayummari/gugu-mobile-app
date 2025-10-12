@@ -25,30 +25,52 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MyProvider(),
-      child: MaterialApp(
-        initialRoute: RouteNames.splash,
-        routes: routes,
-        builder: (context, widget) => ResponsiveWrapper.builder(
-          ClampingScrollWrapper.builder(context, widget!),
-          breakpoints: const [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
-            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-          ],
+    create: (context) => MyProvider(),
+    child: MaterialApp(
+      initialRoute: RouteNames.splash,
+      routes: routes,
+      builder:
+          (context, widget) => ResponsiveWrapper.builder(
+            ClampingScrollWrapper.builder(context, widget!),
+            breakpoints: const [
+              ResponsiveBreakpoint.resize(480, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
+              ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+            ],
+          ),
+      debugShowCheckedModeBanner: false,
+      title: 'GUGU BEAUTY SALOONv',
+      theme: ThemeData(
+        cardColor: AppConst.primary,
+        highlightColor: AppConst.primary,
+        splashColor: AppConst.primary,
+        primaryColor: AppConst.primary,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: createMaterialColor(AppConst.primary),
+        ).copyWith(surface: AppConst.primary),
+        // Make all buttons outlined by default
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
+            foregroundColor: WidgetStateProperty.all<Color>(AppConst.primary),
+            side: WidgetStateProperty.all<BorderSide>(
+              BorderSide(color: AppConst.primary, width: 2),
+            ),
+          ),
         ),
-        debugShowCheckedModeBanner: false,
-        title: 'GUGU BEAUTY SALOONv',
-        theme: ThemeData(
-            cardColor: AppConst.primary,
-            highlightColor: AppConst.primary,
-            splashColor: AppConst.primary,
-            primaryColor: AppConst.primary,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: createMaterialColor(AppConst.primary),
-            ).copyWith(surface: AppConst.primary)),
-      ));
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
+            foregroundColor: WidgetStateProperty.all<Color>(AppConst.primary),
+            side: WidgetStateProperty.all<BorderSide>(
+              BorderSide(color: AppConst.primary, width: 2),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }

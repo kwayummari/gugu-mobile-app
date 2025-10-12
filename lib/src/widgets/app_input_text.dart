@@ -42,37 +42,51 @@ class AppInputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+      padding: const EdgeInsets.only(top: 5, left: 0, right: 0),
       child: TextFormField(
         enabled: enabled ?? true,
-        style: TextStyle(color: textsColor ?? AppConst.white),
+        style: TextStyle(
+          color: textsColor ?? AppConst.white,
+          fontSize: 15,
+        ),
         onChanged: onChange,
         obscureText: obscure,
-        obscuringCharacter: '*',
+        obscuringCharacter: '•',
         controller: textfieldcontroller,
         keyboardType: keyboardType ?? TextInputType.text,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(circle ?? 5.0),
+            borderRadius: BorderRadius.circular(circle ?? 8.0),
+            borderSide: BorderSide(color: AppConst.grey.withOpacity(0.3), width: 1),
           ),
-          label: Container(
-            color: fillcolor,
-            child: AppText(
-              txt: label,
-              size: 15,
-              weight: labelWeight ?? FontWeight.w700,
-              color: textsColor ?? AppConst.white,
-            ),
+          label: AppText(
+            txt: label,
+            size: 14,
+            weight: labelWeight ?? FontWeight.w400,
+            color: AppConst.grey,
           ),
           filled: true,
           fillColor: fillcolor,
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(circle ?? 5.0),
-            borderSide: BorderSide(color: AppConst.black),
+            borderRadius: BorderRadius.circular(circle ?? 8.0),
+            borderSide: BorderSide(color: AppConst.grey.withOpacity(0.2), width: 1),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(circle ?? 5.0),
-            borderSide: BorderSide(color: AppConst.black),
+            borderRadius: BorderRadius.circular(circle ?? 8.0),
+            borderSide: BorderSide(color: AppConst.grey.withOpacity(0.3), width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(circle ?? 8.0),
+            borderSide: BorderSide(color: AppConst.primary, width: 1.5),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(circle ?? 8.0),
+            borderSide: BorderSide(color: Colors.red.shade300, width: 1),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(circle ?? 8.0),
+            borderSide: BorderSide(color: Colors.red.shade400, width: 1.5),
           ),
           prefixIcon: icon,
           suffixIcon: suffixicon,
@@ -84,41 +98,38 @@ class AppInputText extends StatelessWidget {
           RegExp regex = RegExp(
               r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~.]).{8,}$');
           if (ispassword == true && isemail == false && isPhone == false) {
-            if (value!.isNotEmpty) {
-              if (!regex.hasMatch(value)) {
-                return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
-              }
-            } else if (value.isEmpty) {
+            if (value!.isEmpty) {
               return "This field cannot be empty";
-            } else {
-              return null;
             }
+            if (!regex.hasMatch(value)) {
+              return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
+            }
+            return null;
           } else if (isemail == true &&
               ispassword == false &&
               isPhone == false) {
-            if (value!.isEmpty || !emailRegex.hasMatch(value)) {
-              return 'Please enter a valid email address';
-            } else if (value.isEmpty) {
+            if (value!.isEmpty) {
               return "This field cannot be empty";
-            } else {
-              return null;
             }
+            if (!emailRegex.hasMatch(value)) {
+              return 'Please enter a valid email address';
+            }
+            return null;
           } else if (isPhone == true &&
               isemail == false &&
               ispassword == false) {
-            if (value!.isEmpty || !passwordRegex.hasMatch(value)) {
-              return 'Please enter a valid password';
-            } else if (value.isEmpty) {
-              return "THis field cannot be empty";
-            } else {
-              return null;
+            if (value!.isEmpty) {
+              return "This field cannot be empty";
             }
+            if (!passwordRegex.hasMatch(value)) {
+              return 'Please enter a valid phone number';
+            }
+            return null;
           } else {
-            if (value!.isNotEmpty) {
-              return null;
-            } else if (value.isEmpty) {
-              return "THis field cannot be empty";
+            if (value!.isEmpty) {
+              return "This field cannot be empty";
             }
+            return null;
           }
         },
       ),

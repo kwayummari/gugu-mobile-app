@@ -25,6 +25,9 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final myProvider = Provider.of<MyProvider>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return AppBaseScreen(
       isFlexible: false,
       showAppBar: false,
@@ -32,108 +35,106 @@ class _LoginState extends State<Login> {
       isvisible: false,
       backgroundImage: false,
       backgroundAuth: false,
-      child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100,
-              ),
-              Image.asset(
-                'assets/icon.png',
-                height: 210,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              AppInputText(
-                textsColor: AppConst.black,
-                textfieldcontroller: name,
-                ispassword: false,
-                fillcolor: AppConst.white,
-                label: 'Name',
-                obscure: false,
-                icon: Icon(
-                  Icons.person_2,
-                  color: AppConst.black,
-                ),
-                isemail: false,
-                isPhone: false,
-              ),
-              AppInputText(
-                textsColor: AppConst.black,
-                isemail: false,
-                textfieldcontroller: password,
-                ispassword: dont_show_password,
-                fillcolor: AppConst.white,
-                label: 'Password',
-                obscure: dont_show_password,
-                icon: Icon(
-                  Icons.lock,
-                  color: AppConst.black,
-                ),
-                suffixicon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        dont_show_password = !dont_show_password;
-                      });
-                    },
-                    icon: Icon(dont_show_password
-                        ? Icons.visibility_off
-                        : Icons.visibility)),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, top: 20),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: AppText(
-                    txt: 'Forgot password?',
-                    size: 15,
-                    color: AppConst.primary,
+      child: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: screenHeight * 0.08),
+                  // Logo - responsive size
+                  Center(
+                    child: Image.asset(
+                      'assets/icon.png',
+                      height: screenHeight * 0.22,
+                    ),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              myProvider.myLoging == true
-                  ? SpinKitCircle(
-                      color: AppConst.primary,
-                    )
-                  : Container(
-                      width: 350,
-                      height: 55,
-                      child: AppButton(
-                        onPress: () {
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          }
-                          loginService().login(context, name.text.toString(),
-                              password.text.toString());
-                        },
-                        label: 'LOGIN',
-                        borderRadius: 5,
-                        textColor: AppConst.white,
-                        bcolor: AppConst.primary,
+                  SizedBox(height: screenHeight * 0.05),
+                  // Email or Phone input
+                  AppInputText(
+                    textsColor: AppConst.black,
+                    textfieldcontroller: name,
+                    ispassword: false,
+                    fillcolor: AppConst.white,
+                    label: 'Email or Phone',
+                    obscure: false,
+                    isemail: false,
+                    isPhone: false,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: screenHeight * 0.015),
+                  // Password input - only show/hide icon
+                  AppInputText(
+                    textsColor: AppConst.black,
+                    isemail: false,
+                    textfieldcontroller: password,
+                    ispassword: dont_show_password,
+                    fillcolor: AppConst.white,
+                    label: 'Password',
+                    obscure: dont_show_password,
+                    suffixicon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          dont_show_password = !dont_show_password;
+                        });
+                      },
+                      icon: Icon(
+                        dont_show_password
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: AppConst.grey,
+                        size: screenWidth * 0.05,
                       ),
                     ),
-              SizedBox(
-                height: 20,
+                  ),
+                  SizedBox(height: screenHeight * 0.045),
+                  // Login button
+                  myProvider.myLoging == true
+                      ? Center(
+                        child: SpinKitCircle(
+                          color: AppConst.primary,
+                          size: screenWidth * 0.1,
+                        ),
+                      )
+                      : SizedBox(
+                        height: screenHeight * 0.065,
+                        child: AppButton(
+                          onPress: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+                            loginService().login(
+                              context,
+                              name.text.toString(),
+                              password.text.toString(),
+                            );
+                          },
+                          label: 'LOGIN',
+                          borderRadius: 8,
+                          textColor: AppConst.white,
+                          bcolor: AppConst.primary,
+                        ),
+                      ),
+                  SizedBox(height: screenHeight * 0.06),
+                  // Terms - subtle and small
+                  Center(
+                    child: AppText(
+                      txt: 'By continuing you agree to Terms and Conditions',
+                      size: screenWidth * 0.028,
+                      color: AppConst.grey,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.025),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40, right: 40),
-                child: Divider(
-                  color: AppConst.grey,
-                ),
-              ),
-              AppText(
-                txt:
-                    'By continuing you agree to Aurorawave Labs \n               Terms and Condition',
-                size: 15,
-                color: AppConst.primary,
-              )
-            ],
-          )),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -19,12 +19,12 @@ class ContentsById extends StatefulWidget {
   final String name;
   final String amount;
 
-  const ContentsById(
-      {Key? key,
-      required this.styleId,
-      required this.name,
-      required this.amount})
-      : super(key: key);
+  const ContentsById({
+    Key? key,
+    required this.styleId,
+    required this.name,
+    required this.amount,
+  }) : super(key: key);
 
   @override
   State<ContentsById> createState() => _ContentsByIdState();
@@ -61,7 +61,9 @@ class _ContentsByIdState extends State<ContentsById> {
   void fetchData() async {
     hairDressers hairDresserServices = hairDressers();
     final datas = await hairDresserServices.getHairDresserById(
-        context, widget.styleId.toString());
+      context,
+      widget.styleId.toString(),
+    );
     setState(() {
       data = datas['hairDresser'];
       filteredData = data;
@@ -70,47 +72,65 @@ class _ContentsByIdState extends State<ContentsById> {
 
   void filterData() {
     setState(() {
-      filteredData = data.where((item) {
-        final hairDresserName = item['hairDresserName'].toLowerCase();
-        final query = searchController.text.toLowerCase();
-        return hairDresserName.contains(query);
-      }).toList();
+      filteredData =
+          data.where((item) {
+            final hairDresserName = item['hairDresserName'].toLowerCase();
+            final query = searchController.text.toLowerCase();
+            return hairDresserName.contains(query);
+          }).toList();
     });
   }
 
   Future<void> printDoc(style, amount, name, customer, customerPhone) async {
-    final image = await imageFromAssetBundle(
-      "assets/logo.jpg",
-    );
+    final image = await imageFromAssetBundle("assets/logo.jpg");
     final doc = pw.Document();
-    doc.addPage(pw.Page(
+    doc.addPage(
+      pw.Page(
         pageFormat: PdfPageFormat(58 * PdfPageFormat.mm, double.infinity),
         build: (pw.Context context) {
           return buildPrintableData(
-              image, style, amount, name, customer, randomNumber);
-        }));
+            image,
+            style,
+            amount,
+            name,
+            customer,
+            randomNumber,
+          );
+        },
+      ),
+    );
     await Printing.layoutPdf(
-        onLayout: (PdfPageFormat format) async => doc.save());
+      onLayout: (PdfPageFormat format) async => doc.save(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return AppBaseScreen(
       appBar: AppBar(
         title: AppText(
           txt: widget.name,
-          size: 20,
-          weight: FontWeight.bold,
+          size: screenWidth * 0.045,
+          weight: FontWeight.w600,
+          color: AppConst.black,
         ),
+        backgroundColor: AppConst.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: AppConst.black),
         actions: [
           IconButton(
-              onPressed: () {
-                fetchData();
-              },
-              icon: Icon(
-                Icons.refresh,
-                color: AppConst.primary,
-              ))
+            onPressed: () {
+              fetchData();
+            },
+            icon: Icon(
+              Icons.refresh_outlined,
+              color: AppConst.primary,
+              size: screenWidth * 0.055,
+            ),
+          ),
         ],
         centerTitle: true,
       ),
@@ -118,99 +138,137 @@ class _ContentsByIdState extends State<ContentsById> {
       isvisible: false,
       backgroundImage: false,
       backgroundAuth: false,
-      isFlexible: true,
+      isFlexible: false,
       showAppBar: true,
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.05,
+              vertical: screenHeight * 0.02,
+            ),
             child: TextField(
               controller: searchController,
+              style: TextStyle(
+                color: AppConst.black,
+                fontSize: screenWidth * 0.038,
+              ),
               decoration: InputDecoration(
-                hintText: 'Search Hairdresser...',
-                prefixIcon: Icon(Icons.search),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide(color: AppConst.black, width: 1.0),
+                hintText: 'Search hairdresser',
+                hintStyle: TextStyle(
+                  color: AppConst.grey.withOpacity(0.5),
+                  fontSize: screenWidth * 0.035,
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: AppConst.grey.withOpacity(0.3),
+                    width: 1,
+                  ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide(color: AppConst.black, width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: AppConst.grey.withOpacity(0.3),
+                    width: 1,
+                  ),
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(color: AppConst.primary, width: 1.5),
+                ),
+                suffixIcon: Icon(
+                  Icons.search,
+                  color: AppConst.grey.withOpacity(0.5),
+                  size: screenWidth * 0.05,
+                ),
+                filled: true,
+                fillColor: AppConst.white,
               ),
             ),
           ),
           data.isEmpty
               ? Column(
-                  children: List.generate(
-                    5,
-                    (index) => Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: availableCoursesShimmerLoad(
-                            width: 190,
-                            height: 100,
-                            borderRadius: 15,
-                          ),
+                children: List.generate(
+                  5,
+                  (index) => Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(screenWidth * 0.02),
+                        child: availableCoursesShimmerLoad(
+                          width: screenWidth * 0.42,
+                          height: screenHeight * 0.12,
+                          borderRadius: 8,
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: availableCoursesShimmerLoad(
-                            width: 190,
-                            height: 100,
-                            borderRadius: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GridView.builder(
-                      itemCount: filteredData.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 20,
-                        childAspectRatio: 1.6,
                       ),
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  backgroundColor: AppConst.whiteOpacity,
-                                  title: AppText(
-                                    txt: 'Make Order',
-                                    size: 20,
-                                    weight: FontWeight.bold,
-                                  ),
-                                  actions: [
-                                    Form(
-                                      key: _formKey,
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.all(screenWidth * 0.02),
+                        child: availableCoursesShimmerLoad(
+                          width: screenWidth * 0.42,
+                          height: screenHeight * 0.12,
+                          borderRadius: 8,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+              : SizedBox(
+                height: screenHeight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+                  child: GridView.builder(
+                    itemCount: filteredData.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: screenWidth * 0.03,
+                      mainAxisSpacing: screenHeight * 0.02,
+                      childAspectRatio: 1.6,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: AppConst.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                title: AppText(
+                                  txt: 'Make Order',
+                                  size: screenWidth * 0.045,
+                                  weight: FontWeight.w600,
+                                  color: AppConst.black,
+                                ),
+                                actions: [
+                                  Form(
+                                    key: _formKey,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: screenWidth * 0.02,
+                                      ),
                                       child: Column(
                                         children: [
-                                          SizedBox(height: 5),
+                                          SizedBox(height: screenHeight * 0.01),
                                           AppInputText(
                                             textsColor: AppConst.black,
                                             textfieldcontroller: nameController,
                                             ispassword: false,
                                             fillcolor: AppConst.white,
-                                            label: 'Name',
+                                            label: 'Customer Name',
                                             obscure: false,
-                                            icon: Icon(
-                                              Icons.person_2,
-                                              color: AppConst.black,
-                                            ),
                                             isemail: false,
                                             isPhone: false,
+                                          ),
+                                          SizedBox(
+                                            height: screenHeight * 0.015,
                                           ),
                                           AppInputText(
                                             textsColor: AppConst.black,
@@ -218,19 +276,18 @@ class _ContentsByIdState extends State<ContentsById> {
                                                 phoneController,
                                             ispassword: false,
                                             fillcolor: AppConst.white,
-                                            label: 'Phone',
+                                            label: 'Phone Number',
                                             obscure: false,
-                                            icon: Icon(
-                                              Icons.phone,
-                                              color: AppConst.black,
-                                            ),
                                             isemail: false,
                                             isPhone: true,
+                                            keyboardType: TextInputType.phone,
                                           ),
-                                          SizedBox(height: 20),
-                                          Container(
-                                            width: 350,
-                                            height: 55,
+                                          SizedBox(
+                                            height: screenHeight * 0.025,
+                                          ),
+                                          SizedBox(
+                                            width: double.infinity,
+                                            height: screenHeight * 0.06,
                                             child: AppButton(
                                               onPress: () async {
                                                 if (!_formKey.currentState!
@@ -242,25 +299,41 @@ class _ContentsByIdState extends State<ContentsById> {
                                                 showDialog(
                                                   context: context,
                                                   barrierDismissible: false,
-                                                  builder:
-                                                      (BuildContext context) {
+                                                  builder: (
+                                                    BuildContext context,
+                                                  ) {
                                                     return AlertDialog(
                                                       backgroundColor:
-                                                          AppConst.whiteOpacity,
+                                                          AppConst.white,
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              12,
+                                                            ),
+                                                      ),
                                                       content: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
                                                         children: [
                                                           SpinKitCircle(
-                                                            color: AppConst
-                                                                .primary,
-                                                            size: 50.0,
+                                                            color:
+                                                                AppConst
+                                                                    .primary,
+                                                            size:
+                                                                screenWidth *
+                                                                0.12,
                                                           ),
-                                                          SizedBox(height: 20),
+                                                          SizedBox(
+                                                            height:
+                                                                screenHeight *
+                                                                0.02,
+                                                          ),
                                                           AppText(
                                                             txt:
                                                                 'Processing your order...',
-                                                            size: 18,
+                                                            size:
+                                                                screenWidth *
+                                                                0.038,
                                                             color:
                                                                 AppConst.black,
                                                           ),
@@ -271,154 +344,247 @@ class _ContentsByIdState extends State<ContentsById> {
                                                 );
 
                                                 // Perform the order operation
-                                                hairDressers
-                                                    hairDresserServices =
-                                                    hairDressers();
-                                                final datas =
-                                                    await hairDresserServices
-                                                        .makeOrder(
-                                                  context,
-                                                  nameController.text
-                                                      .toString(),
-                                                  phoneController.text
-                                                      .toString(),
-                                                  widget.styleId.toString(),
-                                                  filteredData[index]
-                                                          ['hairdresserId']
-                                                      .toString(),
-                                                  randomNumber.toString(),
-                                                );
+                                                try {
+                                                  hairDressers
+                                                  hairDresserServices =
+                                                      hairDressers();
+                                                  final datas =
+                                                      await hairDresserServices
+                                                          .makeOrder(
+                                                            context,
+                                                            nameController.text
+                                                                .toString(),
+                                                            phoneController.text
+                                                                .toString(),
+                                                            widget.styleId
+                                                                .toString(),
+                                                            filteredData[index]['hairdresserId']
+                                                                .toString(),
+                                                            randomNumber
+                                                                .toString(),
+                                                          );
 
-                                                // Close the loading dialog
-                                                Navigator.pop(context);
+                                                  // Close the loading dialog
+                                                  Navigator.pop(context);
 
-                                                // If the order is successful
-                                                if (datas['message'] ==
-                                                    'Order created successfully') {
-                                                  Navigator.of(context).pop();
-                                                  showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return AlertDialog(
-                                                        backgroundColor:
-                                                            AppConst
-                                                                .whiteOpacity,
-                                                        title: AppText(
-                                                          txt: 'Print receipt',
-                                                          size: 20,
-                                                          weight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                        actions: [
-                                                          Padding(
+                                                  // If the order is successful
+                                                  if (datas != null &&
+                                                      datas['message'] ==
+                                                          'Order created successfully') {
+                                                    Navigator.of(context).pop();
+                                                    showDialog(
+                                                      context: context,
+                                                      barrierDismissible: false,
+                                                      builder: (
+                                                        BuildContext context,
+                                                      ) {
+                                                        return AlertDialog(
+                                                          backgroundColor:
+                                                              AppConst.white,
+                                                          shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  12,
+                                                                ),
+                                                          ),
+                                                          content: Padding(
                                                             padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 350,
-                                                              height: 55,
-                                                              child: AppButton(
-                                                                onPress: () {
-                                                                  printDoc(
-                                                                      widget
-                                                                          .name,
-                                                                      widget
-                                                                          .amount,
-                                                                      filteredData[
-                                                                              index]
-                                                                          [
-                                                                          'hairDresserName'],
-                                                                      nameController
-                                                                          .text
-                                                                          .toString(),
-                                                                      phoneController
-                                                                          .text
-                                                                          .toString());
-                                                                  Navigator
-                                                                      .pushNamedAndRemoveUntil(
-                                                                    context,
-                                                                    RouteNames
-                                                                        .bottomNavigationBar,
-                                                                    (_) =>
-                                                                        false,
-                                                                  );
-                                                                  // Navigator.of(
-                                                                  //         context)
-                                                                  //     .pop();
-                                                                  // AppSnackbar(
-                                                                  //   isError:
-                                                                  //       false,
-                                                                  //   response:
-                                                                  //       'Printing',
-                                                                  // ).show(
-                                                                  //     context);
-                                                                },
-                                                                label:
-                                                                    'Print Receipts',
-                                                                borderRadius: 5,
-                                                                textColor:
-                                                                    AppConst
-                                                                        .white,
-                                                                bcolor: AppConst
-                                                                    .primary,
+                                                                EdgeInsets.symmetric(
+                                                                  vertical:
+                                                                      screenHeight *
+                                                                      0.02,
+                                                                ),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons
+                                                                      .check_circle_outline,
+                                                                  color:
+                                                                      AppConst
+                                                                          .primary,
+                                                                  size:
+                                                                      screenWidth *
+                                                                      0.2,
+                                                                ),
+                                                                SizedBox(
+                                                                  height:
+                                                                      screenHeight *
+                                                                      0.02,
+                                                                ),
+                                                                AppText(
+                                                                  txt:
+                                                                      'Order Created Successfully!',
+                                                                  size:
+                                                                      screenWidth *
+                                                                      0.045,
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color:
+                                                                      AppConst
+                                                                          .black,
+                                                                  align:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
+                                                                SizedBox(
+                                                                  height:
+                                                                      screenHeight *
+                                                                      0.01,
+                                                                ),
+                                                                AppText(
+                                                                  txt:
+                                                                      'Receipt: ${randomNumber}',
+                                                                  size:
+                                                                      screenWidth *
+                                                                      0.035,
+                                                                  color:
+                                                                      AppConst
+                                                                          .grey,
+                                                                  align:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
+                                                                SizedBox(
+                                                                  height:
+                                                                      screenHeight *
+                                                                      0.005,
+                                                                ),
+                                                                AppText(
+                                                                  txt:
+                                                                      'Customer will receive SMS confirmation',
+                                                                  size:
+                                                                      screenWidth *
+                                                                      0.03,
+                                                                  color:
+                                                                      AppConst
+                                                                          .grey,
+                                                                  align:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          actions: [
+                                                            Padding(
+                                                              padding: EdgeInsets.symmetric(
+                                                                horizontal:
+                                                                    screenWidth *
+                                                                    0.04,
+                                                                vertical:
+                                                                    screenHeight *
+                                                                    0.01,
+                                                              ),
+                                                              child: SizedBox(
+                                                                width:
+                                                                    double
+                                                                        .infinity,
+                                                                height:
+                                                                    screenHeight *
+                                                                    0.06,
+                                                                child: AppButton(
+                                                                  onPress: () {
+                                                                    Navigator.pushNamedAndRemoveUntil(
+                                                                      context,
+                                                                      RouteNames
+                                                                          .bottomNavigationBar,
+                                                                      (_) =>
+                                                                          false,
+                                                                    );
+                                                                  },
+                                                                  label:
+                                                                      'GO TO HOME',
+                                                                  borderRadius:
+                                                                      8,
+                                                                  textColor:
+                                                                      AppConst
+                                                                          .white,
+                                                                  bcolor:
+                                                                      AppConst
+                                                                          .primary,
+                                                                ),
                                                               ),
                                                             ),
-                                                          )
-                                                        ],
-                                                      );
-                                                    },
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  } else {
+                                                    // Order failed - show error
+                                                    Navigator.of(context).pop();
+                                                  }
+                                                } catch (e) {
+                                                  // Close loading dialog on error
+                                                  Navigator.pop(context);
+                                                  // Close order dialog
+                                                  Navigator.of(context).pop();
+                                                  print(
+                                                    'Order creation error: ${e.toString()}',
                                                   );
                                                 }
                                               },
-                                              label: 'create order',
-                                              borderRadius: 5,
+                                              label: 'CREATE ORDER',
+                                              borderRadius: 8,
                                               textColor: AppConst.white,
                                               bcolor: AppConst.primary,
                                             ),
                                           ),
-                                          SizedBox(height: 10),
+                                          SizedBox(
+                                            height: screenHeight * 0.015,
+                                          ),
                                         ],
                                       ),
                                     ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                              gradient: AppConst.primaryGradient,
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey[200],
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(screenWidth * 0.04),
+                          decoration: BoxDecoration(
+                            color: AppConst.white,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: AppConst.grey.withOpacity(0.2),
+                              width: 1,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                AppText(
-                                  txt: filteredData[index]['hairDresserName'],
-                                  size: 18,
-                                  color: AppConst.white,
-                                  weight: FontWeight.bold,
-                                ),
-                              ],
-                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppConst.grey.withOpacity(0.08),
+                                blurRadius: 8,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
                           ),
-                        );
-                      },
-                    ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                filteredData[index]['hairDresserName'],
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.038,
+                                  color: AppConst.black,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
+              ),
         ],
       ),
     );
