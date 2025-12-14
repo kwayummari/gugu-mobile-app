@@ -21,8 +21,8 @@ class ContentsById extends StatefulWidget {
 
   const ContentsById({
     Key? key,
-    required this.styleId,
-    required this.name,
+      required this.styleId,
+      required this.name,
     required this.amount,
   }) : super(key: key);
 
@@ -74,10 +74,10 @@ class _ContentsByIdState extends State<ContentsById> {
     setState(() {
       filteredData =
           data.where((item) {
-            final hairDresserName = item['hairDresserName'].toLowerCase();
-            final query = searchController.text.toLowerCase();
-            return hairDresserName.contains(query);
-          }).toList();
+        final hairDresserName = item['hairDresserName'].toLowerCase();
+        final query = searchController.text.toLowerCase();
+        return hairDresserName.contains(query);
+      }).toList();
     });
   }
 
@@ -122,12 +122,12 @@ class _ContentsByIdState extends State<ContentsById> {
         iconTheme: IconThemeData(color: AppConst.black),
         actions: [
           IconButton(
-            onPressed: () {
-              fetchData();
-            },
-            icon: Icon(
+              onPressed: () {
+                fetchData();
+              },
+              icon: Icon(
               Icons.refresh_outlined,
-              color: AppConst.primary,
+                color: AppConst.primary,
               size: screenWidth * 0.055,
             ),
           ),
@@ -193,63 +193,63 @@ class _ContentsByIdState extends State<ContentsById> {
           ),
           data.isEmpty
               ? Column(
-                children: List.generate(
-                  5,
-                  (index) => Row(
-                    children: [
-                      Padding(
+                  children: List.generate(
+                    5,
+                    (index) => Row(
+                      children: [
+                        Padding(
                         padding: EdgeInsets.all(screenWidth * 0.02),
-                        child: availableCoursesShimmerLoad(
+                          child: availableCoursesShimmerLoad(
                           width: screenWidth * 0.42,
                           height: screenHeight * 0.12,
                           borderRadius: 8,
                         ),
-                      ),
-                      Spacer(),
-                      Padding(
+                        ),
+                        Spacer(),
+                        Padding(
                         padding: EdgeInsets.all(screenWidth * 0.02),
-                        child: availableCoursesShimmerLoad(
+                          child: availableCoursesShimmerLoad(
                           width: screenWidth * 0.42,
                           height: screenHeight * 0.12,
                           borderRadius: 8,
                         ),
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )
+                )
               : SizedBox(
                 height: screenHeight,
-                child: Padding(
+                  child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-                  child: GridView.builder(
-                    itemCount: filteredData.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    child: GridView.builder(
+                      itemCount: filteredData.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
                       crossAxisSpacing: screenWidth * 0.03,
                       mainAxisSpacing: screenHeight * 0.02,
-                      childAspectRatio: 1.6,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
+                        childAspectRatio: 1.6,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
                                 backgroundColor: AppConst.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                title: AppText(
-                                  txt: 'Make Order',
+                                  title: AppText(
+                                    txt: 'Make Order',
                                   size: screenWidth * 0.045,
                                   weight: FontWeight.w600,
                                   color: AppConst.black,
-                                ),
-                                actions: [
-                                  Form(
-                                    key: _formKey,
+                                  ),
+                                  actions: [
+                                    Form(
+                                      key: _formKey,
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: screenWidth * 0.02,
@@ -318,7 +318,7 @@ class _ContentsByIdState extends State<ContentsById> {
                                                           SpinKitCircle(
                                                             color:
                                                                 AppConst
-                                                                    .primary,
+                                                                .primary,
                                                             size:
                                                                 screenWidth *
                                                                 0.12,
@@ -345,41 +345,41 @@ class _ContentsByIdState extends State<ContentsById> {
 
                                                 // Perform the order operation
                                                 try {
-                                                  hairDressers
-                                                  hairDresserServices =
-                                                      hairDressers();
-                                                  final datas =
-                                                      await hairDresserServices
-                                                          .makeOrder(
-                                                            context,
-                                                            nameController.text
-                                                                .toString(),
-                                                            phoneController.text
-                                                                .toString(),
+                                                hairDressers
+                                                    hairDresserServices =
+                                                    hairDressers();
+                                                final datas =
+                                                    await hairDresserServices
+                                                        .makeOrder(
+                                                  context,
+                                                  nameController.text
+                                                      .toString(),
+                                                  phoneController.text
+                                                      .toString(),
                                                             widget.styleId
                                                                 .toString(),
                                                             filteredData[index]['hairdresserId']
                                                                 .toString(),
                                                             randomNumber
-                                                                .toString(),
-                                                          );
+                                                      .toString(),
+                                                );
 
-                                                  // Close the loading dialog
-                                                  Navigator.pop(context);
+                                                // Close the loading dialog
+                                                Navigator.pop(context);
 
-                                                  // If the order is successful
+                                                // If the order is successful
                                                   if (datas != null &&
                                                       datas['message'] ==
-                                                          'Order created successfully') {
-                                                    Navigator.of(context).pop();
-                                                    showDialog(
-                                                      context: context,
+                                                    'Order created successfully') {
+                                                  Navigator.of(context).pop();
+                                                  showDialog(
+                                                    context: context,
                                                       barrierDismissible: false,
                                                       builder: (
                                                         BuildContext context,
                                                       ) {
-                                                        return AlertDialog(
-                                                          backgroundColor:
+                                                      return AlertDialog(
+                                                        backgroundColor:
                                                               AppConst.white,
                                                           shape: RoundedRectangleBorder(
                                                             borderRadius:
@@ -403,7 +403,7 @@ class _ContentsByIdState extends State<ContentsById> {
                                                                   Icons
                                                                       .check_circle_outline,
                                                                   color:
-                                                                      AppConst
+                                                            AppConst
                                                                           .primary,
                                                                   size:
                                                                       screenWidth *
@@ -420,7 +420,7 @@ class _ContentsByIdState extends State<ContentsById> {
                                                                   size:
                                                                       screenWidth *
                                                                       0.045,
-                                                                  weight:
+                                                          weight:
                                                                       FontWeight
                                                                           .w600,
                                                                   color:
@@ -468,9 +468,9 @@ class _ContentsByIdState extends State<ContentsById> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          ),
-                                                          actions: [
-                                                            Padding(
+                                                        ),
+                                                        actions: [
+                                                          Padding(
                                                               padding: EdgeInsets.symmetric(
                                                                 horizontal:
                                                                     screenWidth *
@@ -486,32 +486,32 @@ class _ContentsByIdState extends State<ContentsById> {
                                                                 height:
                                                                     screenHeight *
                                                                     0.06,
-                                                                child: AppButton(
-                                                                  onPress: () {
+                                                              child: AppButton(
+                                                                onPress: () {
                                                                     Navigator.pushNamedAndRemoveUntil(
-                                                                      context,
-                                                                      RouteNames
-                                                                          .bottomNavigationBar,
-                                                                      (_) =>
-                                                                          false,
-                                                                    );
-                                                                  },
-                                                                  label:
+                                                                    context,
+                                                                    RouteNames
+                                                                        .bottomNavigationBar,
+                                                                    (_) =>
+                                                                        false,
+                                                                  );
+                                                                },
+                                                                label:
                                                                       'GO TO HOME',
                                                                   borderRadius:
                                                                       8,
-                                                                  textColor:
-                                                                      AppConst
-                                                                          .white,
+                                                                textColor:
+                                                                    AppConst
+                                                                        .white,
                                                                   bcolor:
                                                                       AppConst
-                                                                          .primary,
+                                                                    .primary,
                                                                 ),
                                                               ),
                                                             ),
-                                                          ],
-                                                        );
-                                                      },
+                                                        ],
+                                                      );
+                                                    },
                                                     );
                                                   } else {
                                                     // Order failed - show error
@@ -538,34 +538,34 @@ class _ContentsByIdState extends State<ContentsById> {
                                           ),
                                         ],
                                       ),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Container(
                           padding: EdgeInsets.all(screenWidth * 0.04),
-                          decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                             color: AppConst.white,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color: AppConst.grey.withOpacity(0.2),
                               width: 1,
                             ),
-                            boxShadow: [
-                              BoxShadow(
+                              boxShadow: [
+                                BoxShadow(
                                 color: AppConst.grey.withOpacity(0.08),
                                 blurRadius: 8,
                                 offset: Offset(0, 2),
                               ),
                             ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                               Text(
                                 filteredData[index]['hairDresserName'],
                                 textAlign: TextAlign.center,
@@ -576,15 +576,15 @@ class _ContentsByIdState extends State<ContentsById> {
                                   color: AppConst.black,
                                   fontWeight: FontWeight.w600,
                                 ),
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
         ],
       ),
     );

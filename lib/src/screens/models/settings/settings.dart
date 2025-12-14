@@ -74,7 +74,7 @@ class _SettingsState extends State<Settings> {
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-          child: Column(
+      child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: screenHeight * 0.025),
@@ -179,7 +179,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+        children: [
                     AppText(
                       txt: 'Phone',
                       size: screenWidth * 0.038,
@@ -243,13 +243,13 @@ class _SettingsState extends State<Settings> {
                       size: screenWidth * 0.05,
                     ),
                   ),
-                  title: AppText(
+            title: AppText(
                     txt: 'Contact Support',
                     size: screenWidth * 0.038,
                     weight: FontWeight.w600,
                     color: AppConst.black,
-                  ),
-                  subtitle: AppText(
+            ),
+            subtitle: AppText(
                     txt: 'Get help and support',
                     size: screenWidth * 0.03,
                     color: AppConst.grey,
@@ -285,13 +285,13 @@ class _SettingsState extends State<Settings> {
                       size: screenWidth * 0.05,
                     ),
                   ),
-                  title: AppText(
+            title: AppText(
                     txt: 'Sign Out',
                     size: screenWidth * 0.038,
                     weight: FontWeight.w600,
                     color: Colors.red,
-                  ),
-                  subtitle: AppText(
+            ),
+            subtitle: AppText(
                     txt: 'Sign out of your account',
                     size: screenWidth * 0.03,
                     color: AppConst.grey,

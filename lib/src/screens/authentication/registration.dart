@@ -43,10 +43,10 @@ class _RegistrationState extends State<Registration> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
             Icons.arrow_back_ios_new,
-            color: AppConst.black,
+              color: AppConst.black,
             size: screenWidth * 0.05,
           ),
         ),
@@ -63,9 +63,9 @@ class _RegistrationState extends State<Registration> {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
-            child: Form(
-              key: _formKey,
-              child: Column(
+      child: Form(
+          key: _formKey,
+          child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: screenHeight * 0.025),
@@ -98,11 +98,11 @@ class _RegistrationState extends State<Registration> {
                     textsColor: AppConst.black,
                     isemail: false,
                     suffixicon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obscure = !obscure;
-                        });
-                      },
+                        onPressed: () {
+                          setState(() {
+                            obscure = !obscure;
+                          });
+                        },
                       icon: Icon(
                         obscure
                             ? Icons.visibility_off_outlined
@@ -123,11 +123,11 @@ class _RegistrationState extends State<Registration> {
                     textsColor: AppConst.black,
                     isemail: false,
                     suffixicon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obscure1 = !obscure1;
-                        });
-                      },
+                        onPressed: () {
+                          setState(() {
+                            obscure1 = !obscure1;
+                          });
+                        },
                       icon: Icon(
                         obscure1
                             ? Icons.visibility_off_outlined
@@ -150,46 +150,46 @@ class _RegistrationState extends State<Registration> {
                           color: AppConst.primary,
                           size: screenWidth * 0.1,
                         ),
-                      )
+                        )
                       : SizedBox(
                         height: screenHeight * 0.065,
-                        child: AppButton(
-                          onPress: () {
-                            if (!_formKey.currentState!.validate()) {
-                              return;
-                            }
-                            registrationService().registration(
-                              context,
-                              password.text,
-                              rpassword.text,
-                              fullname.text,
+                          child: AppButton(
+                            onPress: () {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              registrationService().registration(
+                                  context,
+                                  password.text,
+                                  rpassword.text,
+                                  fullname.text,
                               phone.text,
                             );
-                          },
-                          label: 'SIGN UP',
+                            },
+                            label: 'SIGN UP',
                           borderRadius: 8,
-                          textColor: AppConst.white,
-                          bcolor: AppConst.primary,
+                            textColor: AppConst.white,
+                            bcolor: AppConst.primary,
+                          ),
                         ),
-                      ),
                   SizedBox(height: screenHeight * 0.035),
                   // Sign in link
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, RouteNames.login),
                     child: Center(
-                      child: Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: [
-                          AppText(
+                      children: [
+                        AppText(
                             txt: 'Already have an account? ',
                             size: screenWidth * 0.035,
                             color: AppConst.grey,
-                            weight: FontWeight.w400,
-                          ),
-                          AppText(
-                            txt: 'Sign In',
+                          weight: FontWeight.w400,
+                        ),
+                        AppText(
+                          txt: 'Sign In',
                             size: screenWidth * 0.035,
-                            color: AppConst.primary,
+                          color: AppConst.primary,
                             weight: FontWeight.w600,
                           ),
                         ],
