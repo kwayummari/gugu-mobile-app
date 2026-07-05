@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 Future<String> formatPrice(String number, String currencySymbol) async {
-  int price = int.parse(number);
+  double price = double.parse(number);
   String formattedPrice = NumberFormat('#,###').format(price);
   return 'Amount: '+formattedPrice + currencySymbol;
 }
