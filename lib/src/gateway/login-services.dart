@@ -34,6 +34,11 @@ class loginService {
       await prefs.setString('id', newResponse['user']['id'].toString());
       await prefs.setString('email', newResponse['user']['email'] ?? '');
       await prefs.setString('phone', newResponse['user']['phone'] ?? '');
+      await prefs.setString('branch', newResponse['user']['branch'].toString());
+      await prefs.setString(
+        'companyId',
+        newResponse['user']['companyId'].toString(),
+      );
 
       // Save JWT token for authentication
       if (newResponse['token'] != null) {

@@ -2,21 +2,28 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gugu/src/api/apis.dart';
+import 'package:gugu/src/utils/session.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class hairDressers {
   Api api = Api();
-  static String branchId = dotenv.env['BRANCH_ID'] ?? '1';
-  static String companyId = dotenv.env['COMPANY_ID'] ?? '1';
-  Map<String, dynamic> data = {'companyId': companyId, 'branchId': branchId};
+
   Future getHairDresser(BuildContext context) async {
+    final data = {
+      'companyId': await Session.companyId,
+      'branchId': await Session.branchId,
+    };
     final response = await api.post(context, 'getHairDresser', data);
     final decodedResponse = jsonDecode(response.body);
     return decodedResponse;
   }
 
   Future getStyles(BuildContext context) async {
+    final data = {
+      'companyId': await Session.companyId,
+      'branchId': await Session.branchId,
+    };
     final response = await api.post(context, 'getAllHairStyle', data);
     final decodedResponse = jsonDecode(response.body);
     return decodedResponse;
@@ -31,8 +38,8 @@ class hairDressers {
 
   Future getPayroll(BuildContext context) async {
     Map<String, dynamic> dataValue = {
-      'companyId': companyId,
-      'branchId': branchId,
+      'companyId': await Session.companyId,
+      'branchId': await Session.branchId,
     };
     final response = await api.post(context, 'getPayroll', dataValue);
     final decodedResponse = jsonDecode(response.body);
@@ -41,8 +48,8 @@ class hairDressers {
 
   Future reconciliation(BuildContext context) async {
     Map<String, dynamic> dataValue = {
-      'companyId': companyId,
-      'branchId': branchId,
+      'companyId': await Session.companyId,
+      'branchId': await Session.branchId,
     };
     final response = await api.post(context, 'reconciliation', dataValue);
     final decodedResponse = jsonDecode(response.body);
@@ -65,8 +72,8 @@ class hairDressers {
     String hairDresserId,
     String randomNumber,
   ) async {
-    String branchId = dotenv.env['BRANCH_ID'] ?? '1';
-    String companyId = dotenv.env['COMPANY_ID'] ?? '1';
+    String branchId = await Session.branchId;
+    String companyId = await Session.companyId;
     final prefs = await SharedPreferences.getInstance();
     final managerId = prefs.getString('id');
     final managerName = prefs.getString('name');

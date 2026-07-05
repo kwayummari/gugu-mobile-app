@@ -1,14 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../api/apis.dart';
+import '../utils/session.dart';
 import '../widgets/app_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class expensesServices {
   final Api api = Api();
-  static String branchId = dotenv.env['BRANCH_ID'] ?? '1';
-  static String companyId = dotenv.env['COMPANY_ID'] ?? '1';
   Future<String> expenses(
     BuildContext context,
     String valueHolder,
@@ -22,8 +20,8 @@ class expensesServices {
         'valueHolder': valueHolder,
         'amount': amount,
         'description': description,
-        'companyId': companyId,
-        'branchId': branchId,
+        'companyId': await Session.companyId,
+        'branchId': await Session.branchId,
         'managerId': managerId,
       };
       final response = await api.post(context, 'add_expenses', data);
